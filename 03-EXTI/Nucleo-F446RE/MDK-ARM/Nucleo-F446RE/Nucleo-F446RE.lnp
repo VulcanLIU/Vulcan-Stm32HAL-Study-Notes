@@ -1,0 +1,25 @@
+--cpu Cortex-M4.fp
+"nucleo-f446re\startup_stm32f446xx.o"
+"nucleo-f446re\main.o"
+"nucleo-f446re\stm32f4xx_it.o"
+"nucleo-f446re\stm32f4xx_hal_msp.o"
+"nucleo-f446re\stm32f4xx_hal_tim.o"
+"nucleo-f446re\stm32f4xx_hal_tim_ex.o"
+"nucleo-f446re\stm32f4xx_hal_rcc.o"
+"nucleo-f446re\stm32f4xx_hal_rcc_ex.o"
+"nucleo-f446re\stm32f4xx_hal_flash.o"
+"nucleo-f446re\stm32f4xx_hal_flash_ex.o"
+"nucleo-f446re\stm32f4xx_hal_flash_ramfunc.o"
+"nucleo-f446re\stm32f4xx_hal_gpio.o"
+"nucleo-f446re\stm32f4xx_hal_dma_ex.o"
+"nucleo-f446re\stm32f4xx_hal_dma.o"
+"nucleo-f446re\stm32f4xx_hal_pwr.o"
+"nucleo-f446re\stm32f4xx_hal_pwr_ex.o"
+"nucleo-f446re\stm32f4xx_hal_cortex.o"
+"nucleo-f446re\stm32f4xx_hal.o"
+"nucleo-f446re\stm32f4xx_hal_exti.o"
+"nucleo-f446re\system_stm32f4xx.o"
+--library_type=microlib --strict --scatter "Nucleo-F446RE\Nucleo-F446RE.sct"
+--summary_stderr --info summarysizes --map --xref --callgraph --symbols
+--info sizes --info totals --info unused --info veneers
+--list "Nucleo-F446RE.map" -o Nucleo-F446RE\Nucleo-F446RE.axf
