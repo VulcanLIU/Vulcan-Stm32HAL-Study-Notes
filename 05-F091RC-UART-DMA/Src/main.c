@@ -104,7 +104,7 @@ int main(void)
 
   while (1)
   {
-    // HAL_UART_DMAPause(&huart2);
+    HAL_UART_DMAPause(&huart2);
     // HAL_Delay(1000);
     //HAL_UART_DMAResume(&huart2);
     // HAL_Delay(10);
