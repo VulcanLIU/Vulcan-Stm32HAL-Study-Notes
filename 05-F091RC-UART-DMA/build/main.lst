@@ -1,4 +1,4 @@
-ARM GAS  C:\Users\Vulca\AppData\Local\Temp\cc7c74Kj.s 			page 1
+ARM GAS  C:\Users\Vulca\AppData\Local\Temp\ccF2hNMC.s 			page 1
 
 
    1              		.cpu cortex-m0
@@ -8,23 +8,30 @@ ARM GAS  C:\Users\Vulca\AppData\Local\Temp\cc7c74Kj.s 			page 1
    5              		.eabi_attribute 24, 1
    6              		.eabi_attribute 25, 1
    7              		.eabi_attribute 26, 1
-   8              		.eabi_attribute 30, 1
+   8              		.eabi_attribute 30, 6
    9              		.eabi_attribute 34, 0
   10              		.eabi_attribute 18, 4
   11              		.file	"main.c"
   12              		.text
   13              	.Ltext0:
   14              		.cfi_sections	.debug_frame
-  15              		.section	.text.MX_GPIO_Init,"ax",%progbits
-  16              		.align	1
-  17              		.arch armv6s-m
-  18              		.syntax unified
-  19              		.code	16
-  20              		.thumb_func
-  21              		.fpu softvfp
-  23              	MX_GPIO_Init:
-  24              	.LFB44:
-  25              		.file 1 "Src/main.c"
+  15              		.comm	huart2,128,4
+  16              		.comm	hdma_usart2_tx,68,4
+  17              		.section	.rodata
+  18              		.align	2
+  19              	.LC0:
+  20 0000 660D0A00 		.ascii	"f\015\012\000"
+  21              		.section	.text.main,"ax",%progbits
+  22              		.align	1
+  23              		.global	main
+  24              		.arch armv6s-m
+  25              		.syntax unified
+  26              		.code	16
+  27              		.thumb_func
+  28              		.fpu softvfp
+  30              	main:
+  31              	.LFB40:
+  32              		.file 1 "Src/main.c"
    1:Src/main.c    **** /* USER CODE BEGIN Header */
    2:Src/main.c    **** /**
    3:Src/main.c    ****   ******************************************************************************
@@ -47,32 +54,32 @@ ARM GAS  C:\Users\Vulca\AppData\Local\Temp\cc7c74Kj.s 			page 1
   20:Src/main.c    **** 
   21:Src/main.c    **** /* Includes ------------------------------------------------------------------*/
   22:Src/main.c    **** #include "main.h"
-  23:Src/main.c    **** 
-  24:Src/main.c    **** /* Private includes ----------------------------------------------------------*/
-  25:Src/main.c    **** /* USER CODE BEGIN Includes */
-  26:Src/main.c    **** 
-  27:Src/main.c    **** /* USER CODE END Includes */
-  28:Src/main.c    **** 
-  29:Src/main.c    **** /* Private typedef -----------------------------------------------------------*/
-  30:Src/main.c    **** /* USER CODE BEGIN PTD */
-  31:Src/main.c    **** 
-  32:Src/main.c    **** /* USER CODE END PTD */
-  33:Src/main.c    **** 
-ARM GAS  C:\Users\Vulca\AppData\Local\Temp\cc7c74Kj.s 			page 2
+  23:Src/main.c    **** #include <string.h>
+  24:Src/main.c    **** 
+  25:Src/main.c    **** /* Private includes ----------------------------------------------------------*/
+  26:Src/main.c    **** /* USER CODE BEGIN Includes */
+ARM GAS  C:\Users\Vulca\AppData\Local\Temp\ccF2hNMC.s 			page 2
 
 
-  34:Src/main.c    **** /* Private define ------------------------------------------------------------*/
-  35:Src/main.c    **** /* USER CODE BEGIN PD */
-  36:Src/main.c    **** /* USER CODE END PD */
-  37:Src/main.c    **** 
-  38:Src/main.c    **** /* Private macro -------------------------------------------------------------*/
-  39:Src/main.c    **** /* USER CODE BEGIN PM */
-  40:Src/main.c    **** 
-  41:Src/main.c    **** /* USER CODE END PM */
-  42:Src/main.c    **** 
-  43:Src/main.c    **** /* Private variables ---------------------------------------------------------*/
-  44:Src/main.c    **** UART_HandleTypeDef huart2;
-  45:Src/main.c    **** DMA_HandleTypeDef hdma_usart2_rx;
+  27:Src/main.c    **** 
+  28:Src/main.c    **** /* USER CODE END Includes */
+  29:Src/main.c    **** 
+  30:Src/main.c    **** /* Private typedef -----------------------------------------------------------*/
+  31:Src/main.c    **** /* USER CODE BEGIN PTD */
+  32:Src/main.c    **** 
+  33:Src/main.c    **** /* USER CODE END PTD */
+  34:Src/main.c    **** 
+  35:Src/main.c    **** /* Private define ------------------------------------------------------------*/
+  36:Src/main.c    **** /* USER CODE BEGIN PD */
+  37:Src/main.c    **** /* USER CODE END PD */
+  38:Src/main.c    **** 
+  39:Src/main.c    **** /* Private macro -------------------------------------------------------------*/
+  40:Src/main.c    **** /* USER CODE BEGIN PM */
+  41:Src/main.c    **** 
+  42:Src/main.c    **** /* USER CODE END PM */
+  43:Src/main.c    **** 
+  44:Src/main.c    **** /* Private variables ---------------------------------------------------------*/
+  45:Src/main.c    **** UART_HandleTypeDef huart2;
   46:Src/main.c    **** DMA_HandleTypeDef hdma_usart2_tx;
   47:Src/main.c    **** 
   48:Src/main.c    **** /* USER CODE BEGIN PV */
@@ -99,6 +106,21 @@ ARM GAS  C:\Users\Vulca\AppData\Local\Temp\cc7c74Kj.s 			page 1
   69:Src/main.c    ****   */
   70:Src/main.c    **** int main(void)
   71:Src/main.c    **** {
+  33              		.loc 1 71 1
+  34              		.cfi_startproc
+  35              		@ args = 0, pretend = 0, frame = 0
+  36              		@ frame_needed = 1, uses_anonymous_args = 0
+  37 0000 80B5     		push	{r7, lr}
+  38              	.LCFI0:
+  39              		.cfi_def_cfa_offset 8
+  40              		.cfi_offset 7, -8
+  41              		.cfi_offset 14, -4
+  42 0002 00AF     		add	r7, sp, #0
+  43              	.LCFI1:
+  44              		.cfi_def_cfa_register 7
+ARM GAS  C:\Users\Vulca\AppData\Local\Temp\ccF2hNMC.s 			page 3
+
+
   72:Src/main.c    ****   /* USER CODE BEGIN 1 */
   73:Src/main.c    **** 
   74:Src/main.c    ****   /* USER CODE END 1 */
@@ -107,6 +129,8 @@ ARM GAS  C:\Users\Vulca\AppData\Local\Temp\cc7c74Kj.s 			page 1
   77:Src/main.c    **** 
   78:Src/main.c    ****   /* Reset of all peripherals, Initializes the Flash interface and the Systick. */
   79:Src/main.c    ****   HAL_Init();
+  45              		.loc 1 79 3
+  46 0004 FFF7FEFF 		bl	HAL_Init
   80:Src/main.c    **** 
   81:Src/main.c    ****   /* USER CODE BEGIN Init */
   82:Src/main.c    **** 
@@ -114,819 +138,830 @@ ARM GAS  C:\Users\Vulca\AppData\Local\Temp\cc7c74Kj.s 			page 1
   84:Src/main.c    **** 
   85:Src/main.c    ****   /* Configure the system clock */
   86:Src/main.c    ****   SystemClock_Config();
+  47              		.loc 1 86 3
+  48 0008 FFF7FEFF 		bl	SystemClock_Config
   87:Src/main.c    **** 
   88:Src/main.c    ****   /* USER CODE BEGIN SysInit */
   89:Src/main.c    **** 
   90:Src/main.c    ****   /* USER CODE END SysInit */
-ARM GAS  C:\Users\Vulca\AppData\Local\Temp\cc7c74Kj.s 			page 3
-
-
   91:Src/main.c    **** 
   92:Src/main.c    ****   /* Initialize all configured peripherals */
   93:Src/main.c    ****   MX_GPIO_Init();
+  49              		.loc 1 93 3
+  50 000c FFF7FEFF 		bl	MX_GPIO_Init
   94:Src/main.c    ****   MX_DMA_Init();
+  51              		.loc 1 94 3
+  52 0010 FFF7FEFF 		bl	MX_DMA_Init
   95:Src/main.c    ****   MX_USART2_UART_Init();
+  53              		.loc 1 95 3
+  54 0014 FFF7FEFF 		bl	MX_USART2_UART_Init
   96:Src/main.c    ****   /* USER CODE BEGIN 2 */
   97:Src/main.c    **** 
   98:Src/main.c    ****   /* USER CODE END 2 */
   99:Src/main.c    **** 
  100:Src/main.c    ****   /* Infinite loop */
  101:Src/main.c    ****   /* USER CODE BEGIN WHILE */
- 102:Src/main.c    ****   while (1)
- 103:Src/main.c    ****   {
- 104:Src/main.c    ****     /* USER CODE END WHILE */
- 105:Src/main.c    ****     HAL_UART_Transmit(&huart2, (uint8_t *)"hello", strlen("hello"),HAL_MAX_DELAY);
- 106:Src/main.c    ****     HAL_Delay(1000);
- 107:Src/main.c    ****     /* USER CODE BEGIN 3 */
- 108:Src/main.c    ****   }
- 109:Src/main.c    ****   /* USER CODE END 3 */
- 110:Src/main.c    **** }
+ 102:Src/main.c    **** 
+ 103:Src/main.c    ****   HAL_UART_Transmit_DMA(&huart2, (uint8_t *)"f\r\n", strlen("f\r\n"));
+  55              		.loc 1 103 3
+  56 0018 0549     		ldr	r1, .L3
+  57 001a 064B     		ldr	r3, .L3+4
+  58 001c 0322     		movs	r2, #3
+  59 001e 1800     		movs	r0, r3
+  60 0020 FFF7FEFF 		bl	HAL_UART_Transmit_DMA
+  61              	.L2:
+ 104:Src/main.c    **** 
+ 105:Src/main.c    ****   while (1)
+ 106:Src/main.c    ****   {
+ 107:Src/main.c    ****     // HAL_UART_DMAPause(&huart2);
+ 108:Src/main.c    ****     // HAL_Delay(1000);
+ 109:Src/main.c    ****     //HAL_UART_DMAResume(&huart2);
+ 110:Src/main.c    ****     // HAL_Delay(10);
  111:Src/main.c    **** 
- 112:Src/main.c    **** /**
- 113:Src/main.c    ****   * @brief System Clock Configuration
- 114:Src/main.c    ****   * @retval None
- 115:Src/main.c    ****   */
- 116:Src/main.c    **** void SystemClock_Config(void)
- 117:Src/main.c    **** {
- 118:Src/main.c    ****   RCC_OscInitTypeDef RCC_OscInitStruct = {0};
- 119:Src/main.c    ****   RCC_ClkInitTypeDef RCC_ClkInitStruct = {0};
- 120:Src/main.c    ****   RCC_PeriphCLKInitTypeDef PeriphClkInit = {0};
- 121:Src/main.c    **** 
- 122:Src/main.c    ****   /** Initializes the CPU, AHB and APB busses clocks 
- 123:Src/main.c    ****   */
- 124:Src/main.c    ****   RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSI48;
- 125:Src/main.c    ****   RCC_OscInitStruct.HSI48State = RCC_HSI48_ON;
- 126:Src/main.c    ****   RCC_OscInitStruct.PLL.PLLState = RCC_PLL_NONE;
- 127:Src/main.c    ****   if (HAL_RCC_OscConfig(&RCC_OscInitStruct) != HAL_OK)
- 128:Src/main.c    ****   {
- 129:Src/main.c    ****     Error_Handler();
- 130:Src/main.c    ****   }
+ARM GAS  C:\Users\Vulca\AppData\Local\Temp\ccF2hNMC.s 			page 4
+
+
+ 112:Src/main.c    ****     HAL_Delay(1000);
+  62              		.loc 1 112 5 discriminator 1
+  63 0024 FA23     		movs	r3, #250
+  64 0026 9B00     		lsls	r3, r3, #2
+  65 0028 1800     		movs	r0, r3
+  66 002a FFF7FEFF 		bl	HAL_Delay
+  67 002e F9E7     		b	.L2
+  68              	.L4:
+  69              		.align	2
+  70              	.L3:
+  71 0030 00000000 		.word	.LC0
+  72 0034 00000000 		.word	huart2
+  73              		.cfi_endproc
+  74              	.LFE40:
+  76              		.section	.text.SystemClock_Config,"ax",%progbits
+  77              		.align	1
+  78              		.global	SystemClock_Config
+  79              		.syntax unified
+  80              		.code	16
+  81              		.thumb_func
+  82              		.fpu softvfp
+  84              	SystemClock_Config:
+  85              	.LFB41:
+ 113:Src/main.c    **** 
+ 114:Src/main.c    ****     /* USER CODE END WHILE */
+ 115:Src/main.c    **** 
+ 116:Src/main.c    ****     /* USER CODE BEGIN 3 */
+ 117:Src/main.c    ****   }
+ 118:Src/main.c    ****   /* USER CODE END 3 */
+ 119:Src/main.c    **** }
+ 120:Src/main.c    **** 
+ 121:Src/main.c    **** /**
+ 122:Src/main.c    ****   * @brief System Clock Configuration
+ 123:Src/main.c    ****   * @retval None
+ 124:Src/main.c    ****   */
+ 125:Src/main.c    **** void SystemClock_Config(void)
+ 126:Src/main.c    **** {
+  86              		.loc 1 126 1
+  87              		.cfi_startproc
+  88              		@ args = 0, pretend = 0, frame = 96
+  89              		@ frame_needed = 1, uses_anonymous_args = 0
+  90 0000 90B5     		push	{r4, r7, lr}
+  91              	.LCFI2:
+  92              		.cfi_def_cfa_offset 12
+  93              		.cfi_offset 4, -12
+  94              		.cfi_offset 7, -8
+  95              		.cfi_offset 14, -4
+  96 0002 99B0     		sub	sp, sp, #100
+  97              	.LCFI3:
+  98              		.cfi_def_cfa_offset 112
+  99 0004 00AF     		add	r7, sp, #0
+ 100              	.LCFI4:
+ 101              		.cfi_def_cfa_register 7
+ 127:Src/main.c    ****   RCC_OscInitTypeDef RCC_OscInitStruct = {0};
+ 102              		.loc 1 127 22
+ 103 0006 2C24     		movs	r4, #44
+ 104 0008 3B19     		adds	r3, r7, r4
+ARM GAS  C:\Users\Vulca\AppData\Local\Temp\ccF2hNMC.s 			page 5
+
+
+ 105 000a 1800     		movs	r0, r3
+ 106 000c 3423     		movs	r3, #52
+ 107 000e 1A00     		movs	r2, r3
+ 108 0010 0021     		movs	r1, #0
+ 109 0012 FFF7FEFF 		bl	memset
+ 128:Src/main.c    ****   RCC_ClkInitTypeDef RCC_ClkInitStruct = {0};
+ 110              		.loc 1 128 22
+ 111 0016 1C23     		movs	r3, #28
+ 112 0018 FB18     		adds	r3, r7, r3
+ 113 001a 1800     		movs	r0, r3
+ 114 001c 1023     		movs	r3, #16
+ 115 001e 1A00     		movs	r2, r3
+ 116 0020 0021     		movs	r1, #0
+ 117 0022 FFF7FEFF 		bl	memset
+ 129:Src/main.c    ****   RCC_PeriphCLKInitTypeDef PeriphClkInit = {0};
+ 118              		.loc 1 129 28
+ 119 0026 3B00     		movs	r3, r7
+ 120 0028 1800     		movs	r0, r3
+ 121 002a 1C23     		movs	r3, #28
+ 122 002c 1A00     		movs	r2, r3
+ 123 002e 0021     		movs	r1, #0
+ 124 0030 FFF7FEFF 		bl	memset
+ 130:Src/main.c    **** 
  131:Src/main.c    ****   /** Initializes the CPU, AHB and APB busses clocks 
  132:Src/main.c    ****   */
- 133:Src/main.c    ****   RCC_ClkInitStruct.ClockType = RCC_CLOCKTYPE_HCLK | RCC_CLOCKTYPE_SYSCLK | RCC_CLOCKTYPE_PCLK1;
- 134:Src/main.c    ****   RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_HSI48;
- 135:Src/main.c    ****   RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
- 136:Src/main.c    ****   RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV1;
- 137:Src/main.c    **** 
- 138:Src/main.c    ****   if (HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_1) != HAL_OK)
- 139:Src/main.c    ****   {
- 140:Src/main.c    ****     Error_Handler();
- 141:Src/main.c    ****   }
- 142:Src/main.c    ****   PeriphClkInit.PeriphClockSelection = RCC_PERIPHCLK_USART2;
- 143:Src/main.c    ****   PeriphClkInit.Usart2ClockSelection = RCC_USART2CLKSOURCE_PCLK1;
- 144:Src/main.c    ****   if (HAL_RCCEx_PeriphCLKConfig(&PeriphClkInit) != HAL_OK)
- 145:Src/main.c    ****   {
- 146:Src/main.c    ****     Error_Handler();
- 147:Src/main.c    ****   }
-ARM GAS  C:\Users\Vulca\AppData\Local\Temp\cc7c74Kj.s 			page 4
+ 133:Src/main.c    ****   RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSI48;
+ 125              		.loc 1 133 36
+ 126 0034 3B19     		adds	r3, r7, r4
+ 127 0036 2022     		movs	r2, #32
+ 128 0038 1A60     		str	r2, [r3]
+ 134:Src/main.c    ****   RCC_OscInitStruct.HSI48State = RCC_HSI48_ON;
+ 129              		.loc 1 134 32
+ 130 003a 3B19     		adds	r3, r7, r4
+ 131 003c 0122     		movs	r2, #1
+ 132 003e 1A62     		str	r2, [r3, #32]
+ 135:Src/main.c    ****   RCC_OscInitStruct.PLL.PLLState = RCC_PLL_NONE;
+ 133              		.loc 1 135 34
+ 134 0040 3B19     		adds	r3, r7, r4
+ 135 0042 0022     		movs	r2, #0
+ 136 0044 5A62     		str	r2, [r3, #36]
+ 136:Src/main.c    ****   if (HAL_RCC_OscConfig(&RCC_OscInitStruct) != HAL_OK)
+ 137              		.loc 1 136 7
+ 138 0046 3B19     		adds	r3, r7, r4
+ 139 0048 1800     		movs	r0, r3
+ 140 004a FFF7FEFF 		bl	HAL_RCC_OscConfig
+ 141 004e 031E     		subs	r3, r0, #0
+ 142              		.loc 1 136 6
+ 143 0050 01D0     		beq	.L6
+ 137:Src/main.c    ****   {
+ 138:Src/main.c    ****     Error_Handler();
+ 144              		.loc 1 138 5
+ 145 0052 FFF7FEFF 		bl	Error_Handler
+ 146              	.L6:
+ 139:Src/main.c    ****   }
+ 140:Src/main.c    ****   /** Initializes the CPU, AHB and APB busses clocks 
+ 141:Src/main.c    ****   */
+ 142:Src/main.c    ****   RCC_ClkInitStruct.ClockType = RCC_CLOCKTYPE_HCLK | RCC_CLOCKTYPE_SYSCLK | RCC_CLOCKTYPE_PCLK1;
+ARM GAS  C:\Users\Vulca\AppData\Local\Temp\ccF2hNMC.s 			page 6
 
 
- 148:Src/main.c    **** }
- 149:Src/main.c    **** 
- 150:Src/main.c    **** /**
- 151:Src/main.c    ****   * @brief USART2 Initialization Function
- 152:Src/main.c    ****   * @param None
- 153:Src/main.c    ****   * @retval None
- 154:Src/main.c    ****   */
- 155:Src/main.c    **** static void MX_USART2_UART_Init(void)
- 156:Src/main.c    **** {
- 157:Src/main.c    **** 
- 158:Src/main.c    ****   /* USER CODE BEGIN USART2_Init 0 */
- 159:Src/main.c    **** 
- 160:Src/main.c    ****   /* USER CODE END USART2_Init 0 */
- 161:Src/main.c    **** 
- 162:Src/main.c    ****   /* USER CODE BEGIN USART2_Init 1 */
- 163:Src/main.c    **** 
- 164:Src/main.c    ****   /* USER CODE END USART2_Init 1 */
- 165:Src/main.c    ****   huart2.Instance = USART2;
- 166:Src/main.c    ****   huart2.Init.BaudRate = 115200;
- 167:Src/main.c    ****   huart2.Init.WordLength = UART_WORDLENGTH_8B;
- 168:Src/main.c    ****   huart2.Init.StopBits = UART_STOPBITS_1;
- 169:Src/main.c    ****   huart2.Init.Parity = UART_PARITY_NONE;
- 170:Src/main.c    ****   huart2.Init.Mode = UART_MODE_TX_RX;
- 171:Src/main.c    ****   huart2.Init.HwFlowCtl = UART_HWCONTROL_NONE;
- 172:Src/main.c    ****   huart2.Init.OverSampling = UART_OVERSAMPLING_16;
- 173:Src/main.c    ****   huart2.Init.OneBitSampling = UART_ONE_BIT_SAMPLE_DISABLE;
- 174:Src/main.c    ****   huart2.AdvancedInit.AdvFeatureInit = UART_ADVFEATURE_NO_INIT;
- 175:Src/main.c    ****   if (HAL_UART_Init(&huart2) != HAL_OK)
- 176:Src/main.c    ****   {
- 177:Src/main.c    ****     Error_Handler();
- 178:Src/main.c    ****   }
- 179:Src/main.c    ****   /* USER CODE BEGIN USART2_Init 2 */
- 180:Src/main.c    **** 
- 181:Src/main.c    ****   /* USER CODE END USART2_Init 2 */
- 182:Src/main.c    **** }
- 183:Src/main.c    **** 
- 184:Src/main.c    **** /** 
- 185:Src/main.c    ****   * Enable DMA controller clock
- 186:Src/main.c    ****   */
- 187:Src/main.c    **** static void MX_DMA_Init(void)
- 188:Src/main.c    **** {
- 189:Src/main.c    **** 
- 190:Src/main.c    ****   /* DMA controller clock enable */
- 191:Src/main.c    ****   __HAL_RCC_DMA1_CLK_ENABLE();
- 192:Src/main.c    **** 
- 193:Src/main.c    ****   /* DMA interrupt init */
- 194:Src/main.c    ****   /* DMA1_Ch1_IRQn interrupt configuration */
- 195:Src/main.c    ****   HAL_NVIC_SetPriority(DMA1_Ch1_IRQn, 0, 0);
- 196:Src/main.c    ****   HAL_NVIC_EnableIRQ(DMA1_Ch1_IRQn);
- 197:Src/main.c    ****   /* DMA1_Ch2_3_DMA2_Ch1_2_IRQn interrupt configuration */
- 198:Src/main.c    ****   HAL_NVIC_SetPriority(DMA1_Ch2_3_DMA2_Ch1_2_IRQn, 0, 0);
- 199:Src/main.c    ****   HAL_NVIC_EnableIRQ(DMA1_Ch2_3_DMA2_Ch1_2_IRQn);
- 200:Src/main.c    **** }
- 201:Src/main.c    **** 
- 202:Src/main.c    **** /**
- 203:Src/main.c    ****   * @brief GPIO Initialization Function
- 204:Src/main.c    ****   * @param None
-ARM GAS  C:\Users\Vulca\AppData\Local\Temp\cc7c74Kj.s 			page 5
+ 147              		.loc 1 142 31
+ 148 0056 1C21     		movs	r1, #28
+ 149 0058 7B18     		adds	r3, r7, r1
+ 150 005a 0722     		movs	r2, #7
+ 151 005c 1A60     		str	r2, [r3]
+ 143:Src/main.c    ****   RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_HSI48;
+ 152              		.loc 1 143 34
+ 153 005e 7B18     		adds	r3, r7, r1
+ 154 0060 0322     		movs	r2, #3
+ 155 0062 5A60     		str	r2, [r3, #4]
+ 144:Src/main.c    ****   RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
+ 156              		.loc 1 144 35
+ 157 0064 7B18     		adds	r3, r7, r1
+ 158 0066 0022     		movs	r2, #0
+ 159 0068 9A60     		str	r2, [r3, #8]
+ 145:Src/main.c    ****   RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV1;
+ 160              		.loc 1 145 36
+ 161 006a 7B18     		adds	r3, r7, r1
+ 162 006c 0022     		movs	r2, #0
+ 163 006e DA60     		str	r2, [r3, #12]
+ 146:Src/main.c    **** 
+ 147:Src/main.c    ****   if (HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_1) != HAL_OK)
+ 164              		.loc 1 147 7
+ 165 0070 7B18     		adds	r3, r7, r1
+ 166 0072 0121     		movs	r1, #1
+ 167 0074 1800     		movs	r0, r3
+ 168 0076 FFF7FEFF 		bl	HAL_RCC_ClockConfig
+ 169 007a 031E     		subs	r3, r0, #0
+ 170              		.loc 1 147 6
+ 171 007c 01D0     		beq	.L7
+ 148:Src/main.c    ****   {
+ 149:Src/main.c    ****     Error_Handler();
+ 172              		.loc 1 149 5
+ 173 007e FFF7FEFF 		bl	Error_Handler
+ 174              	.L7:
+ 150:Src/main.c    ****   }
+ 151:Src/main.c    ****   PeriphClkInit.PeriphClockSelection = RCC_PERIPHCLK_USART2;
+ 175              		.loc 1 151 38
+ 176 0082 3B00     		movs	r3, r7
+ 177 0084 0222     		movs	r2, #2
+ 178 0086 1A60     		str	r2, [r3]
+ 152:Src/main.c    ****   PeriphClkInit.Usart2ClockSelection = RCC_USART2CLKSOURCE_PCLK1;
+ 179              		.loc 1 152 38
+ 180 0088 3B00     		movs	r3, r7
+ 181 008a 0022     		movs	r2, #0
+ 182 008c DA60     		str	r2, [r3, #12]
+ 153:Src/main.c    ****   if (HAL_RCCEx_PeriphCLKConfig(&PeriphClkInit) != HAL_OK)
+ 183              		.loc 1 153 7
+ 184 008e 3B00     		movs	r3, r7
+ 185 0090 1800     		movs	r0, r3
+ 186 0092 FFF7FEFF 		bl	HAL_RCCEx_PeriphCLKConfig
+ 187 0096 031E     		subs	r3, r0, #0
+ 188              		.loc 1 153 6
+ 189 0098 01D0     		beq	.L9
+ 154:Src/main.c    ****   {
+ 155:Src/main.c    ****     Error_Handler();
+ 190              		.loc 1 155 5
+ARM GAS  C:\Users\Vulca\AppData\Local\Temp\ccF2hNMC.s 			page 7
 
 
- 205:Src/main.c    ****   * @retval None
- 206:Src/main.c    ****   */
- 207:Src/main.c    **** static void MX_GPIO_Init(void)
- 208:Src/main.c    **** {
-  26              		.loc 1 208 1 view -0
-  27              		.cfi_startproc
-  28              		@ args = 0, pretend = 0, frame = 32
-  29              		@ frame_needed = 0, uses_anonymous_args = 0
-  30 0000 30B5     		push	{r4, r5, lr}
-  31              	.LCFI0:
-  32              		.cfi_def_cfa_offset 12
-  33              		.cfi_offset 4, -12
-  34              		.cfi_offset 5, -8
-  35              		.cfi_offset 14, -4
-  36 0002 89B0     		sub	sp, sp, #36
-  37              	.LCFI1:
-  38              		.cfi_def_cfa_offset 48
- 209:Src/main.c    ****   GPIO_InitTypeDef GPIO_InitStruct = {0};
-  39              		.loc 1 209 3 view .LVU1
-  40              		.loc 1 209 20 is_stmt 0 view .LVU2
-  41 0004 1422     		movs	r2, #20
-  42 0006 0021     		movs	r1, #0
-  43 0008 03A8     		add	r0, sp, #12
-  44 000a FFF7FEFF 		bl	memset
-  45              	.LVL0:
- 210:Src/main.c    **** 
- 211:Src/main.c    ****   /* GPIO Ports Clock Enable */
- 212:Src/main.c    ****   __HAL_RCC_GPIOC_CLK_ENABLE();
-  46              		.loc 1 212 3 is_stmt 1 view .LVU3
-  47              	.LBB2:
-  48              		.loc 1 212 3 view .LVU4
-  49              		.loc 1 212 3 view .LVU5
-  50 000e 1D4B     		ldr	r3, .L2
-  51 0010 5969     		ldr	r1, [r3, #20]
-  52 0012 8020     		movs	r0, #128
-  53 0014 0003     		lsls	r0, r0, #12
-  54 0016 0143     		orrs	r1, r0
-  55 0018 5961     		str	r1, [r3, #20]
-  56              		.loc 1 212 3 view .LVU6
-  57 001a 5A69     		ldr	r2, [r3, #20]
-  58 001c 0240     		ands	r2, r0
-  59 001e 0092     		str	r2, [sp]
-  60              		.loc 1 212 3 view .LVU7
-  61 0020 009A     		ldr	r2, [sp]
-  62              	.LBE2:
-  63              		.loc 1 212 3 view .LVU8
- 213:Src/main.c    ****   __HAL_RCC_GPIOF_CLK_ENABLE();
-  64              		.loc 1 213 3 view .LVU9
-  65              	.LBB3:
-  66              		.loc 1 213 3 view .LVU10
-  67              		.loc 1 213 3 view .LVU11
-  68 0022 5969     		ldr	r1, [r3, #20]
-  69 0024 8020     		movs	r0, #128
-  70 0026 C003     		lsls	r0, r0, #15
-  71 0028 0143     		orrs	r1, r0
-  72 002a 5961     		str	r1, [r3, #20]
-  73              		.loc 1 213 3 view .LVU12
-ARM GAS  C:\Users\Vulca\AppData\Local\Temp\cc7c74Kj.s 			page 6
+ 191 009a FFF7FEFF 		bl	Error_Handler
+ 192              	.L9:
+ 156:Src/main.c    ****   }
+ 157:Src/main.c    **** }
+ 193              		.loc 1 157 1
+ 194 009e C046     		nop
+ 195 00a0 BD46     		mov	sp, r7
+ 196 00a2 19B0     		add	sp, sp, #100
+ 197              		@ sp needed
+ 198 00a4 90BD     		pop	{r4, r7, pc}
+ 199              		.cfi_endproc
+ 200              	.LFE41:
+ 202              		.section	.text.MX_USART2_UART_Init,"ax",%progbits
+ 203              		.align	1
+ 204              		.syntax unified
+ 205              		.code	16
+ 206              		.thumb_func
+ 207              		.fpu softvfp
+ 209              	MX_USART2_UART_Init:
+ 210              	.LFB42:
+ 158:Src/main.c    **** 
+ 159:Src/main.c    **** /**
+ 160:Src/main.c    ****   * @brief USART2 Initialization Function
+ 161:Src/main.c    ****   * @param None
+ 162:Src/main.c    ****   * @retval None
+ 163:Src/main.c    ****   */
+ 164:Src/main.c    **** static void MX_USART2_UART_Init(void)
+ 165:Src/main.c    **** {
+ 211              		.loc 1 165 1
+ 212              		.cfi_startproc
+ 213              		@ args = 0, pretend = 0, frame = 0
+ 214              		@ frame_needed = 1, uses_anonymous_args = 0
+ 215 0000 80B5     		push	{r7, lr}
+ 216              	.LCFI5:
+ 217              		.cfi_def_cfa_offset 8
+ 218              		.cfi_offset 7, -8
+ 219              		.cfi_offset 14, -4
+ 220 0002 00AF     		add	r7, sp, #0
+ 221              	.LCFI6:
+ 222              		.cfi_def_cfa_register 7
+ 166:Src/main.c    ****   HAL_NVIC_SetPriority(USART2_IRQn, 0, 0);
+ 223              		.loc 1 166 3
+ 224 0004 0022     		movs	r2, #0
+ 225 0006 0021     		movs	r1, #0
+ 226 0008 1C20     		movs	r0, #28
+ 227 000a FFF7FEFF 		bl	HAL_NVIC_SetPriority
+ 167:Src/main.c    ****   HAL_NVIC_EnableIRQ(USART2_IRQn);
+ 228              		.loc 1 167 3
+ 229 000e 1C20     		movs	r0, #28
+ 230 0010 FFF7FEFF 		bl	HAL_NVIC_EnableIRQ
+ 168:Src/main.c    **** 
+ 169:Src/main.c    ****   /* USER CODE BEGIN USART2_Init 0 */
+ 170:Src/main.c    **** 
+ 171:Src/main.c    ****   /* USER CODE END USART2_Init 0 */
+ 172:Src/main.c    **** 
+ 173:Src/main.c    ****   /* USER CODE BEGIN USART2_Init 1 */
+ 174:Src/main.c    **** 
+ARM GAS  C:\Users\Vulca\AppData\Local\Temp\ccF2hNMC.s 			page 8
 
 
-  74 002c 5A69     		ldr	r2, [r3, #20]
-  75 002e 0240     		ands	r2, r0
-  76 0030 0192     		str	r2, [sp, #4]
-  77              		.loc 1 213 3 view .LVU13
-  78 0032 019A     		ldr	r2, [sp, #4]
-  79              	.LBE3:
-  80              		.loc 1 213 3 view .LVU14
- 214:Src/main.c    ****   __HAL_RCC_GPIOA_CLK_ENABLE();
-  81              		.loc 1 214 3 view .LVU15
-  82              	.LBB4:
-  83              		.loc 1 214 3 view .LVU16
-  84              		.loc 1 214 3 view .LVU17
-  85 0034 5A69     		ldr	r2, [r3, #20]
-  86 0036 8021     		movs	r1, #128
-  87 0038 8902     		lsls	r1, r1, #10
-  88 003a 0A43     		orrs	r2, r1
-  89 003c 5A61     		str	r2, [r3, #20]
-  90              		.loc 1 214 3 view .LVU18
-  91 003e 5B69     		ldr	r3, [r3, #20]
-  92 0040 0B40     		ands	r3, r1
-  93 0042 0293     		str	r3, [sp, #8]
-  94              		.loc 1 214 3 view .LVU19
-  95 0044 029B     		ldr	r3, [sp, #8]
-  96              	.LBE4:
-  97              		.loc 1 214 3 view .LVU20
- 215:Src/main.c    **** 
- 216:Src/main.c    ****   /*Configure GPIO pin Output Level */
- 217:Src/main.c    ****   HAL_GPIO_WritePin(LD2_GPIO_Port, LD2_Pin, GPIO_PIN_RESET);
-  98              		.loc 1 217 3 view .LVU21
-  99 0046 9025     		movs	r5, #144
- 100 0048 ED05     		lsls	r5, r5, #23
- 101 004a 0022     		movs	r2, #0
- 102 004c 2021     		movs	r1, #32
- 103 004e 2800     		movs	r0, r5
- 104 0050 FFF7FEFF 		bl	HAL_GPIO_WritePin
- 105              	.LVL1:
- 218:Src/main.c    **** 
- 219:Src/main.c    ****   /*Configure GPIO pin : B1_Pin */
- 220:Src/main.c    ****   GPIO_InitStruct.Pin = B1_Pin;
- 106              		.loc 1 220 3 view .LVU22
- 107              		.loc 1 220 23 is_stmt 0 view .LVU23
- 108 0054 8023     		movs	r3, #128
- 109 0056 9B01     		lsls	r3, r3, #6
- 110 0058 0393     		str	r3, [sp, #12]
- 221:Src/main.c    ****   GPIO_InitStruct.Mode = GPIO_MODE_IT_FALLING;
- 111              		.loc 1 221 3 is_stmt 1 view .LVU24
- 112              		.loc 1 221 24 is_stmt 0 view .LVU25
- 113 005a 0B4B     		ldr	r3, .L2+4
- 114 005c 0493     		str	r3, [sp, #16]
- 222:Src/main.c    ****   GPIO_InitStruct.Pull = GPIO_NOPULL;
- 115              		.loc 1 222 3 is_stmt 1 view .LVU26
- 116              		.loc 1 222 24 is_stmt 0 view .LVU27
- 117 005e 0024     		movs	r4, #0
- 118 0060 0594     		str	r4, [sp, #20]
- 223:Src/main.c    ****   HAL_GPIO_Init(B1_GPIO_Port, &GPIO_InitStruct);
- 119              		.loc 1 223 3 is_stmt 1 view .LVU28
- 120 0062 03A9     		add	r1, sp, #12
-ARM GAS  C:\Users\Vulca\AppData\Local\Temp\cc7c74Kj.s 			page 7
+ 175:Src/main.c    ****   /* USER CODE END USART2_Init 1 */
+ 176:Src/main.c    ****   huart2.Instance = USART2;
+ 231              		.loc 1 176 19
+ 232 0014 144B     		ldr	r3, .L13
+ 233 0016 154A     		ldr	r2, .L13+4
+ 234 0018 1A60     		str	r2, [r3]
+ 177:Src/main.c    ****   huart2.Init.BaudRate = 115200;
+ 235              		.loc 1 177 24
+ 236 001a 134B     		ldr	r3, .L13
+ 237 001c E122     		movs	r2, #225
+ 238 001e 5202     		lsls	r2, r2, #9
+ 239 0020 5A60     		str	r2, [r3, #4]
+ 178:Src/main.c    ****   huart2.Init.WordLength = UART_WORDLENGTH_8B;
+ 240              		.loc 1 178 26
+ 241 0022 114B     		ldr	r3, .L13
+ 242 0024 0022     		movs	r2, #0
+ 243 0026 9A60     		str	r2, [r3, #8]
+ 179:Src/main.c    ****   huart2.Init.StopBits = UART_STOPBITS_1;
+ 244              		.loc 1 179 24
+ 245 0028 0F4B     		ldr	r3, .L13
+ 246 002a 0022     		movs	r2, #0
+ 247 002c DA60     		str	r2, [r3, #12]
+ 180:Src/main.c    ****   huart2.Init.Parity = UART_PARITY_NONE;
+ 248              		.loc 1 180 22
+ 249 002e 0E4B     		ldr	r3, .L13
+ 250 0030 0022     		movs	r2, #0
+ 251 0032 1A61     		str	r2, [r3, #16]
+ 181:Src/main.c    ****   huart2.Init.Mode = UART_MODE_TX_RX;
+ 252              		.loc 1 181 20
+ 253 0034 0C4B     		ldr	r3, .L13
+ 254 0036 0C22     		movs	r2, #12
+ 255 0038 5A61     		str	r2, [r3, #20]
+ 182:Src/main.c    ****   huart2.Init.HwFlowCtl = UART_HWCONTROL_NONE;
+ 256              		.loc 1 182 25
+ 257 003a 0B4B     		ldr	r3, .L13
+ 258 003c 0022     		movs	r2, #0
+ 259 003e 9A61     		str	r2, [r3, #24]
+ 183:Src/main.c    ****   huart2.Init.OverSampling = UART_OVERSAMPLING_16;
+ 260              		.loc 1 183 28
+ 261 0040 094B     		ldr	r3, .L13
+ 262 0042 0022     		movs	r2, #0
+ 263 0044 DA61     		str	r2, [r3, #28]
+ 184:Src/main.c    ****   huart2.Init.OneBitSampling = UART_ONE_BIT_SAMPLE_DISABLE;
+ 264              		.loc 1 184 30
+ 265 0046 084B     		ldr	r3, .L13
+ 266 0048 0022     		movs	r2, #0
+ 267 004a 1A62     		str	r2, [r3, #32]
+ 185:Src/main.c    ****   huart2.AdvancedInit.AdvFeatureInit = UART_ADVFEATURE_NO_INIT;
+ 268              		.loc 1 185 38
+ 269 004c 064B     		ldr	r3, .L13
+ 270 004e 0022     		movs	r2, #0
+ 271 0050 5A62     		str	r2, [r3, #36]
+ 186:Src/main.c    ****   if (HAL_UART_Init(&huart2) != HAL_OK)
+ 272              		.loc 1 186 7
+ 273 0052 054B     		ldr	r3, .L13
+ 274 0054 1800     		movs	r0, r3
+ 275 0056 FFF7FEFF 		bl	HAL_UART_Init
+ARM GAS  C:\Users\Vulca\AppData\Local\Temp\ccF2hNMC.s 			page 9
 
 
- 121 0064 0948     		ldr	r0, .L2+8
- 122 0066 FFF7FEFF 		bl	HAL_GPIO_Init
- 123              	.LVL2:
- 224:Src/main.c    **** 
- 225:Src/main.c    ****   /*Configure GPIO pin : LD2_Pin */
- 226:Src/main.c    ****   GPIO_InitStruct.Pin = LD2_Pin;
- 124              		.loc 1 226 3 view .LVU29
- 125              		.loc 1 226 23 is_stmt 0 view .LVU30
- 126 006a 2023     		movs	r3, #32
- 127 006c 0393     		str	r3, [sp, #12]
- 227:Src/main.c    ****   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
- 128              		.loc 1 227 3 is_stmt 1 view .LVU31
- 129              		.loc 1 227 24 is_stmt 0 view .LVU32
- 130 006e 1F3B     		subs	r3, r3, #31
- 131 0070 0493     		str	r3, [sp, #16]
- 228:Src/main.c    ****   GPIO_InitStruct.Pull = GPIO_NOPULL;
- 132              		.loc 1 228 3 is_stmt 1 view .LVU33
- 133              		.loc 1 228 24 is_stmt 0 view .LVU34
- 134 0072 0594     		str	r4, [sp, #20]
- 229:Src/main.c    ****   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
- 135              		.loc 1 229 3 is_stmt 1 view .LVU35
- 136              		.loc 1 229 25 is_stmt 0 view .LVU36
- 137 0074 0694     		str	r4, [sp, #24]
- 230:Src/main.c    ****   HAL_GPIO_Init(LD2_GPIO_Port, &GPIO_InitStruct);
- 138              		.loc 1 230 3 is_stmt 1 view .LVU37
- 139 0076 03A9     		add	r1, sp, #12
- 140 0078 2800     		movs	r0, r5
- 141 007a FFF7FEFF 		bl	HAL_GPIO_Init
- 142              	.LVL3:
- 231:Src/main.c    **** }
- 143              		.loc 1 231 1 is_stmt 0 view .LVU38
- 144 007e 09B0     		add	sp, sp, #36
- 145              		@ sp needed
- 146 0080 30BD     		pop	{r4, r5, pc}
- 147              	.L3:
- 148 0082 C046     		.align	2
- 149              	.L2:
- 150 0084 00100240 		.word	1073876992
- 151 0088 00002110 		.word	270598144
- 152 008c 00080048 		.word	1207961600
- 153              		.cfi_endproc
- 154              	.LFE44:
- 156              		.section	.text.MX_DMA_Init,"ax",%progbits
- 157              		.align	1
- 158              		.syntax unified
- 159              		.code	16
- 160              		.thumb_func
- 161              		.fpu softvfp
- 163              	MX_DMA_Init:
- 164              	.LFB43:
- 188:Src/main.c    **** 
- 165              		.loc 1 188 1 is_stmt 1 view -0
- 166              		.cfi_startproc
- 167              		@ args = 0, pretend = 0, frame = 8
- 168              		@ frame_needed = 0, uses_anonymous_args = 0
- 169 0000 00B5     		push	{lr}
- 170              	.LCFI2:
-ARM GAS  C:\Users\Vulca\AppData\Local\Temp\cc7c74Kj.s 			page 8
-
-
- 171              		.cfi_def_cfa_offset 4
- 172              		.cfi_offset 14, -4
- 173 0002 83B0     		sub	sp, sp, #12
- 174              	.LCFI3:
- 175              		.cfi_def_cfa_offset 16
+ 276 005a 031E     		subs	r3, r0, #0
+ 277              		.loc 1 186 6
+ 278 005c 01D0     		beq	.L12
+ 187:Src/main.c    ****   {
+ 188:Src/main.c    ****     Error_Handler();
+ 279              		.loc 1 188 5
+ 280 005e FFF7FEFF 		bl	Error_Handler
+ 281              	.L12:
+ 189:Src/main.c    ****   }
+ 190:Src/main.c    ****   /* USER CODE BEGIN USART2_Init 2 */
  191:Src/main.c    **** 
- 176              		.loc 1 191 3 view .LVU40
- 177              	.LBB5:
- 191:Src/main.c    **** 
- 178              		.loc 1 191 3 view .LVU41
- 191:Src/main.c    **** 
- 179              		.loc 1 191 3 view .LVU42
- 180 0004 0D4A     		ldr	r2, .L5
- 181 0006 5169     		ldr	r1, [r2, #20]
- 182 0008 0123     		movs	r3, #1
- 183 000a 1943     		orrs	r1, r3
- 184 000c 5161     		str	r1, [r2, #20]
- 191:Src/main.c    **** 
- 185              		.loc 1 191 3 view .LVU43
- 186 000e 5269     		ldr	r2, [r2, #20]
- 187 0010 1340     		ands	r3, r2
- 188 0012 0193     		str	r3, [sp, #4]
- 191:Src/main.c    **** 
- 189              		.loc 1 191 3 view .LVU44
- 190 0014 019B     		ldr	r3, [sp, #4]
- 191              	.LBE5:
- 191:Src/main.c    **** 
- 192              		.loc 1 191 3 view .LVU45
- 195:Src/main.c    ****   HAL_NVIC_EnableIRQ(DMA1_Ch1_IRQn);
- 193              		.loc 1 195 3 view .LVU46
- 194 0016 0022     		movs	r2, #0
- 195 0018 0021     		movs	r1, #0
- 196 001a 0920     		movs	r0, #9
- 197 001c FFF7FEFF 		bl	HAL_NVIC_SetPriority
- 198              	.LVL4:
- 196:Src/main.c    ****   /* DMA1_Ch2_3_DMA2_Ch1_2_IRQn interrupt configuration */
- 199              		.loc 1 196 3 view .LVU47
- 200 0020 0920     		movs	r0, #9
- 201 0022 FFF7FEFF 		bl	HAL_NVIC_EnableIRQ
- 202              	.LVL5:
- 198:Src/main.c    ****   HAL_NVIC_EnableIRQ(DMA1_Ch2_3_DMA2_Ch1_2_IRQn);
- 203              		.loc 1 198 3 view .LVU48
- 204 0026 0022     		movs	r2, #0
- 205 0028 0021     		movs	r1, #0
- 206 002a 0A20     		movs	r0, #10
- 207 002c FFF7FEFF 		bl	HAL_NVIC_SetPriority
- 208              	.LVL6:
- 199:Src/main.c    **** }
- 209              		.loc 1 199 3 view .LVU49
- 210 0030 0A20     		movs	r0, #10
- 211 0032 FFF7FEFF 		bl	HAL_NVIC_EnableIRQ
- 212              	.LVL7:
+ 192:Src/main.c    ****   /* USER CODE END USART2_Init 2 */
+ 193:Src/main.c    **** }
+ 282              		.loc 1 193 1
+ 283 0062 C046     		nop
+ 284 0064 BD46     		mov	sp, r7
+ 285              		@ sp needed
+ 286 0066 80BD     		pop	{r7, pc}
+ 287              	.L14:
+ 288              		.align	2
+ 289              	.L13:
+ 290 0068 00000000 		.word	huart2
+ 291 006c 00440040 		.word	1073759232
+ 292              		.cfi_endproc
+ 293              	.LFE42:
+ 295              		.section	.text.MX_DMA_Init,"ax",%progbits
+ 296              		.align	1
+ 297              		.syntax unified
+ 298              		.code	16
+ 299              		.thumb_func
+ 300              		.fpu softvfp
+ 302              	MX_DMA_Init:
+ 303              	.LFB43:
+ 194:Src/main.c    **** 
+ 195:Src/main.c    **** /** 
+ 196:Src/main.c    ****   * Enable DMA controller clock
+ 197:Src/main.c    ****   */
+ 198:Src/main.c    **** static void MX_DMA_Init(void)
+ 199:Src/main.c    **** {
+ 304              		.loc 1 199 1
+ 305              		.cfi_startproc
+ 306              		@ args = 0, pretend = 0, frame = 8
+ 307              		@ frame_needed = 1, uses_anonymous_args = 0
+ 308 0000 80B5     		push	{r7, lr}
+ 309              	.LCFI7:
+ 310              		.cfi_def_cfa_offset 8
+ 311              		.cfi_offset 7, -8
+ 312              		.cfi_offset 14, -4
+ 313 0002 82B0     		sub	sp, sp, #8
+ 314              	.LCFI8:
+ 315              		.cfi_def_cfa_offset 16
+ 316 0004 00AF     		add	r7, sp, #0
+ 317              	.LCFI9:
+ 318              		.cfi_def_cfa_register 7
+ 319              	.LBB2:
  200:Src/main.c    **** 
- 213              		.loc 1 200 1 is_stmt 0 view .LVU50
- 214 0036 03B0     		add	sp, sp, #12
- 215              		@ sp needed
- 216 0038 00BD     		pop	{pc}
-ARM GAS  C:\Users\Vulca\AppData\Local\Temp\cc7c74Kj.s 			page 9
+ 201:Src/main.c    ****   /* DMA controller clock enable */
+ARM GAS  C:\Users\Vulca\AppData\Local\Temp\ccF2hNMC.s 			page 10
 
 
- 217              	.L6:
- 218 003a C046     		.align	2
- 219              	.L5:
- 220 003c 00100240 		.word	1073876992
- 221              		.cfi_endproc
- 222              	.LFE43:
- 224              		.section	.text.MX_USART2_UART_Init,"ax",%progbits
- 225              		.align	1
- 226              		.syntax unified
- 227              		.code	16
- 228              		.thumb_func
- 229              		.fpu softvfp
- 231              	MX_USART2_UART_Init:
- 232              	.LFB42:
- 156:Src/main.c    **** 
- 233              		.loc 1 156 1 is_stmt 1 view -0
- 234              		.cfi_startproc
- 235              		@ args = 0, pretend = 0, frame = 0
- 236              		@ frame_needed = 0, uses_anonymous_args = 0
- 237 0000 10B5     		push	{r4, lr}
- 238              	.LCFI4:
- 239              		.cfi_def_cfa_offset 8
- 240              		.cfi_offset 4, -8
- 241              		.cfi_offset 14, -4
- 165:Src/main.c    ****   huart2.Init.BaudRate = 115200;
- 242              		.loc 1 165 3 view .LVU52
- 165:Src/main.c    ****   huart2.Init.BaudRate = 115200;
- 243              		.loc 1 165 19 is_stmt 0 view .LVU53
- 244 0002 0948     		ldr	r0, .L8
- 245 0004 094B     		ldr	r3, .L8+4
- 246 0006 0360     		str	r3, [r0]
- 166:Src/main.c    ****   huart2.Init.WordLength = UART_WORDLENGTH_8B;
- 247              		.loc 1 166 3 is_stmt 1 view .LVU54
- 166:Src/main.c    ****   huart2.Init.WordLength = UART_WORDLENGTH_8B;
- 248              		.loc 1 166 24 is_stmt 0 view .LVU55
- 249 0008 E123     		movs	r3, #225
- 250 000a 5B02     		lsls	r3, r3, #9
- 251 000c 4360     		str	r3, [r0, #4]
- 167:Src/main.c    ****   huart2.Init.StopBits = UART_STOPBITS_1;
- 252              		.loc 1 167 3 is_stmt 1 view .LVU56
- 167:Src/main.c    ****   huart2.Init.StopBits = UART_STOPBITS_1;
- 253              		.loc 1 167 26 is_stmt 0 view .LVU57
- 254 000e 0023     		movs	r3, #0
- 255 0010 8360     		str	r3, [r0, #8]
- 168:Src/main.c    ****   huart2.Init.Parity = UART_PARITY_NONE;
- 256              		.loc 1 168 3 is_stmt 1 view .LVU58
- 168:Src/main.c    ****   huart2.Init.Parity = UART_PARITY_NONE;
- 257              		.loc 1 168 24 is_stmt 0 view .LVU59
- 258 0012 C360     		str	r3, [r0, #12]
- 169:Src/main.c    ****   huart2.Init.Mode = UART_MODE_TX_RX;
- 259              		.loc 1 169 3 is_stmt 1 view .LVU60
- 169:Src/main.c    ****   huart2.Init.Mode = UART_MODE_TX_RX;
- 260              		.loc 1 169 22 is_stmt 0 view .LVU61
- 261 0014 0361     		str	r3, [r0, #16]
- 170:Src/main.c    ****   huart2.Init.HwFlowCtl = UART_HWCONTROL_NONE;
- 262              		.loc 1 170 3 is_stmt 1 view .LVU62
- 170:Src/main.c    ****   huart2.Init.HwFlowCtl = UART_HWCONTROL_NONE;
-ARM GAS  C:\Users\Vulca\AppData\Local\Temp\cc7c74Kj.s 			page 10
+ 202:Src/main.c    ****   __HAL_RCC_DMA1_CLK_ENABLE();
+ 320              		.loc 1 202 3
+ 321 0006 0C4B     		ldr	r3, .L16
+ 322 0008 5A69     		ldr	r2, [r3, #20]
+ 323 000a 0B4B     		ldr	r3, .L16
+ 324 000c 0121     		movs	r1, #1
+ 325 000e 0A43     		orrs	r2, r1
+ 326 0010 5A61     		str	r2, [r3, #20]
+ 327 0012 094B     		ldr	r3, .L16
+ 328 0014 5B69     		ldr	r3, [r3, #20]
+ 329 0016 0122     		movs	r2, #1
+ 330 0018 1340     		ands	r3, r2
+ 331 001a 7B60     		str	r3, [r7, #4]
+ 332 001c 7B68     		ldr	r3, [r7, #4]
+ 333              	.LBE2:
+ 203:Src/main.c    **** 
+ 204:Src/main.c    ****   /* DMA interrupt init */
+ 205:Src/main.c    ****   /* DMA1_Ch2_3_DMA2_Ch1_2_IRQn interrupt configuration */
+ 206:Src/main.c    ****   HAL_NVIC_SetPriority(DMA1_Ch2_3_DMA2_Ch1_2_IRQn, 0, 0);
+ 334              		.loc 1 206 3
+ 335 001e 0022     		movs	r2, #0
+ 336 0020 0021     		movs	r1, #0
+ 337 0022 0A20     		movs	r0, #10
+ 338 0024 FFF7FEFF 		bl	HAL_NVIC_SetPriority
+ 207:Src/main.c    ****   HAL_NVIC_EnableIRQ(DMA1_Ch2_3_DMA2_Ch1_2_IRQn);
+ 339              		.loc 1 207 3
+ 340 0028 0A20     		movs	r0, #10
+ 341 002a FFF7FEFF 		bl	HAL_NVIC_EnableIRQ
+ 208:Src/main.c    **** }
+ 342              		.loc 1 208 1
+ 343 002e C046     		nop
+ 344 0030 BD46     		mov	sp, r7
+ 345 0032 02B0     		add	sp, sp, #8
+ 346              		@ sp needed
+ 347 0034 80BD     		pop	{r7, pc}
+ 348              	.L17:
+ 349 0036 C046     		.align	2
+ 350              	.L16:
+ 351 0038 00100240 		.word	1073876992
+ 352              		.cfi_endproc
+ 353              	.LFE43:
+ 355              		.section	.text.MX_GPIO_Init,"ax",%progbits
+ 356              		.align	1
+ 357              		.syntax unified
+ 358              		.code	16
+ 359              		.thumb_func
+ 360              		.fpu softvfp
+ 362              	MX_GPIO_Init:
+ 363              	.LFB44:
+ 209:Src/main.c    **** 
+ 210:Src/main.c    **** /**
+ 211:Src/main.c    ****   * @brief GPIO Initialization Function
+ 212:Src/main.c    ****   * @param None
+ 213:Src/main.c    ****   * @retval None
+ 214:Src/main.c    ****   */
+ 215:Src/main.c    **** static void MX_GPIO_Init(void)
+ 216:Src/main.c    **** {
+ARM GAS  C:\Users\Vulca\AppData\Local\Temp\ccF2hNMC.s 			page 11
 
 
- 263              		.loc 1 170 20 is_stmt 0 view .LVU63
- 264 0016 0C22     		movs	r2, #12
- 265 0018 4261     		str	r2, [r0, #20]
- 171:Src/main.c    ****   huart2.Init.OverSampling = UART_OVERSAMPLING_16;
- 266              		.loc 1 171 3 is_stmt 1 view .LVU64
- 171:Src/main.c    ****   huart2.Init.OverSampling = UART_OVERSAMPLING_16;
- 267              		.loc 1 171 25 is_stmt 0 view .LVU65
- 268 001a 8361     		str	r3, [r0, #24]
- 172:Src/main.c    ****   huart2.Init.OneBitSampling = UART_ONE_BIT_SAMPLE_DISABLE;
- 269              		.loc 1 172 3 is_stmt 1 view .LVU66
- 172:Src/main.c    ****   huart2.Init.OneBitSampling = UART_ONE_BIT_SAMPLE_DISABLE;
- 270              		.loc 1 172 28 is_stmt 0 view .LVU67
- 271 001c C361     		str	r3, [r0, #28]
- 173:Src/main.c    ****   huart2.AdvancedInit.AdvFeatureInit = UART_ADVFEATURE_NO_INIT;
- 272              		.loc 1 173 3 is_stmt 1 view .LVU68
- 173:Src/main.c    ****   huart2.AdvancedInit.AdvFeatureInit = UART_ADVFEATURE_NO_INIT;
- 273              		.loc 1 173 30 is_stmt 0 view .LVU69
- 274 001e 0362     		str	r3, [r0, #32]
- 174:Src/main.c    ****   if (HAL_UART_Init(&huart2) != HAL_OK)
- 275              		.loc 1 174 3 is_stmt 1 view .LVU70
- 174:Src/main.c    ****   if (HAL_UART_Init(&huart2) != HAL_OK)
- 276              		.loc 1 174 38 is_stmt 0 view .LVU71
- 277 0020 4362     		str	r3, [r0, #36]
- 175:Src/main.c    ****   {
- 278              		.loc 1 175 3 is_stmt 1 view .LVU72
- 175:Src/main.c    ****   {
- 279              		.loc 1 175 7 is_stmt 0 view .LVU73
- 280 0022 FFF7FEFF 		bl	HAL_UART_Init
- 281              	.LVL8:
- 182:Src/main.c    **** 
- 282              		.loc 1 182 1 view .LVU74
- 283              		@ sp needed
- 284 0026 10BD     		pop	{r4, pc}
- 285              	.L9:
- 286              		.align	2
- 287              	.L8:
- 288 0028 00000000 		.word	huart2
- 289 002c 00440040 		.word	1073759232
- 290              		.cfi_endproc
- 291              	.LFE42:
- 293              		.section	.text.SystemClock_Config,"ax",%progbits
- 294              		.align	1
- 295              		.global	SystemClock_Config
- 296              		.syntax unified
- 297              		.code	16
- 298              		.thumb_func
- 299              		.fpu softvfp
- 301              	SystemClock_Config:
- 302              	.LFB41:
- 117:Src/main.c    ****   RCC_OscInitTypeDef RCC_OscInitStruct = {0};
- 303              		.loc 1 117 1 is_stmt 1 view -0
- 304              		.cfi_startproc
- 305              		@ args = 0, pretend = 0, frame = 96
- 306              		@ frame_needed = 0, uses_anonymous_args = 0
- 307 0000 10B5     		push	{r4, lr}
- 308              	.LCFI5:
- 309              		.cfi_def_cfa_offset 8
-ARM GAS  C:\Users\Vulca\AppData\Local\Temp\cc7c74Kj.s 			page 11
+ 364              		.loc 1 216 1
+ 365              		.cfi_startproc
+ 366              		@ args = 0, pretend = 0, frame = 32
+ 367              		@ frame_needed = 1, uses_anonymous_args = 0
+ 368 0000 90B5     		push	{r4, r7, lr}
+ 369              	.LCFI10:
+ 370              		.cfi_def_cfa_offset 12
+ 371              		.cfi_offset 4, -12
+ 372              		.cfi_offset 7, -8
+ 373              		.cfi_offset 14, -4
+ 374 0002 89B0     		sub	sp, sp, #36
+ 375              	.LCFI11:
+ 376              		.cfi_def_cfa_offset 48
+ 377 0004 00AF     		add	r7, sp, #0
+ 378              	.LCFI12:
+ 379              		.cfi_def_cfa_register 7
+ 217:Src/main.c    ****   GPIO_InitTypeDef GPIO_InitStruct = {0};
+ 380              		.loc 1 217 20
+ 381 0006 0C24     		movs	r4, #12
+ 382 0008 3B19     		adds	r3, r7, r4
+ 383 000a 1800     		movs	r0, r3
+ 384 000c 1423     		movs	r3, #20
+ 385 000e 1A00     		movs	r2, r3
+ 386 0010 0021     		movs	r1, #0
+ 387 0012 FFF7FEFF 		bl	memset
+ 388              	.LBB3:
+ 218:Src/main.c    **** 
+ 219:Src/main.c    ****   /* GPIO Ports Clock Enable */
+ 220:Src/main.c    ****   __HAL_RCC_GPIOC_CLK_ENABLE();
+ 389              		.loc 1 220 3
+ 390 0016 2C4B     		ldr	r3, .L19
+ 391 0018 5A69     		ldr	r2, [r3, #20]
+ 392 001a 2B4B     		ldr	r3, .L19
+ 393 001c 8021     		movs	r1, #128
+ 394 001e 0903     		lsls	r1, r1, #12
+ 395 0020 0A43     		orrs	r2, r1
+ 396 0022 5A61     		str	r2, [r3, #20]
+ 397 0024 284B     		ldr	r3, .L19
+ 398 0026 5A69     		ldr	r2, [r3, #20]
+ 399 0028 8023     		movs	r3, #128
+ 400 002a 1B03     		lsls	r3, r3, #12
+ 401 002c 1340     		ands	r3, r2
+ 402 002e BB60     		str	r3, [r7, #8]
+ 403 0030 BB68     		ldr	r3, [r7, #8]
+ 404              	.LBE3:
+ 405              	.LBB4:
+ 221:Src/main.c    ****   __HAL_RCC_GPIOF_CLK_ENABLE();
+ 406              		.loc 1 221 3
+ 407 0032 254B     		ldr	r3, .L19
+ 408 0034 5A69     		ldr	r2, [r3, #20]
+ 409 0036 244B     		ldr	r3, .L19
+ 410 0038 8021     		movs	r1, #128
+ 411 003a C903     		lsls	r1, r1, #15
+ 412 003c 0A43     		orrs	r2, r1
+ 413 003e 5A61     		str	r2, [r3, #20]
+ 414 0040 214B     		ldr	r3, .L19
+ 415 0042 5A69     		ldr	r2, [r3, #20]
+ARM GAS  C:\Users\Vulca\AppData\Local\Temp\ccF2hNMC.s 			page 12
 
 
- 310              		.cfi_offset 4, -8
- 311              		.cfi_offset 14, -4
- 312 0002 98B0     		sub	sp, sp, #96
- 313              	.LCFI6:
- 314              		.cfi_def_cfa_offset 104
- 118:Src/main.c    ****   RCC_ClkInitTypeDef RCC_ClkInitStruct = {0};
- 315              		.loc 1 118 3 view .LVU76
- 118:Src/main.c    ****   RCC_ClkInitTypeDef RCC_ClkInitStruct = {0};
- 316              		.loc 1 118 22 is_stmt 0 view .LVU77
- 317 0004 3022     		movs	r2, #48
- 318 0006 0021     		movs	r1, #0
- 319 0008 0CA8     		add	r0, sp, #48
- 320 000a FFF7FEFF 		bl	memset
- 321              	.LVL9:
- 119:Src/main.c    ****   RCC_PeriphCLKInitTypeDef PeriphClkInit = {0};
- 322              		.loc 1 119 3 is_stmt 1 view .LVU78
- 119:Src/main.c    ****   RCC_PeriphCLKInitTypeDef PeriphClkInit = {0};
- 323              		.loc 1 119 22 is_stmt 0 view .LVU79
- 324 000e 1022     		movs	r2, #16
- 325 0010 0021     		movs	r1, #0
- 326 0012 07A8     		add	r0, sp, #28
- 327 0014 FFF7FEFF 		bl	memset
- 328              	.LVL10:
- 120:Src/main.c    **** 
- 329              		.loc 1 120 3 is_stmt 1 view .LVU80
- 120:Src/main.c    **** 
- 330              		.loc 1 120 28 is_stmt 0 view .LVU81
- 331 0018 1C22     		movs	r2, #28
- 332 001a 0021     		movs	r1, #0
- 333 001c 6846     		mov	r0, sp
- 334 001e FFF7FEFF 		bl	memset
- 335              	.LVL11:
- 124:Src/main.c    ****   RCC_OscInitStruct.HSI48State = RCC_HSI48_ON;
- 336              		.loc 1 124 3 is_stmt 1 view .LVU82
- 124:Src/main.c    ****   RCC_OscInitStruct.HSI48State = RCC_HSI48_ON;
- 337              		.loc 1 124 36 is_stmt 0 view .LVU83
- 338 0022 2023     		movs	r3, #32
- 339 0024 0B93     		str	r3, [sp, #44]
- 125:Src/main.c    ****   RCC_OscInitStruct.PLL.PLLState = RCC_PLL_NONE;
- 340              		.loc 1 125 3 is_stmt 1 view .LVU84
- 125:Src/main.c    ****   RCC_OscInitStruct.PLL.PLLState = RCC_PLL_NONE;
- 341              		.loc 1 125 32 is_stmt 0 view .LVU85
- 342 0026 1F3B     		subs	r3, r3, #31
- 343 0028 1393     		str	r3, [sp, #76]
- 126:Src/main.c    ****   if (HAL_RCC_OscConfig(&RCC_OscInitStruct) != HAL_OK)
- 344              		.loc 1 126 3 is_stmt 1 view .LVU86
- 126:Src/main.c    ****   if (HAL_RCC_OscConfig(&RCC_OscInitStruct) != HAL_OK)
- 345              		.loc 1 126 34 is_stmt 0 view .LVU87
- 346 002a 0024     		movs	r4, #0
- 127:Src/main.c    ****   {
- 347              		.loc 1 127 3 is_stmt 1 view .LVU88
- 127:Src/main.c    ****   {
- 348              		.loc 1 127 7 is_stmt 0 view .LVU89
- 349 002c 0BA8     		add	r0, sp, #44
- 350 002e FFF7FEFF 		bl	HAL_RCC_OscConfig
- 351              	.LVL12:
- 133:Src/main.c    ****   RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_HSI48;
-ARM GAS  C:\Users\Vulca\AppData\Local\Temp\cc7c74Kj.s 			page 12
+ 416 0044 8023     		movs	r3, #128
+ 417 0046 DB03     		lsls	r3, r3, #15
+ 418 0048 1340     		ands	r3, r2
+ 419 004a 7B60     		str	r3, [r7, #4]
+ 420 004c 7B68     		ldr	r3, [r7, #4]
+ 421              	.LBE4:
+ 422              	.LBB5:
+ 222:Src/main.c    ****   __HAL_RCC_GPIOA_CLK_ENABLE();
+ 423              		.loc 1 222 3
+ 424 004e 1E4B     		ldr	r3, .L19
+ 425 0050 5A69     		ldr	r2, [r3, #20]
+ 426 0052 1D4B     		ldr	r3, .L19
+ 427 0054 8021     		movs	r1, #128
+ 428 0056 8902     		lsls	r1, r1, #10
+ 429 0058 0A43     		orrs	r2, r1
+ 430 005a 5A61     		str	r2, [r3, #20]
+ 431 005c 1A4B     		ldr	r3, .L19
+ 432 005e 5A69     		ldr	r2, [r3, #20]
+ 433 0060 8023     		movs	r3, #128
+ 434 0062 9B02     		lsls	r3, r3, #10
+ 435 0064 1340     		ands	r3, r2
+ 436 0066 3B60     		str	r3, [r7]
+ 437 0068 3B68     		ldr	r3, [r7]
+ 438              	.LBE5:
+ 223:Src/main.c    **** 
+ 224:Src/main.c    ****   /*Configure GPIO pin Output Level */
+ 225:Src/main.c    ****   HAL_GPIO_WritePin(LD2_GPIO_Port, LD2_Pin, GPIO_PIN_RESET);
+ 439              		.loc 1 225 3
+ 440 006a 9023     		movs	r3, #144
+ 441 006c DB05     		lsls	r3, r3, #23
+ 442 006e 0022     		movs	r2, #0
+ 443 0070 2021     		movs	r1, #32
+ 444 0072 1800     		movs	r0, r3
+ 445 0074 FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 226:Src/main.c    **** 
+ 227:Src/main.c    ****   /*Configure GPIO pin : B1_Pin */
+ 228:Src/main.c    ****   GPIO_InitStruct.Pin = B1_Pin;
+ 446              		.loc 1 228 23
+ 447 0078 3B19     		adds	r3, r7, r4
+ 448 007a 8022     		movs	r2, #128
+ 449 007c 9201     		lsls	r2, r2, #6
+ 450 007e 1A60     		str	r2, [r3]
+ 229:Src/main.c    ****   GPIO_InitStruct.Mode = GPIO_MODE_IT_FALLING;
+ 451              		.loc 1 229 24
+ 452 0080 3B19     		adds	r3, r7, r4
+ 453 0082 124A     		ldr	r2, .L19+4
+ 454 0084 5A60     		str	r2, [r3, #4]
+ 230:Src/main.c    ****   GPIO_InitStruct.Pull = GPIO_NOPULL;
+ 455              		.loc 1 230 24
+ 456 0086 3B19     		adds	r3, r7, r4
+ 457 0088 0022     		movs	r2, #0
+ 458 008a 9A60     		str	r2, [r3, #8]
+ 231:Src/main.c    ****   HAL_GPIO_Init(B1_GPIO_Port, &GPIO_InitStruct);
+ 459              		.loc 1 231 3
+ 460 008c 3B19     		adds	r3, r7, r4
+ 461 008e 104A     		ldr	r2, .L19+8
+ 462 0090 1900     		movs	r1, r3
+ARM GAS  C:\Users\Vulca\AppData\Local\Temp\ccF2hNMC.s 			page 13
 
 
- 352              		.loc 1 133 3 is_stmt 1 view .LVU90
- 133:Src/main.c    ****   RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_HSI48;
- 353              		.loc 1 133 31 is_stmt 0 view .LVU91
- 354 0032 0723     		movs	r3, #7
- 355 0034 0793     		str	r3, [sp, #28]
- 134:Src/main.c    ****   RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
- 356              		.loc 1 134 3 is_stmt 1 view .LVU92
- 134:Src/main.c    ****   RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
- 357              		.loc 1 134 34 is_stmt 0 view .LVU93
- 358 0036 043B     		subs	r3, r3, #4
- 359 0038 0893     		str	r3, [sp, #32]
- 135:Src/main.c    ****   RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV1;
- 360              		.loc 1 135 3 is_stmt 1 view .LVU94
- 135:Src/main.c    ****   RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV1;
- 361              		.loc 1 135 35 is_stmt 0 view .LVU95
- 362 003a 0994     		str	r4, [sp, #36]
- 136:Src/main.c    **** 
- 363              		.loc 1 136 3 is_stmt 1 view .LVU96
- 136:Src/main.c    **** 
- 364              		.loc 1 136 36 is_stmt 0 view .LVU97
- 365 003c 0A94     		str	r4, [sp, #40]
- 138:Src/main.c    ****   {
- 366              		.loc 1 138 3 is_stmt 1 view .LVU98
- 138:Src/main.c    ****   {
- 367              		.loc 1 138 7 is_stmt 0 view .LVU99
- 368 003e 0121     		movs	r1, #1
- 369 0040 07A8     		add	r0, sp, #28
- 370 0042 FFF7FEFF 		bl	HAL_RCC_ClockConfig
- 371              	.LVL13:
- 142:Src/main.c    ****   PeriphClkInit.Usart2ClockSelection = RCC_USART2CLKSOURCE_PCLK1;
- 372              		.loc 1 142 3 is_stmt 1 view .LVU100
- 142:Src/main.c    ****   PeriphClkInit.Usart2ClockSelection = RCC_USART2CLKSOURCE_PCLK1;
- 373              		.loc 1 142 38 is_stmt 0 view .LVU101
- 374 0046 0223     		movs	r3, #2
- 375 0048 0093     		str	r3, [sp]
- 143:Src/main.c    ****   if (HAL_RCCEx_PeriphCLKConfig(&PeriphClkInit) != HAL_OK)
- 376              		.loc 1 143 3 is_stmt 1 view .LVU102
- 143:Src/main.c    ****   if (HAL_RCCEx_PeriphCLKConfig(&PeriphClkInit) != HAL_OK)
- 377              		.loc 1 143 38 is_stmt 0 view .LVU103
- 378 004a 0394     		str	r4, [sp, #12]
- 144:Src/main.c    ****   {
- 379              		.loc 1 144 3 is_stmt 1 view .LVU104
- 144:Src/main.c    ****   {
- 380              		.loc 1 144 7 is_stmt 0 view .LVU105
- 381 004c 6846     		mov	r0, sp
- 382 004e FFF7FEFF 		bl	HAL_RCCEx_PeriphCLKConfig
- 383              	.LVL14:
- 148:Src/main.c    **** 
- 384              		.loc 1 148 1 view .LVU106
- 385 0052 18B0     		add	sp, sp, #96
- 386              		@ sp needed
- 387 0054 10BD     		pop	{r4, pc}
- 388              		.cfi_endproc
- 389              	.LFE41:
- 391              		.section	.rodata.main.str1.4,"aMS",%progbits,1
- 392              		.align	2
- 393              	.LC1:
-ARM GAS  C:\Users\Vulca\AppData\Local\Temp\cc7c74Kj.s 			page 13
-
-
- 394 0000 68656C6C 		.ascii	"hello\000"
- 394      6F00
- 395              		.section	.text.main,"ax",%progbits
- 396              		.align	1
- 397              		.global	main
- 398              		.syntax unified
- 399              		.code	16
- 400              		.thumb_func
- 401              		.fpu softvfp
- 403              	main:
- 404              	.LFB40:
-  71:Src/main.c    ****   /* USER CODE BEGIN 1 */
- 405              		.loc 1 71 1 is_stmt 1 view -0
- 406              		.cfi_startproc
- 407              		@ Volatile: function does not return.
- 408              		@ args = 0, pretend = 0, frame = 0
- 409              		@ frame_needed = 0, uses_anonymous_args = 0
- 410 0000 10B5     		push	{r4, lr}
- 411              	.LCFI7:
- 412              		.cfi_def_cfa_offset 8
- 413              		.cfi_offset 4, -8
- 414              		.cfi_offset 14, -4
-  79:Src/main.c    **** 
- 415              		.loc 1 79 3 view .LVU108
- 416 0002 FFF7FEFF 		bl	HAL_Init
- 417              	.LVL15:
-  86:Src/main.c    **** 
- 418              		.loc 1 86 3 view .LVU109
- 419 0006 FFF7FEFF 		bl	SystemClock_Config
- 420              	.LVL16:
-  93:Src/main.c    ****   MX_DMA_Init();
- 421              		.loc 1 93 3 view .LVU110
- 422 000a FFF7FEFF 		bl	MX_GPIO_Init
- 423              	.LVL17:
-  94:Src/main.c    ****   MX_USART2_UART_Init();
- 424              		.loc 1 94 3 view .LVU111
- 425 000e FFF7FEFF 		bl	MX_DMA_Init
- 426              	.LVL18:
-  95:Src/main.c    ****   /* USER CODE BEGIN 2 */
- 427              		.loc 1 95 3 view .LVU112
- 428 0012 FFF7FEFF 		bl	MX_USART2_UART_Init
- 429              	.LVL19:
- 430              	.L12:
- 102:Src/main.c    ****   {
- 431              		.loc 1 102 3 discriminator 1 view .LVU113
- 432              	.LBB6:
- 105:Src/main.c    ****     HAL_Delay(1000);
- 433              		.loc 1 105 5 discriminator 1 view .LVU114
- 434 0016 0123     		movs	r3, #1
- 435 0018 5B42     		rsbs	r3, r3, #0
- 436 001a 0522     		movs	r2, #5
- 437 001c 0449     		ldr	r1, .L13
- 438 001e 0548     		ldr	r0, .L13+4
- 439 0020 FFF7FEFF 		bl	HAL_UART_Transmit
- 440              	.LVL20:
- 106:Src/main.c    ****     /* USER CODE BEGIN 3 */
- 441              		.loc 1 106 5 discriminator 1 view .LVU115
-ARM GAS  C:\Users\Vulca\AppData\Local\Temp\cc7c74Kj.s 			page 14
-
-
- 442 0024 FA20     		movs	r0, #250
- 443 0026 8000     		lsls	r0, r0, #2
- 444 0028 FFF7FEFF 		bl	HAL_Delay
- 445              	.LVL21:
- 446              	.LBE6:
- 102:Src/main.c    ****   {
- 447              		.loc 1 102 9 discriminator 1 view .LVU116
- 448 002c F3E7     		b	.L12
- 449              	.L14:
- 450 002e C046     		.align	2
- 451              	.L13:
- 452 0030 00000000 		.word	.LC1
- 453 0034 00000000 		.word	huart2
- 454              		.cfi_endproc
- 455              	.LFE40:
- 457              		.section	.text.HAL_UART_TxCpltCallback,"ax",%progbits
- 458              		.align	1
- 459              		.global	HAL_UART_TxCpltCallback
- 460              		.syntax unified
- 461              		.code	16
- 462              		.thumb_func
- 463              		.fpu softvfp
- 465              	HAL_UART_TxCpltCallback:
- 466              	.LVL22:
- 467              	.LFB45:
+ 463 0092 1000     		movs	r0, r2
+ 464 0094 FFF7FEFF 		bl	HAL_GPIO_Init
  232:Src/main.c    **** 
- 233:Src/main.c    **** /* USER CODE BEGIN 4 */
- 234:Src/main.c    **** void HAL_UART_TxCpltCallback(UART_HandleTypeDef *huart)
- 235:Src/main.c    **** {
- 468              		.loc 1 235 1 view -0
- 469              		.cfi_startproc
- 470              		@ args = 0, pretend = 0, frame = 0
- 471              		@ frame_needed = 0, uses_anonymous_args = 0
- 472              		.loc 1 235 1 is_stmt 0 view .LVU118
- 473 0000 10B5     		push	{r4, lr}
- 474              	.LCFI8:
- 475              		.cfi_def_cfa_offset 8
- 476              		.cfi_offset 4, -8
- 477              		.cfi_offset 14, -4
- 236:Src/main.c    ****   HAL_GPIO_TogglePin(LD2_GPIO_Port,LD2_Pin);
- 478              		.loc 1 236 3 is_stmt 1 view .LVU119
- 479 0002 9020     		movs	r0, #144
- 480              	.LVL23:
- 481              		.loc 1 236 3 is_stmt 0 view .LVU120
- 482 0004 2021     		movs	r1, #32
- 483 0006 C005     		lsls	r0, r0, #23
- 484 0008 FFF7FEFF 		bl	HAL_GPIO_TogglePin
- 485              	.LVL24:
- 237:Src/main.c    **** }
- 486              		.loc 1 237 1 view .LVU121
- 487              		@ sp needed
- 488 000c 10BD     		pop	{r4, pc}
- 489              		.cfi_endproc
- 490              	.LFE45:
- 492              		.section	.text.Error_Handler,"ax",%progbits
- 493              		.align	1
- 494              		.global	Error_Handler
-ARM GAS  C:\Users\Vulca\AppData\Local\Temp\cc7c74Kj.s 			page 15
+ 233:Src/main.c    ****   /*Configure GPIO pin : LD2_Pin */
+ 234:Src/main.c    ****   GPIO_InitStruct.Pin = LD2_Pin;
+ 465              		.loc 1 234 23
+ 466 0098 2100     		movs	r1, r4
+ 467 009a 7B18     		adds	r3, r7, r1
+ 468 009c 2022     		movs	r2, #32
+ 469 009e 1A60     		str	r2, [r3]
+ 235:Src/main.c    ****   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+ 470              		.loc 1 235 24
+ 471 00a0 7B18     		adds	r3, r7, r1
+ 472 00a2 0122     		movs	r2, #1
+ 473 00a4 5A60     		str	r2, [r3, #4]
+ 236:Src/main.c    ****   GPIO_InitStruct.Pull = GPIO_NOPULL;
+ 474              		.loc 1 236 24
+ 475 00a6 7B18     		adds	r3, r7, r1
+ 476 00a8 0022     		movs	r2, #0
+ 477 00aa 9A60     		str	r2, [r3, #8]
+ 237:Src/main.c    ****   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+ 478              		.loc 1 237 25
+ 479 00ac 7B18     		adds	r3, r7, r1
+ 480 00ae 0022     		movs	r2, #0
+ 481 00b0 DA60     		str	r2, [r3, #12]
+ 238:Src/main.c    ****   HAL_GPIO_Init(LD2_GPIO_Port, &GPIO_InitStruct);
+ 482              		.loc 1 238 3
+ 483 00b2 7A18     		adds	r2, r7, r1
+ 484 00b4 9023     		movs	r3, #144
+ 485 00b6 DB05     		lsls	r3, r3, #23
+ 486 00b8 1100     		movs	r1, r2
+ 487 00ba 1800     		movs	r0, r3
+ 488 00bc FFF7FEFF 		bl	HAL_GPIO_Init
+ 239:Src/main.c    **** }
+ 489              		.loc 1 239 1
+ 490 00c0 C046     		nop
+ 491 00c2 BD46     		mov	sp, r7
+ 492 00c4 09B0     		add	sp, sp, #36
+ 493              		@ sp needed
+ 494 00c6 90BD     		pop	{r4, r7, pc}
+ 495              	.L20:
+ 496              		.align	2
+ 497              	.L19:
+ 498 00c8 00100240 		.word	1073876992
+ 499 00cc 00002110 		.word	270598144
+ 500 00d0 00080048 		.word	1207961600
+ 501              		.cfi_endproc
+ 502              	.LFE44:
+ 504              		.section	.text.HAL_UART_TxCpltCallback,"ax",%progbits
+ 505              		.align	1
+ 506              		.global	HAL_UART_TxCpltCallback
+ 507              		.syntax unified
+ 508              		.code	16
+ 509              		.thumb_func
+ 510              		.fpu softvfp
+ 512              	HAL_UART_TxCpltCallback:
+ 513              	.LFB45:
+ARM GAS  C:\Users\Vulca\AppData\Local\Temp\ccF2hNMC.s 			page 14
 
 
- 495              		.syntax unified
- 496              		.code	16
- 497              		.thumb_func
- 498              		.fpu softvfp
- 500              	Error_Handler:
- 501              	.LFB46:
- 238:Src/main.c    **** /* USER CODE END 4 */
- 239:Src/main.c    **** 
- 240:Src/main.c    **** /**
- 241:Src/main.c    ****   * @brief  This function is executed in case of error occurrence.
- 242:Src/main.c    ****   * @retval None
- 243:Src/main.c    ****   */
- 244:Src/main.c    **** void Error_Handler(void)
- 245:Src/main.c    **** {
- 502              		.loc 1 245 1 is_stmt 1 view -0
- 503              		.cfi_startproc
- 504              		@ args = 0, pretend = 0, frame = 0
- 505              		@ frame_needed = 0, uses_anonymous_args = 0
- 506              		@ link register save eliminated.
- 246:Src/main.c    ****   /* USER CODE BEGIN Error_Handler_Debug */
- 247:Src/main.c    ****   /* User can add his own implementation to report the HAL error return state */
- 248:Src/main.c    **** 
- 249:Src/main.c    ****   /* USER CODE END Error_Handler_Debug */
+ 240:Src/main.c    **** 
+ 241:Src/main.c    **** /* USER CODE BEGIN 4 */
+ 242:Src/main.c    **** void HAL_UART_TxCpltCallback(UART_HandleTypeDef *huart)
+ 243:Src/main.c    **** {
+ 514              		.loc 1 243 1
+ 515              		.cfi_startproc
+ 516              		@ args = 0, pretend = 0, frame = 8
+ 517              		@ frame_needed = 1, uses_anonymous_args = 0
+ 518 0000 80B5     		push	{r7, lr}
+ 519              	.LCFI13:
+ 520              		.cfi_def_cfa_offset 8
+ 521              		.cfi_offset 7, -8
+ 522              		.cfi_offset 14, -4
+ 523 0002 82B0     		sub	sp, sp, #8
+ 524              	.LCFI14:
+ 525              		.cfi_def_cfa_offset 16
+ 526 0004 00AF     		add	r7, sp, #0
+ 527              	.LCFI15:
+ 528              		.cfi_def_cfa_register 7
+ 529 0006 7860     		str	r0, [r7, #4]
+ 244:Src/main.c    ****   HAL_GPIO_TogglePin(LD2_GPIO_Port, LD2_Pin);
+ 530              		.loc 1 244 3
+ 531 0008 9023     		movs	r3, #144
+ 532 000a DB05     		lsls	r3, r3, #23
+ 533 000c 2021     		movs	r1, #32
+ 534 000e 1800     		movs	r0, r3
+ 535 0010 FFF7FEFF 		bl	HAL_GPIO_TogglePin
+ 245:Src/main.c    **** }
+ 536              		.loc 1 245 1
+ 537 0014 C046     		nop
+ 538 0016 BD46     		mov	sp, r7
+ 539 0018 02B0     		add	sp, sp, #8
+ 540              		@ sp needed
+ 541 001a 80BD     		pop	{r7, pc}
+ 542              		.cfi_endproc
+ 543              	.LFE45:
+ 545              		.section	.text.HAL_UART_TxHalfCpltCallback,"ax",%progbits
+ 546              		.align	1
+ 547              		.global	HAL_UART_TxHalfCpltCallback
+ 548              		.syntax unified
+ 549              		.code	16
+ 550              		.thumb_func
+ 551              		.fpu softvfp
+ 553              	HAL_UART_TxHalfCpltCallback:
+ 554              	.LFB46:
+ 246:Src/main.c    **** 
+ 247:Src/main.c    **** void HAL_UART_TxHalfCpltCallback(UART_HandleTypeDef *huart)
+ 248:Src/main.c    **** {
+ 555              		.loc 1 248 1
+ 556              		.cfi_startproc
+ 557              		@ args = 0, pretend = 0, frame = 16
+ 558              		@ frame_needed = 1, uses_anonymous_args = 0
+ 559 0000 80B5     		push	{r7, lr}
+ 560              	.LCFI16:
+ 561              		.cfi_def_cfa_offset 8
+ 562              		.cfi_offset 7, -8
+ 563              		.cfi_offset 14, -4
+ARM GAS  C:\Users\Vulca\AppData\Local\Temp\ccF2hNMC.s 			page 15
+
+
+ 564 0002 84B0     		sub	sp, sp, #16
+ 565              	.LCFI17:
+ 566              		.cfi_def_cfa_offset 24
+ 567 0004 00AF     		add	r7, sp, #0
+ 568              	.LCFI18:
+ 569              		.cfi_def_cfa_register 7
+ 570 0006 7860     		str	r0, [r7, #4]
+ 249:Src/main.c    ****   int i = 1;
+ 571              		.loc 1 249 7
+ 572 0008 0123     		movs	r3, #1
+ 573 000a FB60     		str	r3, [r7, #12]
  250:Src/main.c    **** }
- 507              		.loc 1 250 1 view .LVU123
- 508              		@ sp needed
- 509 0000 7047     		bx	lr
- 510              		.cfi_endproc
- 511              	.LFE46:
- 513              		.comm	hdma_usart2_tx,68,4
- 514              		.comm	hdma_usart2_rx,68,4
- 515              		.comm	huart2,128,4
- 516              		.text
- 517              	.Letext0:
- 518              		.file 2 "c:\\program files (x86)\\gnu tools arm embedded\\9 2019-q4-major\\arm-none-eabi\\include\
- 519              		.file 3 "c:\\program files (x86)\\gnu tools arm embedded\\9 2019-q4-major\\arm-none-eabi\\include\
- 520              		.file 4 "Drivers/CMSIS/Device/ST/STM32F0xx/Include/system_stm32f0xx.h"
- 521              		.file 5 "Drivers/CMSIS/Device/ST/STM32F0xx/Include/stm32f091xc.h"
- 522              		.file 6 "Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_def.h"
- 523              		.file 7 "Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_rcc.h"
- 524              		.file 8 "Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_rcc_ex.h"
- 525              		.file 9 "Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_gpio.h"
- 526              		.file 10 "Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_dma.h"
- 527              		.file 11 "Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_uart.h"
- 528              		.file 12 "Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal.h"
- 529              		.file 13 "Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_cortex.h"
- 530              		.file 14 "<built-in>"
-ARM GAS  C:\Users\Vulca\AppData\Local\Temp\cc7c74Kj.s 			page 16
+ 574              		.loc 1 250 1
+ 575 000c C046     		nop
+ 576 000e BD46     		mov	sp, r7
+ 577 0010 04B0     		add	sp, sp, #16
+ 578              		@ sp needed
+ 579 0012 80BD     		pop	{r7, pc}
+ 580              		.cfi_endproc
+ 581              	.LFE46:
+ 583              		.section	.text.Error_Handler,"ax",%progbits
+ 584              		.align	1
+ 585              		.global	Error_Handler
+ 586              		.syntax unified
+ 587              		.code	16
+ 588              		.thumb_func
+ 589              		.fpu softvfp
+ 591              	Error_Handler:
+ 592              	.LFB47:
+ 251:Src/main.c    **** /* USER CODE END 4 */
+ 252:Src/main.c    **** 
+ 253:Src/main.c    **** /**
+ 254:Src/main.c    ****   * @brief  This function is executed in case of error occurrence.
+ 255:Src/main.c    ****   * @retval None
+ 256:Src/main.c    ****   */
+ 257:Src/main.c    **** void Error_Handler(void)
+ 258:Src/main.c    **** {
+ 593              		.loc 1 258 1
+ 594              		.cfi_startproc
+ 595              		@ args = 0, pretend = 0, frame = 0
+ 596              		@ frame_needed = 1, uses_anonymous_args = 0
+ 597 0000 80B5     		push	{r7, lr}
+ 598              	.LCFI19:
+ 599              		.cfi_def_cfa_offset 8
+ 600              		.cfi_offset 7, -8
+ 601              		.cfi_offset 14, -4
+ 602 0002 00AF     		add	r7, sp, #0
+ 603              	.LCFI20:
+ 604              		.cfi_def_cfa_register 7
+ 259:Src/main.c    ****   /* USER CODE BEGIN Error_Handler_Debug */
+ 260:Src/main.c    ****   /* User can add his own implementation to report the HAL error return state */
+ 261:Src/main.c    **** 
+ 262:Src/main.c    ****   /* USER CODE END Error_Handler_Debug */
+ 263:Src/main.c    **** }
+ 605              		.loc 1 263 1
+ 606 0004 C046     		nop
+ 607 0006 BD46     		mov	sp, r7
+ARM GAS  C:\Users\Vulca\AppData\Local\Temp\ccF2hNMC.s 			page 16
+
+
+ 608              		@ sp needed
+ 609 0008 80BD     		pop	{r7, pc}
+ 610              		.cfi_endproc
+ 611              	.LFE47:
+ 613              		.text
+ 614              	.Letext0:
+ 615              		.file 2 "c:\\program files (x86)\\gnu tools arm embedded\\9 2019-q4-major\\arm-none-eabi\\include\
+ 616              		.file 3 "c:\\program files (x86)\\gnu tools arm embedded\\9 2019-q4-major\\arm-none-eabi\\include\
+ 617              		.file 4 "Drivers/CMSIS/Device/ST/STM32F0xx/Include/system_stm32f0xx.h"
+ 618              		.file 5 "Drivers/CMSIS/Device/ST/STM32F0xx/Include/stm32f091xc.h"
+ 619              		.file 6 "Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_def.h"
+ 620              		.file 7 "Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_rcc.h"
+ 621              		.file 8 "Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_rcc_ex.h"
+ 622              		.file 9 "Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_gpio.h"
+ 623              		.file 10 "Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_dma.h"
+ 624              		.file 11 "Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_uart.h"
+ 625              		.file 12 "Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal.h"
+ 626              		.file 13 "c:\\program files (x86)\\gnu tools arm embedded\\9 2019-q4-major\\arm-none-eabi\\include
+ 627              		.file 14 "c:\\program files (x86)\\gnu tools arm embedded\\9 2019-q4-major\\arm-none-eabi\\include
+ 628              		.file 15 "c:\\program files (x86)\\gnu tools arm embedded\\9 2019-q4-major\\lib\\gcc\\arm-none-eab
+ 629              		.file 16 "c:\\program files (x86)\\gnu tools arm embedded\\9 2019-q4-major\\arm-none-eabi\\include
+ARM GAS  C:\Users\Vulca\AppData\Local\Temp\ccF2hNMC.s 			page 17
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 main.c
-C:\Users\Vulca\AppData\Local\Temp\cc7c74Kj.s:16     .text.MX_GPIO_Init:00000000 $t
-C:\Users\Vulca\AppData\Local\Temp\cc7c74Kj.s:23     .text.MX_GPIO_Init:00000000 MX_GPIO_Init
-C:\Users\Vulca\AppData\Local\Temp\cc7c74Kj.s:150    .text.MX_GPIO_Init:00000084 $d
-C:\Users\Vulca\AppData\Local\Temp\cc7c74Kj.s:157    .text.MX_DMA_Init:00000000 $t
-C:\Users\Vulca\AppData\Local\Temp\cc7c74Kj.s:163    .text.MX_DMA_Init:00000000 MX_DMA_Init
-C:\Users\Vulca\AppData\Local\Temp\cc7c74Kj.s:220    .text.MX_DMA_Init:0000003c $d
-C:\Users\Vulca\AppData\Local\Temp\cc7c74Kj.s:225    .text.MX_USART2_UART_Init:00000000 $t
-C:\Users\Vulca\AppData\Local\Temp\cc7c74Kj.s:231    .text.MX_USART2_UART_Init:00000000 MX_USART2_UART_Init
-C:\Users\Vulca\AppData\Local\Temp\cc7c74Kj.s:288    .text.MX_USART2_UART_Init:00000028 $d
                             *COM*:00000080 huart2
-C:\Users\Vulca\AppData\Local\Temp\cc7c74Kj.s:294    .text.SystemClock_Config:00000000 $t
-C:\Users\Vulca\AppData\Local\Temp\cc7c74Kj.s:301    .text.SystemClock_Config:00000000 SystemClock_Config
-C:\Users\Vulca\AppData\Local\Temp\cc7c74Kj.s:392    .rodata.main.str1.4:00000000 $d
-C:\Users\Vulca\AppData\Local\Temp\cc7c74Kj.s:396    .text.main:00000000 $t
-C:\Users\Vulca\AppData\Local\Temp\cc7c74Kj.s:403    .text.main:00000000 main
-C:\Users\Vulca\AppData\Local\Temp\cc7c74Kj.s:452    .text.main:00000030 $d
-C:\Users\Vulca\AppData\Local\Temp\cc7c74Kj.s:458    .text.HAL_UART_TxCpltCallback:00000000 $t
-C:\Users\Vulca\AppData\Local\Temp\cc7c74Kj.s:465    .text.HAL_UART_TxCpltCallback:00000000 HAL_UART_TxCpltCallback
-C:\Users\Vulca\AppData\Local\Temp\cc7c74Kj.s:493    .text.Error_Handler:00000000 $t
-C:\Users\Vulca\AppData\Local\Temp\cc7c74Kj.s:500    .text.Error_Handler:00000000 Error_Handler
                             *COM*:00000044 hdma_usart2_tx
-                            *COM*:00000044 hdma_usart2_rx
+C:\Users\Vulca\AppData\Local\Temp\ccF2hNMC.s:18     .rodata:00000000 $d
+C:\Users\Vulca\AppData\Local\Temp\ccF2hNMC.s:22     .text.main:00000000 $t
+C:\Users\Vulca\AppData\Local\Temp\ccF2hNMC.s:30     .text.main:00000000 main
+C:\Users\Vulca\AppData\Local\Temp\ccF2hNMC.s:84     .text.SystemClock_Config:00000000 SystemClock_Config
+C:\Users\Vulca\AppData\Local\Temp\ccF2hNMC.s:362    .text.MX_GPIO_Init:00000000 MX_GPIO_Init
+C:\Users\Vulca\AppData\Local\Temp\ccF2hNMC.s:302    .text.MX_DMA_Init:00000000 MX_DMA_Init
+C:\Users\Vulca\AppData\Local\Temp\ccF2hNMC.s:209    .text.MX_USART2_UART_Init:00000000 MX_USART2_UART_Init
+C:\Users\Vulca\AppData\Local\Temp\ccF2hNMC.s:71     .text.main:00000030 $d
+C:\Users\Vulca\AppData\Local\Temp\ccF2hNMC.s:77     .text.SystemClock_Config:00000000 $t
+C:\Users\Vulca\AppData\Local\Temp\ccF2hNMC.s:591    .text.Error_Handler:00000000 Error_Handler
+C:\Users\Vulca\AppData\Local\Temp\ccF2hNMC.s:203    .text.MX_USART2_UART_Init:00000000 $t
+C:\Users\Vulca\AppData\Local\Temp\ccF2hNMC.s:290    .text.MX_USART2_UART_Init:00000068 $d
+C:\Users\Vulca\AppData\Local\Temp\ccF2hNMC.s:296    .text.MX_DMA_Init:00000000 $t
+C:\Users\Vulca\AppData\Local\Temp\ccF2hNMC.s:351    .text.MX_DMA_Init:00000038 $d
+C:\Users\Vulca\AppData\Local\Temp\ccF2hNMC.s:356    .text.MX_GPIO_Init:00000000 $t
+C:\Users\Vulca\AppData\Local\Temp\ccF2hNMC.s:498    .text.MX_GPIO_Init:000000c8 $d
+C:\Users\Vulca\AppData\Local\Temp\ccF2hNMC.s:505    .text.HAL_UART_TxCpltCallback:00000000 $t
+C:\Users\Vulca\AppData\Local\Temp\ccF2hNMC.s:512    .text.HAL_UART_TxCpltCallback:00000000 HAL_UART_TxCpltCallback
+C:\Users\Vulca\AppData\Local\Temp\ccF2hNMC.s:546    .text.HAL_UART_TxHalfCpltCallback:00000000 $t
+C:\Users\Vulca\AppData\Local\Temp\ccF2hNMC.s:553    .text.HAL_UART_TxHalfCpltCallback:00000000 HAL_UART_TxHalfCpltCallback
+C:\Users\Vulca\AppData\Local\Temp\ccF2hNMC.s:584    .text.Error_Handler:00000000 $t
 
 UNDEFINED SYMBOLS
+HAL_Init
+HAL_UART_Transmit_DMA
+HAL_Delay
 memset
-HAL_GPIO_WritePin
-HAL_GPIO_Init
-HAL_NVIC_SetPriority
-HAL_NVIC_EnableIRQ
-HAL_UART_Init
 HAL_RCC_OscConfig
 HAL_RCC_ClockConfig
 HAL_RCCEx_PeriphCLKConfig
-HAL_Init
-HAL_UART_Transmit
-HAL_Delay
+HAL_NVIC_SetPriority
+HAL_NVIC_EnableIRQ
+HAL_UART_Init
+HAL_GPIO_WritePin
+HAL_GPIO_Init
 HAL_GPIO_TogglePin

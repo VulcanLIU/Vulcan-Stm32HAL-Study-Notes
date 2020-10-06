@@ -1,1 +1,1 @@
-[]
+[{"node":"DMA.ISR","expanded":true,"format":0},{"node":"DMA.IFCR","expanded":true,"format":0},{"node":"DMA.CCR2","expanded":true,"format":0},{"node":"DMA.CCR7","expanded":true,"format":0},{"node":"DMA.CNDTR7","expanded":true,"format":0},{"node":"DMA.CPAR7","expanded":true,"format":0},{"node":"DMA.CMAR7","expanded":true,"format":0},{"node":"USART2","expanded":true,"format":0},{"node":"USART2.ISR","expanded":true,"format":0}]

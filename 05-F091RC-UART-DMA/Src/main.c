@@ -20,6 +20,7 @@
 
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
+#include <string.h>
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
@@ -42,7 +43,6 @@
 
 /* Private variables ---------------------------------------------------------*/
 UART_HandleTypeDef huart2;
-DMA_HandleTypeDef hdma_usart2_rx;
 DMA_HandleTypeDef hdma_usart2_tx;
 
 /* USER CODE BEGIN PV */
@@ -99,11 +99,20 @@ int main(void)
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
+
+  HAL_UART_Transmit_DMA(&huart2, (uint8_t *)"f\r\n", strlen("f\r\n"));
+
   while (1)
   {
-    /* USER CODE END WHILE */
-    HAL_UART_Transmit(&huart2, (uint8_t *)"hello", strlen("hello"),HAL_MAX_DELAY);
+    // HAL_UART_DMAPause(&huart2);
+    // HAL_Delay(1000);
+    //HAL_UART_DMAResume(&huart2);
+    // HAL_Delay(10);
+
     HAL_Delay(1000);
+
+    /* USER CODE END WHILE */
+
     /* USER CODE BEGIN 3 */
   }
   /* USER CODE END 3 */
@@ -154,6 +163,8 @@ void SystemClock_Config(void)
   */
 static void MX_USART2_UART_Init(void)
 {
+  HAL_NVIC_SetPriority(USART2_IRQn, 0, 0);
+  HAL_NVIC_EnableIRQ(USART2_IRQn);
 
   /* USER CODE BEGIN USART2_Init 0 */
 
@@ -191,9 +202,6 @@ static void MX_DMA_Init(void)
   __HAL_RCC_DMA1_CLK_ENABLE();
 
   /* DMA interrupt init */
-  /* DMA1_Ch1_IRQn interrupt configuration */
-  HAL_NVIC_SetPriority(DMA1_Ch1_IRQn, 0, 0);
-  HAL_NVIC_EnableIRQ(DMA1_Ch1_IRQn);
   /* DMA1_Ch2_3_DMA2_Ch1_2_IRQn interrupt configuration */
   HAL_NVIC_SetPriority(DMA1_Ch2_3_DMA2_Ch1_2_IRQn, 0, 0);
   HAL_NVIC_EnableIRQ(DMA1_Ch2_3_DMA2_Ch1_2_IRQn);
@@ -233,7 +241,12 @@ static void MX_GPIO_Init(void)
 /* USER CODE BEGIN 4 */
 void HAL_UART_TxCpltCallback(UART_HandleTypeDef *huart)
 {
-  HAL_GPIO_TogglePin(LD2_GPIO_Port,LD2_Pin);
+  HAL_GPIO_TogglePin(LD2_GPIO_Port, LD2_Pin);
+}
+
+void HAL_UART_TxHalfCpltCallback(UART_HandleTypeDef *huart)
+{
+  int i = 1;
 }
 /* USER CODE END 4 */
 
