@@ -212,7 +212,7 @@ void EXTI15_10_IRQHandler(void)
 }
 
 /* USER CODE BEGIN 1 */
-void  USART2_IRQHanler(void)
+void  USART2_IRQHandler(void)
 {
   HAL_UART_IRQHandler(&huart2);
 }

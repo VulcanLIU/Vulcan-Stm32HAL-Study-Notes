@@ -66,7 +66,7 @@ extern UART_HandleTypeDef huart2;
 #define USART_RX_Pin GPIO_PIN_3
 #define USART_RX_GPIO_Port GPIOA
 #define LD2_Pin GPIO_PIN_0
-#define LD2_GPIO_Port GPIOA
+#define LD2_GPIO_Port GPIOB
 #define TMS_Pin GPIO_PIN_13
 #define TMS_GPIO_Port GPIOA
 #define TCK_Pin GPIO_PIN_14
@@ -74,7 +74,10 @@ extern UART_HandleTypeDef huart2;
 #define SWO_Pin GPIO_PIN_3
 #define SWO_GPIO_Port GPIOB
 /* USER CODE BEGIN Private defines */
-
+#define USART1_TX_Pin GPIO_PIN_6
+#define USART1_TX_GPIO_Port GPIOB
+#define USART1_RX_Pin GPIO_PIN_7
+#define USART1_RX_GPIO_Port GPIOB
 /* USER CODE END Private defines */
 
 #ifdef __cplusplus

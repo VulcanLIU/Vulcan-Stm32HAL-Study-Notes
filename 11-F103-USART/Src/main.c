@@ -44,7 +44,7 @@
 UART_HandleTypeDef huart2;
 
 /* USER CODE BEGIN PV */
-
+UART_HandleTypeDef huart1;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -52,7 +52,8 @@ void SystemClock_Config(void);
 static void MX_GPIO_Init(void);
 static void MX_USART2_UART_Init(void);
 /* USER CODE BEGIN PFP */
-static void MY_GPIO_Init(void);
+void MY_USART1_UART_Init(void);
+void HAL_UART_TxCpltCallback(UART_HandleTypeDef *huart);
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
@@ -90,7 +91,7 @@ int main(void)
   MX_GPIO_Init();
   MX_USART2_UART_Init();
   /* USER CODE BEGIN 2 */
-
+  MY_USART1_UART_Init();
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -98,7 +99,9 @@ int main(void)
   while (1)
   {
     /* USER CODE END WHILE */
-
+    //HAL_UART_Transmit(&huart1,(uint8_t *)"ffff",sizeof("ffff"),100);
+    HAL_GPIO_TogglePin(LD2_GPIO_Port,LD2_Pin);
+    HAL_Delay(100);
     /* USER CODE BEGIN 3 */
   }
   /* USER CODE END 3 */
@@ -170,8 +173,8 @@ static void MX_USART2_UART_Init(void)
   }
   /* USER CODE BEGIN USART2_Init 2 */
   //启动NVIC
-  HAL_NVIC_SetPriority(USART2_IRQn,1,1);
-  HAL_NVIC_EnableIRQ(USART2_IRQn);
+  //HAL_NVIC_SetPriority(USART2_IRQn,0,0);
+  //HAL_NVIC_EnableIRQ(USART2_IRQn);
   /* USER CODE END USART2_Init 2 */
 
 }
@@ -194,11 +197,11 @@ static void MX_GPIO_Init(void)
   /*Configure GPIO pin Output Level */
   HAL_GPIO_WritePin(LD2_GPIO_Port, LD2_Pin, GPIO_PIN_RESET);
 
-  /*Configure GPIO pin : B1_Pin */
-  GPIO_InitStruct.Pin = B1_Pin;
-  GPIO_InitStruct.Mode = GPIO_MODE_IT_RISING;
-  GPIO_InitStruct.Pull = GPIO_NOPULL;
-  HAL_GPIO_Init(B1_GPIO_Port, &GPIO_InitStruct);
+  // /*Configure GPIO pin : B1_Pin */
+  // GPIO_InitStruct.Pin = B1_Pin;
+  // GPIO_InitStruct.Mode = GPIO_MODE_IT_RISING;
+  // GPIO_InitStruct.Pull = GPIO_NOPULL;
+  // HAL_GPIO_Init(B1_GPIO_Port, &GPIO_InitStruct);
 
   /*Configure GPIO pin : LD2_Pin */
   GPIO_InitStruct.Pin = LD2_Pin;
@@ -207,24 +210,49 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(LD2_GPIO_Port, &GPIO_InitStruct);
 
-  /* EXTI interrupt init*/
-  HAL_NVIC_SetPriority(EXTI15_10_IRQn, 0, 0);
-  HAL_NVIC_EnableIRQ(EXTI15_10_IRQn);
+  // /* EXTI interrupt init*/
+  // HAL_NVIC_SetPriority(EXTI15_10_IRQn, 0, 0);
+  // HAL_NVIC_EnableIRQ(EXTI15_10_IRQn);
 
 }
 
-/* USER CODE BEGIN 4 */
-void MY_GPIO_Init()
-{
-  //开时钟
-  __HAL_RCC_GPIOB_CLK_ENABLE();
-  
-  //定义结构体并配置
-
-  //驱动引脚
-}
 void HAL_UART_TxCpltCallback(UART_HandleTypeDef *huart)
 {
+  //HAL_GPIO_TogglePin(LD2_GPIO_Port,LD2_Pin);
+}
+/**
+  * @brief USART2 Initialization Function
+  * @param None
+  * @retval None
+  */
+
+void MY_USART1_UART_Init(void)
+{
+
+  /* USER CODE BEGIN USART2_Init 0 */
+
+  /* USER CODE END USART2_Init 0 */
+
+  /* USER CODE BEGIN USART2_Init 1 */
+
+  /* USER CODE END USART2_Init 1 */
+  huart1.Instance = USART1;
+  huart1.Init.BaudRate = 115200;
+  huart1.Init.WordLength = UART_WORDLENGTH_8B;
+  huart1.Init.StopBits = UART_STOPBITS_1;
+  huart1.Init.Parity = UART_PARITY_NONE;
+  huart1.Init.Mode = UART_MODE_TX_RX;
+  huart1.Init.HwFlowCtl = UART_HWCONTROL_NONE;
+  huart1.Init.OverSampling = UART_OVERSAMPLING_16;
+  if (HAL_UART_Init(&huart1) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  /* USER CODE BEGIN USART2_Init 2 */
+  //启动NVIC
+  //HAL_NVIC_SetPriority(USART2_IRQn,0,0);
+  //HAL_NVIC_EnableIRQ(USART2_IRQn);
+  /* USER CODE END USART2_Init 2 */
 
 }
 
