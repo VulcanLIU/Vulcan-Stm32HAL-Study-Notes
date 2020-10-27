@@ -68,13 +68,13 @@ PREFIX = arm-none-eabi-
 # either it can be added to the PATH environment variable.
 ifdef GCC_PATH
 CC = $(GCC_PATH)/$(PREFIX)gcc
-CCC = $(GCC_PATH)/$(PREFIX)g++
+CPP = $(GCC_PATH)/$(PREFIX)g++
 AS = $(GCC_PATH)/$(PREFIX)gcc -x assembler-with-cpp
 CP = $(GCC_PATH)/$(PREFIX)objcopy
 SZ = $(GCC_PATH)/$(PREFIX)size
 else
 CC = $(PREFIX)gcc
-CCC = $(PREFIX)g++
+CPP = $(PREFIX)g++
 AS = $(PREFIX)gcc -x assembler-with-cpp
 CP = $(PREFIX)objcopy
 SZ = $(PREFIX)size
@@ -120,7 +120,7 @@ C_INCLUDES =  \
 -IC:/Users/Vulca/AppData/Local/Arduino15/packages/STM32/hardware/stm32/1.9.0/libraries/Wire/src\
 -IC:\Users\Vulca\AppData\Local\Arduino15\packages\STM32\hardware\stm32\1.9.0\cores\arduino
 
-CPP_INCLUDES = \
+CXX_INCLUDES = \
 -IC:\Users\Vulca\AppData\Local\Arduino15\packages\STM32\hardware\stm32\1.9.0\cores\arduino
 
 # compile gcc flags
@@ -128,14 +128,17 @@ ASFLAGS = $(MCU) $(AS_DEFS) $(AS_INCLUDES) $(OPT) -Wall -fdata-sections -ffuncti
 
 CFLAGS = $(MCU) $(C_DEFS) $(C_INCLUDES) $(OPT) -Wall -fdata-sections -ffunction-sections
 
+CPPFLAGS = $(MCU) $(CPP_DEFS) $(CPP_INCLUDES) $(OPT) -Wall -fdata-sections -ffunction-sections
+
 ifeq ($(DEBUG), 1)
 CFLAGS += -g -gdwarf-2
+CPPFLAGS += -g -gdwarf-2
 endif
 
 
 # Generate dependency information
 CFLAGS += -MMD -MP -MF"$(@:%.o=%.d)"
-
+CPPFLAGS += -MMD -MP -MF"$(@:%.o=%.d)"
 
 #######################################
 # LDFLAGS
