@@ -1,0 +1,50 @@
+D:\01-Projects\Stm32\Vulcan-Stm32HAL-Study-Notes\12-F103-USART>make
+arm-none-eabi-gcc -c -mcpu=cortex-m3 -mthumb   -DUSE_HAL_DRIVER -DSTM32F103xB -D__arm__ -DSTM32F103xB 
+-IInc 
+-IDrivers/STM32F1xx_HAL_Driver/Inc 
+-IDrivers/STM32F1xx_HAL_Driver/Inc/Legacy 
+-IDrivers/CMSIS/Device/ST/STM32F1xx/Include 
+-IDrivers/CMSIS/Include 
+-Og -Wall -fdata-sections -ffunction-sections -g -gdwarf-2 -MMD -MP -MF"build/main.d" 
+-Wa,-a,-ad,-alms=build/main.lst Src/main.c -o build/main.o
+
+arm-none-eabi-gcc 
+build/main.o 
+build/stm32f1xx_it.o
+ build/stm32f1xx_hal_msp.o 
+ build/stm32f1xx_hal_gpio_ex.o 
+ build/stm32f1xx_hal_tim.o 
+ build/stm32f1xx_hal_tim_ex.o 
+ build/stm32f1xx_hal_uart.o 
+ build/stm32f1xx_hal.o 
+ build/stm32f1xx_hal_rcc.o 
+ build/stm32f1xx_hal_rcc_ex.o 
+ build/stm32f1xx_hal_gpio.o 
+ build/stm32f1xx_hal_dma.o 
+ build/stm32f1xx_hal_cortex.o 
+ build/stm32f1xx_hal_pwr.o 
+ build/stm32f1xx_hal_flash.o 
+ build/stm32f1xx_hal_flash_ex.o
+ build/stm32f1xx_hal_exti.o 
+ build/system_stm32f1xx.o  
+ build/startup_stm32f103xb.o 
+ -mcpu=cortex-m3 -mthumb   -specs=nano.specs -TSTM32F103C8Tx_FLASH.ld  
+ -lc -lm -lnosys  -Wl,-Map=build/12-F103-USART.map,--cref -Wl,--gc-sections -o build/12-F103-USART.elf
+
+arm-none-eabi-size build/12-F103-USART.elf
+   text    data     bss     dec     hex filename
+   4324      20    1700    6044    179c build/12-F103-USART.elf
+arm-none-eabi-objcopy -O ihex build/12-F103-USART.elf build/12-F103-USART.hex
+arm-none-eabi-objcopy -O binary -S build/12-F103-USART.elf build/12-F103-USART.bin
+
+arm-none-eabi-gcc -c -mcpu=cortex-m3 -mthumb   
+-DUSE_HAL_DRIVER 
+-DSTM32F103xB 
+-D__arm__ 
+-DSTM32F103xB 
+-IInc 
+-IDrivers/STM32F1xx_HAL_Driver/Inc 
+-IDrivers/STM32F1xx_HAL_Driver/Inc/Legacy 
+-IDrivers/CMSIS/Device/ST/STM32F1xx/Include 
+-IDrivers/CMSIS/Include 
+-Og -Wall -fdata-sections -ffunction-sections -g -gdwarf-2 -MMD -MP -MF"build/main.d" -Wa,-a,-ad,-alms=build/main.lst Src/main.c -o build/main.o

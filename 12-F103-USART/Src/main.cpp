@@ -23,7 +23,7 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-#include "Wire.h"
+#include "a.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -45,7 +45,7 @@ UART_HandleTypeDef huart1;
 UART_HandleTypeDef huart2;
 
 /* USER CODE BEGIN PV */
-
+a s = a();
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -101,7 +101,9 @@ int main(void)
   while (1)
   {
     /* USER CODE END WHILE */
-
+    uint8_t data_array[10] = {};
+    s.get_a();
+    HAL_UART_Receive(&huart2,data_array,10,1000);
     /* USER CODE BEGIN 3 */
   }
   /* USER CODE END 3 */
