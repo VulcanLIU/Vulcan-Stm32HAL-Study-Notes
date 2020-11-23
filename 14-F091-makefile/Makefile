@@ -58,9 +58,10 @@ Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_exti.c \
 Src/system_stm32f0xx.c  
 
 # CPP sources
-CXX_SOURCES=\
-Src/main.cpp \
-Src/RingBuffer.cpp
+CXX_SOURCES= \
+Src/RingBuffer.cpp \
+Src/main.cpp
+
 
 # ASM sources
 ASM_SOURCES =  \
@@ -132,7 +133,7 @@ CXX_INCLUDES =  \
 # compile gcc flags
 ASFLAGS = $(MCU) $(AS_DEFS) $(AS_INCLUDES) $(OPT) -Wall -fdata-sections -ffunction-sections
 
-CFLAGS = $(MCU) $(C_DEFS) $(C_INCLUDES) $(OPT) -Wall -fdata-sections -ffunction-sections
+CFLAGS = $(MCU) $(C_DEFS) $(C_INCLUDES) $(OPT) -Wall -fdata-sections -ffunction-sections 
 
 CXXFLAGS = -lstdc++ $(CFLAGS) $(CXX_DEFS) $(CXX_INCLUDES) -g -ggdb3 -fno-rtti -fno-exceptions -std=gnu++14\
 -fverbose-asm -fdata-sections -ffunction-sections -fpermissive -Wa,-ahlms=$(BUILD_DIR)/$(notdir $(<:.cpp=.lst))

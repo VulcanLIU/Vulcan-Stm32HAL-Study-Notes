@@ -37,18 +37,15 @@
 
 /* Private macro -------------------------------------------------------------*/
 /* USER CODE BEGIN PM */
-//LED引脚和端口
-#define LED_PIN GPIO_PIN_3
-#define LED_PORT GPIOB
-//按键引脚和端口
-#define KEY_PIN GPIO_PIN_10
-#define KEY_PORT GPIOA
+
 /* USER CODE END PM */
 
 /* Private variables ---------------------------------------------------------*/
 UART_HandleTypeDef huart2;
-UART_HandleTypeDef huart1;
+TIM_HandleTypeDef htim6;
+
 /* USER CODE BEGIN PV */
+RingBuffer ringbuffer1;
 
 /* USER CODE END PV */
 
@@ -57,10 +54,7 @@ void SystemClock_Config(void);
 static void MX_GPIO_Init(void);
 static void MX_USART2_UART_Init(void);
 /* USER CODE BEGIN PFP */
-static void LED_GPIO_Init(void); //LED灯端口初始化
-static void KEY_EXTI_Init(void); //按键中断初始化
-
-void MY_USART1_UART_Init(void);
+static void MY_TIM_Init(void);
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
@@ -98,9 +92,7 @@ int main(void)
   MX_GPIO_Init();
   MX_USART2_UART_Init();
   /* USER CODE BEGIN 2 */
-  LED_GPIO_Init();
-  KEY_EXTI_Init();
-  MY_USART1_UART_Init();
+  MY_TIM_Init();
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -108,11 +100,7 @@ int main(void)
   while (1)
   {
     /* USER CODE END WHILE */
-    HAL_GPIO_TogglePin(LED_PORT, LED_PIN);
-    HAL_UART_Transmit(&huart1, (uint8_t *)"DDDD", sizeof("DDDD"), 10);
-    HAL_UART_Transmit_IT
-    //HAL_UART_Transmit(&huart2,(uint8_t *)"DDDD",sizeof("DDDD"),10);
-    HAL_Delay(500);
+
     /* USER CODE BEGIN 3 */
   }
   /* USER CODE END 3 */
@@ -126,35 +114,42 @@ void SystemClock_Config(void)
 {
   RCC_OscInitTypeDef RCC_OscInitStruct = {0};
   RCC_ClkInitTypeDef RCC_ClkInitStruct = {0};
-  RCC_PeriphCLKInitTypeDef PeriphClkInit = {0};
 
+  /** Configure the main internal regulator output voltage 
+  */
+  __HAL_RCC_PWR_CLK_ENABLE();
+  __HAL_PWR_VOLTAGESCALING_CONFIG(PWR_REGULATOR_VOLTAGE_SCALE1);
   /** Initializes the CPU, AHB and APB busses clocks 
   */
-  RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSI;
-  RCC_OscInitStruct.HSIState = RCC_HSI_ON;
-  RCC_OscInitStruct.HSICalibrationValue = RCC_HSICALIBRATION_DEFAULT;
+  RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSE;
+  RCC_OscInitStruct.HSEState = RCC_HSE_ON;
   RCC_OscInitStruct.PLL.PLLState = RCC_PLL_ON;
-  RCC_OscInitStruct.PLL.PLLSource = RCC_PLLSOURCE_HSI;
-  RCC_OscInitStruct.PLL.PLLMUL = RCC_PLL_MUL12;
-  RCC_OscInitStruct.PLL.PREDIV = RCC_PREDIV_DIV2;
+  RCC_OscInitStruct.PLL.PLLSource = RCC_PLLSOURCE_HSE;
+  RCC_OscInitStruct.PLL.PLLM = 4;
+  RCC_OscInitStruct.PLL.PLLN = 180;
+  RCC_OscInitStruct.PLL.PLLP = RCC_PLLP_DIV2;
+  RCC_OscInitStruct.PLL.PLLQ = 2;
+  RCC_OscInitStruct.PLL.PLLR = 2;
   if (HAL_RCC_OscConfig(&RCC_OscInitStruct) != HAL_OK)
   {
     Error_Handler();
   }
-  /** Initializes the CPU, AHB and APB busses clocks 
+  /** Activate the Over-Drive mode 
   */
-  RCC_ClkInitStruct.ClockType = RCC_CLOCKTYPE_HCLK | RCC_CLOCKTYPE_SYSCLK | RCC_CLOCKTYPE_PCLK1;
-  RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK;
-  RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
-  RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV1;
-
-  if (HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_1) != HAL_OK)
+  if (HAL_PWREx_EnableOverDrive() != HAL_OK)
   {
     Error_Handler();
   }
-  PeriphClkInit.PeriphClockSelection = RCC_PERIPHCLK_USART2;
-  PeriphClkInit.Usart2ClockSelection = RCC_USART2CLKSOURCE_PCLK1;
-  if (HAL_RCCEx_PeriphCLKConfig(&PeriphClkInit) != HAL_OK)
+  /** Initializes the CPU, AHB and APB busses clocks 
+  */
+  RCC_ClkInitStruct.ClockType = RCC_CLOCKTYPE_HCLK|RCC_CLOCKTYPE_SYSCLK
+                              |RCC_CLOCKTYPE_PCLK1|RCC_CLOCKTYPE_PCLK2;
+  RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK;
+  RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
+  RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV4;
+  RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV2;
+
+  if (HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_5) != HAL_OK)
   {
     Error_Handler();
   }
@@ -183,16 +178,14 @@ static void MX_USART2_UART_Init(void)
   huart2.Init.Mode = UART_MODE_TX_RX;
   huart2.Init.HwFlowCtl = UART_HWCONTROL_NONE;
   huart2.Init.OverSampling = UART_OVERSAMPLING_16;
-  huart2.Init.OneBitSampling = UART_ONE_BIT_SAMPLE_DISABLE;
-  huart2.AdvancedInit.AdvFeatureInit = UART_ADVFEATURE_NO_INIT;
   if (HAL_UART_Init(&huart2) != HAL_OK)
   {
     Error_Handler();
   }
   /* USER CODE BEGIN USART2_Init 2 */
-  HAL_NVIC_SetPriority(USART2_IRQn, 1, 1);
-  HAL_NVIC_EnableIRQ(USART2_IRQn);
+
   /* USER CODE END USART2_Init 2 */
+
 }
 
 /**
@@ -206,11 +199,18 @@ static void MX_GPIO_Init(void)
 
   /* GPIO Ports Clock Enable */
   __HAL_RCC_GPIOC_CLK_ENABLE();
-  __HAL_RCC_GPIOF_CLK_ENABLE();
+  __HAL_RCC_GPIOH_CLK_ENABLE();
   __HAL_RCC_GPIOA_CLK_ENABLE();
+  __HAL_RCC_GPIOB_CLK_ENABLE();
 
   /*Configure GPIO pin Output Level */
   HAL_GPIO_WritePin(LD2_GPIO_Port, LD2_Pin, GPIO_PIN_RESET);
+
+  /*Configure GPIO pin : B1_Pin */
+  GPIO_InitStruct.Pin = B1_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_IT_FALLING;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  HAL_GPIO_Init(B1_GPIO_Port, &GPIO_InitStruct);
 
   /*Configure GPIO pin : LD2_Pin */
   GPIO_InitStruct.Pin = LD2_Pin;
@@ -221,71 +221,29 @@ static void MX_GPIO_Init(void)
 }
 
 /* USER CODE BEGIN 4 */
-static void LED_GPIO_Init()
+static void MY_TIM_Init(void)
 {
-  __HAL_RCC_GPIOB_CLK_ENABLE();
+  __TIM6_CLK_ENABLE();
+  TIM_Base_InitTypeDef time_base;
+  time_base.Prescaler = 9000-1;
+  time_base.CounterMode = TIM_COUNTERMODE_UP;
+  time_base.Period = 1000-1;
+  time_base.AutoReloadPreload  = TIM_AUTORELOAD_PRELOAD_ENABLE;
+  time_base.ClockDivision = TIM_CLOCKDIVISION_DIV1;
+  time_base.RepetitionCounter = 1;
+  
+  htim6.Instance = TIM6;
+  htim6.Init = time_base;
+  HAL_TIM_Base_Init(&htim6);
+  HAL_TIM_Base_Start_IT(&htim6);
 
-  GPIO_InitTypeDef GPIO_InitStruct;
-  GPIO_InitStruct.Pin = LED_PIN;
-  GPIO_InitStruct.Pull = GPIO_NOPULL;
-  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
-  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_MEDIUM;
-  HAL_GPIO_Init(LED_PORT, &GPIO_InitStruct);
-  HAL_GPIO_WritePin(LED_PORT, LED_PIN, 1);
+  HAL_NVIC_SetPriority(TIM6_DAC_IRQn,1,1);
+  HAL_NVIC_EnableIRQ(TIM6_DAC_IRQn);
 }
 
-static void KEY_EXTI_Init()
+void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 {
-  //开时钟
-  __HAL_RCC_GPIOA_CLK_ENABLE();
-
-  //配置GPIO&EXTI
-  GPIO_InitTypeDef GPIO_InitStruct;
-  GPIO_InitStruct.Pin = KEY_PIN;
-  GPIO_InitStruct.Pull = GPIO_PULLUP;
-  GPIO_InitStruct.Mode = GPIO_MODE_IT_FALLING;
-  HAL_GPIO_Init(KEY_PORT, &GPIO_InitStruct);
-
-  //配置NVIC
-  HAL_NVIC_SetPriority(EXTI4_15_IRQn, 1, 0);
-  HAL_NVIC_EnableIRQ(EXTI4_15_IRQn);
-}
-
-void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
-{
-  HAL_GPIO_TogglePin(LED_PORT, LED_PIN);
-}
-
-void HAL_UART_TxCpltCallback(UART_HandleTypeDef *huart)
-{
-  if (huart == &huart2)
-  {
-    HAL_GPIO_TogglePin(LD2_GPIO_Port, LD2_Pin);
-  }
-}
-
-void MY_USART1_UART_Init(void)
-{
-
-  /* USER CODE BEGIN USART2_Init 0 */
-
-  /* USER CODE END USART2_Init 0 */
-
-  /* USER CODE BEGIN USART2_Init 1 */
-
-  /* USER CODE END USART2_Init 1 */
-  huart1.Instance = USART1;
-  huart1.Init.BaudRate = 115200;
-  huart1.Init.WordLength = UART_WORDLENGTH_8B;
-  huart1.Init.StopBits = UART_STOPBITS_1;
-  huart1.Init.Parity = UART_PARITY_NONE;
-  huart1.Init.Mode = UART_MODE_TX_RX;
-  huart1.Init.HwFlowCtl = UART_HWCONTROL_NONE;
-  huart1.Init.OverSampling = UART_OVERSAMPLING_16;
-  if (HAL_UART_Init(&huart1) != HAL_OK)
-  {
-    Error_Handler();
-  }
+  HAL_GPIO_TogglePin(LD2_GPIO_Port,LD2_Pin);
 }
 /* USER CODE END 4 */
 
@@ -301,7 +259,7 @@ void Error_Handler(void)
   /* USER CODE END Error_Handler_Debug */
 }
 
-#ifdef USE_FULL_ASSERT
+#ifdef  USE_FULL_ASSERT
 /**
   * @brief  Reports the name of the source file and the source line number
   *         where the assert_param error has occurred.
@@ -310,7 +268,7 @@ void Error_Handler(void)
   * @retval None
   */
 void assert_failed(uint8_t *file, uint32_t line)
-{
+{ 
   /* USER CODE BEGIN 6 */
   /* User can add his own implementation to report the file name and line number,
      tex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */

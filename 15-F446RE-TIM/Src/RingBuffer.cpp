@@ -16,28 +16,27 @@
   Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
-#ifndef _RING_BUFFER_
-#define _RING_BUFFER_
+#include "RingBuffer.h"
+#include <string.h>
 
-#include <stdint.h>
+RingBuffer::RingBuffer(void)
+{
+  memset((void *)_aucBuffer, 0, SERIAL_BUFFER_SIZE) ;
+  _iHead = 0 ;
+  _iTail = 0 ;
+}
 
-#ifdef __cplusplus
-// Define constants and variables for buffering incoming serial data.  We're
-// using a ring buffer, in which head is the index of the location
-// to which to write the next incoming character and tail is the index of the
-// location from which to read.
-#define SERIAL_BUFFER_SIZE 128
+void RingBuffer::store_char(uint8_t c)
+{
+  int i = (uint32_t)(_iHead + 1) % SERIAL_BUFFER_SIZE ;
 
-class RingBuffer {
-  public:
-    volatile uint8_t _aucBuffer[SERIAL_BUFFER_SIZE] ;
-    volatile int _iHead ;
-    volatile int _iTail ;
+  // if we should be storing the received character into the location
+  // just before the tail (meaning that the head would advance to the
+  // current location of the tail), we're about to overflow the buffer
+  // and so we don't write the character or advance the head.
+  if (i != _iTail) {
+    _aucBuffer[_iHead] = c ;
+    _iHead = i ;
+  }
+}
 
-  public:
-    RingBuffer(void) ;
-    void store_char(uint8_t c) ;
-} ;
-#endif
-
-#endif /* _RING_BUFFER_ */
