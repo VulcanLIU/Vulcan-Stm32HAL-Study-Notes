@@ -10,6 +10,7 @@ extern "C"
 
 //TIM初始化
 void MX_TIM1_Init(void);
+void MX_TIM1_OC_Init(void);
 void TIM1_UP_TIM10_IRQHandler(void);
 
 #ifdef __cplusplus
