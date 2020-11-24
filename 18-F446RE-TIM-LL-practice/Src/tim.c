@@ -100,7 +100,7 @@ void MX_TIM1_OC_Init(void)
   NVIC_SetPriority(TIM1_UP_TIM10_IRQn, NVIC_EncodePriority(NVIC_GetPriorityGrouping(),0, 0));
   NVIC_EnableIRQ(TIM1_UP_TIM10_IRQn);
 
-  TIM_InitStruct.Prescaler = 84;
+  TIM_InitStruct.Prescaler = 180;
   TIM_InitStruct.CounterMode = LL_TIM_COUNTERMODE_UP;
   TIM_InitStruct.Autoreload = 200;
   TIM_InitStruct.ClockDivision = LL_TIM_CLOCKDIVISION_DIV1;
@@ -118,7 +118,7 @@ void MX_TIM1_OC_Init(void)
   TIM_OC_InitStruct.OCNIdleState = LL_TIM_OCIDLESTATE_LOW;
   LL_TIM_OC_Init(TIM1, LL_TIM_CHANNEL_CH1, &TIM_OC_InitStruct);
   LL_TIM_OC_DisableFast(TIM1, LL_TIM_CHANNEL_CH1);
-  LL_TIM_SetTriggerOutput(TIM1, LL_TIM_TRGO_RESET);
+  //LL_TIM_SetTriggerOutput(TIM1, LL_TIM_TRGO_RESET);
   LL_TIM_DisableMasterSlaveMode(TIM1);
   TIM_BDTRInitStruct.OSSRState = LL_TIM_OSSR_DISABLE;
   TIM_BDTRInitStruct.OSSIState = LL_TIM_OSSI_DISABLE;
@@ -127,18 +127,22 @@ void MX_TIM1_OC_Init(void)
   TIM_BDTRInitStruct.BreakState = LL_TIM_BREAK_DISABLE;
   TIM_BDTRInitStruct.BreakPolarity = LL_TIM_BREAK_POLARITY_HIGH;
   TIM_BDTRInitStruct.AutomaticOutput = LL_TIM_AUTOMATICOUTPUT_DISABLE;
-  LL_TIM_BDTR_Init(TIM1, &TIM_BDTRInitStruct);
+  //LL_TIM_BDTR_Init(TIM1, &TIM_BDTRInitStruct);
+   // LL_TIM_EnableAutomaticOutput(TIM1);
+  LL_TIM_EnableAllOutputs(TIM1);
   LL_AHB1_GRP1_EnableClock(LL_AHB1_GRP1_PERIPH_GPIOA);
     /**TIM1 GPIO Configuration    
     PA8     ------> TIM1_CH1 
     */
   GPIO_InitStruct.Pin = LL_GPIO_PIN_8;
   GPIO_InitStruct.Mode = LL_GPIO_MODE_ALTERNATE;
-  GPIO_InitStruct.Speed = LL_GPIO_SPEED_FREQ_LOW;
+  GPIO_InitStruct.Speed = LL_GPIO_SPEED_FREQ_HIGH;
   GPIO_InitStruct.OutputType = LL_GPIO_OUTPUT_PUSHPULL;
   GPIO_InitStruct.Pull = LL_GPIO_PULL_NO;
   GPIO_InitStruct.Alternate = LL_GPIO_AF_1;
   LL_GPIO_Init(GPIOA, &GPIO_InitStruct);
+  //LL_GPIO_WriteOutputPort(GPIOA,LL_GPIO_PIN_8);
+  LL_TIM_EnableCounter(TIM1);
 }
 
 void TIM1_UP_TIM10_IRQHandler(void)
