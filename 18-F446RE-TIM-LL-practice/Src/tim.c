@@ -57,15 +57,28 @@ void MX_TIM1_OC_Init(void)
     LL_TIM_GenerateEvent_UPDATE(TIM1);
 
     //初始化比较匹配单元
-    LL_TIM_OC_SetMode(TIM1, TIM_CHANNEL_1, LL_TIM_OCMODE_TOGGLE);
+    LL_TIM_OC_SetMode(TIM1, LL_TIM_CHANNEL_CH1, LL_TIM_OCMODE_TOGGLE);
+    CLEAR_BIT(TIM1->CCMR1, TIM_CCMR1_CC1S);
+    CLEAR_BIT(TIM1->CCER, TIM_CCER_CC1E);
     LL_TIM_OC_SetCompareCH1(TIM1, 100);                                       //设置通道1比较值
     LL_TIM_OC_SetIdleState(TIM1, LL_TIM_CHANNEL_CH1, LL_TIM_OCIDLESTATE_LOW); //空闲状态极性
     LL_TIM_OC_SetIdleState(TIM1, LL_TIM_CHANNEL_CH1N, LL_TIM_OCIDLESTATE_LOW);
     LL_TIM_OC_SetPolarity(TIM1, LL_TIM_CHANNEL_CH1, LL_TIM_OCPOLARITY_HIGH); //匹配状态电平
     LL_TIM_OC_SetPolarity(TIM1, LL_TIM_CHANNEL_CH1N, LL_TIM_OCPOLARITY_HIGH);
     LL_TIM_OC_EnablePreload(TIM1, LL_TIM_CHANNEL_CH1); //使能比较寄存器预装载
+    LL_TIM_CC_EnableChannel(TIM1, LL_TIM_CHANNEL_CH1); //使能通道输出
 
-    //LL_TIM_CC_EnableChannel(TIM1, LL_TIM_CHANNEL_CH1); //使能通道输出
+    // LL_TIM_OC_InitTypeDef TIM_OC_InitStruct = {0};
+    // TIM_OC_InitStruct.OCMode = LL_TIM_OCMODE_TOGGLE;
+    // TIM_OC_InitStruct.OCState = LL_TIM_OCSTATE_ENABLE;
+    // TIM_OC_InitStruct.OCNState = LL_TIM_OCSTATE_DISABLE;
+    // TIM_OC_InitStruct.CompareValue = 100;
+    // TIM_OC_InitStruct.OCPolarity = LL_TIM_OCPOLARITY_HIGH;
+    // TIM_OC_InitStruct.OCNPolarity = LL_TIM_OCPOLARITY_HIGH;
+    // TIM_OC_InitStruct.OCIdleState = LL_TIM_OCIDLESTATE_LOW;
+    // TIM_OC_InitStruct.OCNIdleState = LL_TIM_OCIDLESTATE_LOW;
+    // LL_TIM_OC_Init(TIM1, LL_TIM_CHANNEL_CH1, &TIM_OC_InitStruct);
+    
     LL_TIM_EnableAllOutputs(TIM1);
 
     //中断
@@ -118,7 +131,7 @@ void MX_TIM1_OC_Init(void)
     //   TIM_OC_InitStruct.OCNPolarity = LL_TIM_OCPOLARITY_HIGH;
     //   TIM_OC_InitStruct.OCIdleState = LL_TIM_OCIDLESTATE_LOW;
     //   TIM_OC_InitStruct.OCNIdleState = LL_TIM_OCIDLESTATE_LOW;
-      // LL_TIM_OC_Init(TIM1, LL_TIM_CHANNEL_CH1, &TIM_OC_InitStruct);
+    // LL_TIM_OC_Init(TIM1, LL_TIM_CHANNEL_CH1, &TIM_OC_InitStruct);
     //   LL_TIM_OC_DisableFast(TIM1, LL_TIM_CHANNEL_CH1);
     //   //LL_TIM_SetTriggerOutput(TIM1, LL_TIM_TRGO_RESET);
     //   LL_TIM_DisableMasterSlaveMode(TIM1);
