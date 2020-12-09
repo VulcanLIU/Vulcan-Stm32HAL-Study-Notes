@@ -1,0 +1,508 @@
+D:\01-Projects\Stm32\Vulcan-Stm32HAL-Study-Notes\12-F103-USART>make
+arm-none-eabi-gcc -c -mcpu=cortex-m3 -mthumb   -DUSE_HAL_DRIVER -DSTM32F103xB -D__arm__ -DSTM32F103xB 
+-IInc 
+-IDrivers/STM32F1xx_HAL_Driver/Inc 
+-IDrivers/STM32F1xx_HAL_Driver/Inc/Legacy 
+-IDrivers/CMSIS/Device/ST/STM32F1xx/Include 
+-IDrivers/CMSIS/Include 
+-Og -Wall -fdata-sections -ffunction-sections -g -gdwarf-2 -MMD -MP -MF"build/main.d" 
+-Wa,-a,-ad,-alms=build/main.lst Src/main.c -o build/main.o
+
+arm-none-eabi-gcc 
+build/main.o 
+build/stm32f1xx_it.o
+ build/stm32f1xx_hal_msp.o 
+ build/stm32f1xx_hal_gpio_ex.o 
+ build/stm32f1xx_hal_tim.o 
+ build/stm32f1xx_hal_tim_ex.o 
+ build/stm32f1xx_hal_uart.o 
+ build/stm32f1xx_hal.o 
+ build/stm32f1xx_hal_rcc.o 
+ build/stm32f1xx_hal_rcc_ex.o 
+ build/stm32f1xx_hal_gpio.o 
+ build/stm32f1xx_hal_dma.o 
+ build/stm32f1xx_hal_cortex.o 
+ build/stm32f1xx_hal_pwr.o 
+ build/stm32f1xx_hal_flash.o 
+ build/stm32f1xx_hal_flash_ex.o
+ build/stm32f1xx_hal_exti.o 
+ build/system_stm32f1xx.o  
+ build/startup_stm32f103xb.o 
+ -mcpu=cortex-m3 -mthumb   -specs=nano.specs -TSTM32F103C8Tx_FLASH.ld  
+ -lc -lm -lnosys  -Wl,-Map=build/12-F103-USART.map,--cref -Wl,--gc-sections -o build/12-F103-USART.elf
+
+arm-none-eabi-size build/12-F103-USART.elf
+   text    data     bss     dec     hex filename
+   4324      20    1700    6044    179c build/12-F103-USART.elf
+arm-none-eabi-objcopy -O ihex build/12-F103-USART.elf build/12-F103-USART.hex
+arm-none-eabi-objcopy -O binary -S build/12-F103-USART.elf build/12-F103-USART.bin
+
+arm-none-eabi-gcc -c -mcpu=cortex-m3 -mthumb   -DUSE_HAL_DRIVER -DSTM32F103xB -D__arm__ -DSTM32F103xB -IInc -IDrivers/STM32F1xx_HAL_Driver/Inc -IDrivers/STM32F1xx_HAL_Driver/Inc/Legacy -IDrivers/CMSIS/Device/ST/STM32F1xx/Include -IDrivers/CMSIS/Include -Og -Wall -fdata-sections -ffunction-sections -g -gdwarf-2 -MMD -MP -MF"build/main.d" -Wa,-a,-ad,-alms=build/main.lst Src/main.c -o build/main.o
+
+D:\01-Projects\Matlab-Projects\stm32f103c8>make
+系统找不到指定的路径。
+mkdir build
+arm-none-eabi-gcc -c -mcpu=cortex-m3 -mthumb   -DUSE_HAL_DRIVER -DSTM32F103xB -IInc -IDrivers/STM32F1xx_HAL_Driver/Inc -IDrivers/STM32F1xx_HAL_Driver/Inc/Legacy -IMiddlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3 -IDrivers/CMSIS/Device/ST/STM32F1xx/Include -IMiddlewares/Third_Party/FreeRTOS/Source/include -IMiddlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -IMiddlewares/ST/STM32_USB_Device_Library/Core/Inc -IMiddlewares/ST/STM32_USB_Device_Library/Class/HID/Inc -IMiddlewares/system/sys -IMiddlewares/system/usart -IMiddlewares/system/delay -IMiddlewares/cxxsource -IMiddlewares/HARDWARE/include -IMiddlewares/MPU6050 -IMiddlewares/MPU6050/eMPL -IMiddlewares/myusb -IMiddlewares/RC522/include -IDrivers/CMSIS/Include -Og -Wall -fdata-sections -ffunction-sections -g -gdwarf-2 -MMD -MP -MF"build/stm32f1xx_hal_flash.d" -MT"build/stm32f1xx_hal_flash.d" -Wa,-a,-ad,-alms=build/stm32f1xx_hal_flash.lst Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_flash.c -o build/stm32f1xx_hal_flash.o
+arm-none-eabi-gcc -c -mcpu=cortex-m3 -mthumb   -DUSE_HAL_DRIVER -DSTM32F103xB -IInc -IDrivers/STM32F1xx_HAL_Driver/Inc -IDrivers/STM32F1xx_HAL_Driver/Inc/Legacy -IMiddlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3 -IDrivers/CMSIS/Device/ST/STM32F1xx/Include -IMiddlewares/Third_Party/FreeRTOS/Source/include -IMiddlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -IMiddlewares/ST/STM32_USB_Device_Library/Core/Inc -IMiddlewares/ST/STM32_USB_Device_Library/Class/HID/Inc -IMiddlewares/system/sys -IMiddlewares/system/usart -IMiddlewares/system/delay -IMiddlewares/cxxsource -IMiddlewares/HARDWARE/include -IMiddlewares/MPU6050 -IMiddlewares/MPU6050/eMPL -IMiddlewares/myusb -IMiddlewares/RC522/include -IDrivers/CMSIS/Include -Og -Wall -fdata-sections -ffunction-sections -g -gdwarf-2 -MMD -MP -MF"build/stm32f1xx_hal.d" -MT"build/stm32f1xx_hal.d" -Wa,-a,-ad,-alms=build/stm32f1xx_hal.lst Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal.c -o build/stm32f1xx_hal.o
+arm-none-eabi-gcc -c -mcpu=cortex-m3 -mthumb   -DUSE_HAL_DRIVER -DSTM32F103xB -IInc -IDrivers/STM32F1xx_HAL_Driver/Inc -IDrivers/STM32F1xx_HAL_Driver/Inc/Legacy -IMiddlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3 -IDrivers/CMSIS/Device/ST/STM32F1xx/Include -IMiddlewares/Third_Party/FreeRTOS/Source/include -IMiddlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -IMiddlewares/ST/STM32_USB_Device_Library/Core/Inc -IMiddlewares/ST/STM32_USB_Device_Library/Class/HID/Inc -IMiddlewares/system/sys -IMiddlewares/system/usart -IMiddlewares/system/delay -IMiddlewares/cxxsource -IMiddlewares/HARDWARE/include -IMiddlewares/MPU6050 -IMiddlewares/MPU6050/eMPL -IMiddlewares/myusb -IMiddlewares/RC522/include -IDrivers/CMSIS/Include -Og -Wall -fdata-sections -ffunction-sections -g -gdwarf-2 -MMD -MP -MF"build/stm32f1xx_hal_spi.d" -MT"build/stm32f1xx_hal_spi.d" -Wa,-a,-ad,-alms=build/stm32f1xx_hal_spi.lst Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_spi.c -o build/stm32f1xx_hal_spi.o
+arm-none-eabi-gcc -c -mcpu=cortex-m3 -mthumb   -DUSE_HAL_DRIVER -DSTM32F103xB -IInc -IDrivers/STM32F1xx_HAL_Driver/Inc -IDrivers/STM32F1xx_HAL_Driver/Inc/Legacy -IMiddlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3 -IDrivers/CMSIS/Device/ST/STM32F1xx/Include -IMiddlewares/Third_Party/FreeRTOS/Source/include -IMiddlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -IMiddlewares/ST/STM32_USB_Device_Library/Core/Inc -IMiddlewares/ST/STM32_USB_Device_Library/Class/HID/Inc -IMiddlewares/system/sys -IMiddlewares/system/usart -IMiddlewares/system/delay -IMiddlewares/cxxsource -IMiddlewares/HARDWARE/include -IMiddlewares/MPU6050 -IMiddlewares/MPU6050/eMPL -IMiddlewares/myusb -IMiddlewares/RC522/include -IDrivers/CMSIS/Include -Og -Wall -fdata-sections -ffunction-sections -g -gdwarf-2 -MMD -MP -MF"build/stm32f1xx_hal_pcd.d" -MT"build/stm32f1xx_hal_pcd.d" -Wa,-a,-ad,-alms=build/stm32f1xx_hal_pcd.lst Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_pcd.c -o build/stm32f1xx_hal_pcd.o
+arm-none-eabi-gcc -c -mcpu=cortex-m3 -mthumb   -DUSE_HAL_DRIVER -DSTM32F103xB -IInc -IDrivers/STM32F1xx_HAL_Driver/Inc -IDrivers/STM32F1xx_HAL_Driver/Inc/Legacy -IMiddlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3 -IDrivers/CMSIS/Device/ST/STM32F1xx/Include -IMiddlewares/Third_Party/FreeRTOS/Source/include -IMiddlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -IMiddlewares/ST/STM32_USB_Device_Library/Core/Inc -IMiddlewares/ST/STM32_USB_Device_Library/Class/HID/Inc -IMiddlewares/system/sys -IMiddlewares/system/usart -IMiddlewares/system/delay -IMiddlewares/cxxsource -IMiddlewares/HARDWARE/include -IMiddlewares/MPU6050 -IMiddlewares/MPU6050/eMPL -IMiddlewares/myusb -IMiddlewares/RC522/include -IDrivers/CMSIS/Include -Og -Wall -fdata-sections -ffunction-sections -g -gdwarf-2 -MMD -MP -MF"build/stm32f1xx_hal_pwr.d" -MT"build/stm32f1xx_hal_pwr.d" -Wa,-a,-ad,-alms=build/stm32f1xx_hal_pwr.lst Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_pwr.c -o build/stm32f1xx_hal_pwr.o
+arm-none-eabi-gcc -c -mcpu=cortex-m3 -mthumb   -DUSE_HAL_DRIVER -DSTM32F103xB -IInc -IDrivers/STM32F1xx_HAL_Driver/Inc -IDrivers/STM32F1xx_HAL_Driver/Inc/Legacy -IMiddlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3 -IDrivers/CMSIS/Device/ST/STM32F1xx/Include -IMiddlewares/Third_Party/FreeRTOS/Source/include -IMiddlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -IMiddlewares/ST/STM32_USB_Device_Library/Core/Inc -IMiddlewares/ST/STM32_USB_Device_Library/Class/HID/Inc -IMiddlewares/system/sys -IMiddlewares/system/usart -IMiddlewares/system/delay -IMiddlewares/cxxsource -IMiddlewares/HARDWARE/include -IMiddlewares/MPU6050 -IMiddlewares/MPU6050/eMPL -IMiddlewares/myusb -IMiddlewares/RC522/include -IDrivers/CMSIS/Include -Og -Wall -fdata-sections -ffunction-sections -g -gdwarf-2 -MMD -MP -MF"build/stm32f1xx_ll_usb.d" -MT"build/stm32f1xx_ll_usb.d" -Wa,-a,-ad,-alms=build/stm32f1xx_ll_usb.lst Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_ll_usb.c -o build/stm32f1xx_ll_usb.o
+arm-none-eabi-gcc -c -mcpu=cortex-m3 -mthumb   -DUSE_HAL_DRIVER -DSTM32F103xB -IInc -IDrivers/STM32F1xx_HAL_Driver/Inc -IDrivers/STM32F1xx_HAL_Driver/Inc/Legacy -IMiddlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3 -IDrivers/CMSIS/Device/ST/STM32F1xx/Include -IMiddlewares/Third_Party/FreeRTOS/Source/include -IMiddlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -IMiddlewares/ST/STM32_USB_Device_Library/Core/Inc -IMiddlewares/ST/STM32_USB_Device_Library/Class/HID/Inc -IMiddlewares/system/sys -IMiddlewares/system/usart -IMiddlewares/system/delay -IMiddlewares/cxxsource -IMiddlewares/HARDWARE/include -IMiddlewares/MPU6050 -IMiddlewares/MPU6050/eMPL -IMiddlewares/myusb -IMiddlewares/RC522/include -IDrivers/CMSIS/Include -Og -Wall -fdata-sections -ffunction-sections -g -gdwarf-2 -MMD -MP -MF"build/stm32f1xx_hal_rcc_ex.d" -MT"build/stm32f1xx_hal_rcc_ex.d" -Wa,-a,-ad,-alms=build/stm32f1xx_hal_rcc_ex.lst Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rcc_ex.c -o build/stm32f1xx_hal_rcc_ex.o
+arm-none-eabi-gcc -c -mcpu=cortex-m3 -mthumb   -DUSE_HAL_DRIVER -DSTM32F103xB -IInc -IDrivers/STM32F1xx_HAL_Driver/Inc -IDrivers/STM32F1xx_HAL_Driver/Inc/Legacy -IMiddlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3 -IDrivers/CMSIS/Device/ST/STM32F1xx/Include -IMiddlewares/Third_Party/FreeRTOS/Source/include -IMiddlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -IMiddlewares/ST/STM32_USB_Device_Library/Core/Inc -IMiddlewares/ST/STM32_USB_Device_Library/Class/HID/Inc -IMiddlewares/system/sys -IMiddlewares/system/usart -IMiddlewares/system/delay -IMiddlewares/cxxsource -IMiddlewares/HARDWARE/include -IMiddlewares/MPU6050 -IMiddlewares/MPU6050/eMPL -IMiddlewares/myusb -IMiddlewares/RC522/include -IDrivers/CMSIS/Include -Og -Wall -fdata-sections -ffunction-sections -g -gdwarf-2 -MMD -MP -MF"build/stm32f1xx_hal_tim.d" -MT"build/stm32f1xx_hal_tim.d" -Wa,-a,-ad,-alms=build/stm32f1xx_hal_tim.lst Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_tim.c -o build/stm32f1xx_hal_tim.o
+arm-none-eabi-gcc -c -mcpu=cortex-m3 -mthumb   -DUSE_HAL_DRIVER -DSTM32F103xB -IInc -IDrivers/STM32F1xx_HAL_Driver/Inc -IDrivers/STM32F1xx_HAL_Driver/Inc/Legacy -IMiddlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3 -IDrivers/CMSIS/Device/ST/STM32F1xx/Include -IMiddlewares/Third_Party/FreeRTOS/Source/include -IMiddlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -IMiddlewares/ST/STM32_USB_Device_Library/Core/Inc -IMiddlewares/ST/STM32_USB_Device_Library/Class/HID/Inc -IMiddlewares/system/sys -IMiddlewares/system/usart -IMiddlewares/system/delay -IMiddlewares/cxxsource -IMiddlewares/HARDWARE/include -IMiddlewares/MPU6050 -IMiddlewares/MPU6050/eMPL -IMiddlewares/myusb -IMiddlewares/RC522/include -IDrivers/CMSIS/Include -Og -Wall -fdata-sections -ffunction-sections -g -gdwarf-2 -MMD -MP -MF"build/stm32f1xx_hal_adc_ex.d" -MT"build/stm32f1xx_hal_adc_ex.d" -Wa,-a,-ad,-alms=build/stm32f1xx_hal_adc_ex.lst Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc_ex.c -o build/stm32f1xx_hal_adc_ex.o
+arm-none-eabi-gcc -c -mcpu=cortex-m3 -mthumb   -DUSE_HAL_DRIVER -DSTM32F103xB -IInc -IDrivers/STM32F1xx_HAL_Driver/Inc -IDrivers/STM32F1xx_HAL_Driver/Inc/Legacy -IMiddlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3 -IDrivers/CMSIS/Device/ST/STM32F1xx/Include -IMiddlewares/Third_Party/FreeRTOS/Source/include -IMiddlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -IMiddlewares/ST/STM32_USB_Device_Library/Core/Inc -IMiddlewares/ST/STM32_USB_Device_Library/Class/HID/Inc -IMiddlewares/system/sys -IMiddlewares/system/usart -IMiddlewares/system/delay -IMiddlewares/cxxsource -IMiddlewares/HARDWARE/include -IMiddlewares/MPU6050 -IMiddlewares/MPU6050/eMPL -IMiddlewares/myusb -IMiddlewares/RC522/include -IDrivers/CMSIS/Include -Og -Wall -fdata-sections -ffunction-sections -g -gdwarf-2 -MMD -MP -MF"build/stm32f1xx_hal_dma.d" -MT"build/stm32f1xx_hal_dma.d" -Wa,-a,-ad,-alms=build/stm32f1xx_hal_dma.lst Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_dma.c -o build/stm32f1xx_hal_dma.o
+arm-none-eabi-gcc -c -mcpu=cortex-m3 -mthumb   -DUSE_HAL_DRIVER -DSTM32F103xB -IInc -IDrivers/STM32F1xx_HAL_Driver/Inc -IDrivers/STM32F1xx_HAL_Driver/Inc/Legacy -IMiddlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3 -IDrivers/CMSIS/Device/ST/STM32F1xx/Include -IMiddlewares/Third_Party/FreeRTOS/Source/include -IMiddlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -IMiddlewares/ST/STM32_USB_Device_Library/Core/Inc -IMiddlewares/ST/STM32_USB_Device_Library/Class/HID/Inc -IMiddlewares/system/sys -IMiddlewares/system/usart -IMiddlewares/system/delay -IMiddlewares/cxxsource -IMiddlewares/HARDWARE/include -IMiddlewares/MPU6050 -IMiddlewares/MPU6050/eMPL -IMiddlewares/myusb -IMiddlewares/RC522/include -IDrivers/CMSIS/Include -Og -Wall -fdata-sections -ffunction-sections -g -gdwarf-2 -MMD -MP -MF"build/stm32f1xx_hal_spi_ex.d" -MT"build/stm32f1xx_hal_spi_ex.d" -Wa,-a,-ad,-alms=build/stm32f1xx_hal_spi_ex.lst Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_spi_ex.c -o build/stm32f1xx_hal_spi_ex.o
+arm-none-eabi-gcc -c -mcpu=cortex-m3 -mthumb   -DUSE_HAL_DRIVER -DSTM32F103xB -IInc -IDrivers/STM32F1xx_HAL_Driver/Inc -IDrivers/STM32F1xx_HAL_Driver/Inc/Legacy -IMiddlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3 -IDrivers/CMSIS/Device/ST/STM32F1xx/Include -IMiddlewares/Third_Party/FreeRTOS/Source/include -IMiddlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -IMiddlewares/ST/STM32_USB_Device_Library/Core/Inc -IMiddlewares/ST/STM32_USB_Device_Library/Class/HID/Inc -IMiddlewares/system/sys -IMiddlewares/system/usart -IMiddlewares/system/delay -IMiddlewares/cxxsource -IMiddlewares/HARDWARE/include -IMiddlewares/MPU6050 -IMiddlewares/MPU6050/eMPL -IMiddlewares/myusb -IMiddlewares/RC522/include -IDrivers/CMSIS/Include -Og -Wall -fdata-sections -ffunction-sections -g -gdwarf-2 -MMD -MP -MF"build/stm32f1xx_hal_cortex.d" -MT"build/stm32f1xx_hal_cortex.d" -Wa,-a,-ad,-alms=build/stm32f1xx_hal_cortex.lst Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.c -o build/stm32f1xx_hal_cortex.o
+arm-none-eabi-gcc -c -mcpu=cortex-m3 -mthumb   -DUSE_HAL_DRIVER -DSTM32F103xB -IInc -IDrivers/STM32F1xx_HAL_Driver/Inc -IDrivers/STM32F1xx_HAL_Driver/Inc/Legacy -IMiddlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3 -IDrivers/CMSIS/Device/ST/STM32F1xx/Include -IMiddlewares/Third_Party/FreeRTOS/Source/include -IMiddlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -IMiddlewares/ST/STM32_USB_Device_Library/Core/Inc -IMiddlewares/ST/STM32_USB_Device_Library/Class/HID/Inc -IMiddlewares/system/sys -IMiddlewares/system/usart -IMiddlewares/system/delay -IMiddlewares/cxxsource -IMiddlewares/HARDWARE/include -IMiddlewares/MPU6050 -IMiddlewares/MPU6050/eMPL -IMiddlewares/myusb -IMiddlewares/RC522/include -IDrivers/CMSIS/Include -Og -Wall -fdata-sections -ffunction-sections -g -gdwarf-2 -MMD -MP -MF"build/stm32f1xx_hal_pcd_ex.d" -MT"build/stm32f1xx_hal_pcd_ex.d" -Wa,-a,-ad,-alms=build/stm32f1xx_hal_pcd_ex.lst Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_pcd_ex.c -o build/stm32f1xx_hal_pcd_ex.o
+arm-none-eabi-gcc -c -mcpu=cortex-m3 -mthumb   -DUSE_HAL_DRIVER -DSTM32F103xB -IInc -IDrivers/STM32F1xx_HAL_Driver/Inc -IDrivers/STM32F1xx_HAL_Driver/Inc/Legacy -IMiddlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3 -IDrivers/CMSIS/Device/ST/STM32F1xx/Include -IMiddlewares/Third_Party/FreeRTOS/Source/include -IMiddlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -IMiddlewares/ST/STM32_USB_Device_Library/Core/Inc -IMiddlewares/ST/STM32_USB_Device_Library/Class/HID/Inc -IMiddlewares/system/sys -IMiddlewares/system/usart -IMiddlewares/system/delay -IMiddlewares/cxxsource -IMiddlewares/HARDWARE/include -IMiddlewares/MPU6050 -IMiddlewares/MPU6050/eMPL -IMiddlewares/myusb -IMiddlewares/RC522/include -IDrivers/CMSIS/Include -Og -Wall -fdata-sections -ffunction-sections -g -gdwarf-2 -MMD -MP -MF"build/stm32f1xx_hal_tim_ex.d" -MT"build/stm32f1xx_hal_tim_ex.d" -Wa,-a,-ad,-alms=build/stm32f1xx_hal_tim_ex.lst Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_tim_ex.c -o build/stm32f1xx_hal_tim_ex.o
+arm-none-eabi-gcc -c -mcpu=cortex-m3 -mthumb   -DUSE_HAL_DRIVER -DSTM32F103xB -IInc -IDrivers/STM32F1xx_HAL_Driver/Inc -IDrivers/STM32F1xx_HAL_Driver/Inc/Legacy -IMiddlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3 -IDrivers/CMSIS/Device/ST/STM32F1xx/Include -IMiddlewares/Third_Party/FreeRTOS/Source/include -IMiddlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -IMiddlewares/ST/STM32_USB_Device_Library/Core/Inc -IMiddlewares/ST/STM32_USB_Device_Library/Class/HID/Inc -IMiddlewares/system/sys -IMiddlewares/system/usart -IMiddlewares/system/delay -IMiddlewares/cxxsource -IMiddlewares/HARDWARE/include -IMiddlewares/MPU6050 -IMiddlewares/MPU6050/eMPL -IMiddlewares/myusb -IMiddlewares/RC522/include -IDrivers/CMSIS/Include -Og -Wall -fdata-sections -ffunction-sections -g -gdwarf-2 -MMD -MP -MF"build/stm32f1xx_hal_i2c.d" -MT"build/stm32f1xx_hal_i2c.d" -Wa,-a,-ad,-alms=build/stm32f1xx_hal_i2c.lst Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_i2c.c -o build/stm32f1xx_hal_i2c.o
+arm-none-eabi-gcc -c -mcpu=cortex-m3 -mthumb   -DUSE_HAL_DRIVER -DSTM32F103xB -IInc -IDrivers/STM32F1xx_HAL_Driver/Inc -IDrivers/STM32F1xx_HAL_Driver/Inc/Legacy -IMiddlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3 -IDrivers/CMSIS/Device/ST/STM32F1xx/Include -IMiddlewares/Third_Party/FreeRTOS/Source/include -IMiddlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -IMiddlewares/ST/STM32_USB_Device_Library/Core/Inc -IMiddlewares/ST/STM32_USB_Device_Library/Class/HID/Inc -IMiddlewares/system/sys -IMiddlewares/system/usart -IMiddlewares/system/delay -IMiddlewares/cxxsource -IMiddlewares/HARDWARE/include -IMiddlewares/MPU6050 -IMiddlewares/MPU6050/eMPL -IMiddlewares/myusb -IMiddlewares/RC522/include -IDrivers/CMSIS/Include -Og -Wall -fdata-sections -ffunction-sections -g -gdwarf-2 -MMD -MP -MF"build/stm32f1xx_hal_adc.d" -MT"build/stm32f1xx_hal_adc.d" -Wa,-a,-ad,-alms=build/stm32f1xx_hal_adc.lst Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc.c -o build/stm32f1xx_hal_adc.o
+arm-none-eabi-gcc -c -mcpu=cortex-m3 -mthumb   -DUSE_HAL_DRIVER -DSTM32F103xB -IInc -IDrivers/STM32F1xx_HAL_Driver/Inc -IDrivers/STM32F1xx_HAL_Driver/Inc/Legacy -IMiddlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3 -IDrivers/CMSIS/Device/ST/STM32F1xx/Include -IMiddlewares/Third_Party/FreeRTOS/Source/include -IMiddlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -IMiddlewares/ST/STM32_USB_Device_Library/Core/Inc -IMiddlewares/ST/STM32_USB_Device_Library/Class/HID/Inc -IMiddlewares/system/sys -IMiddlewares/system/usart -IMiddlewares/system/delay -IMiddlewares/cxxsource -IMiddlewares/HARDWARE/include -IMiddlewares/MPU6050 -IMiddlewares/MPU6050/eMPL -IMiddlewares/myusb -IMiddlewares/RC522/include -IDrivers/CMSIS/Include -Og -Wall -fdata-sections -ffunction-sections -g -gdwarf-2 -MMD -MP -MF"build/stm32f1xx_hal_flash_ex.d" -MT"build/stm32f1xx_hal_flash_ex.d" -Wa,-a,-ad,-alms=build/stm32f1xx_hal_flash_ex.lst Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_flash_ex.c -o build/stm32f1xx_hal_flash_ex.o
+arm-none-eabi-gcc -c -mcpu=cortex-m3 -mthumb   -DUSE_HAL_DRIVER -DSTM32F103xB -IInc -IDrivers/STM32F1xx_HAL_Driver/Inc -IDrivers/STM32F1xx_HAL_Driver/Inc/Legacy -IMiddlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3 -IDrivers/CMSIS/Device/ST/STM32F1xx/Include -IMiddlewares/Third_Party/FreeRTOS/Source/include -IMiddlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -IMiddlewares/ST/STM32_USB_Device_Library/Core/Inc -IMiddlewares/ST/STM32_USB_Device_Library/Class/HID/Inc -IMiddlewares/system/sys -IMiddlewares/system/usart -IMiddlewares/system/delay -IMiddlewares/cxxsource -IMiddlewares/HARDWARE/include -IMiddlewares/MPU6050 -IMiddlewares/MPU6050/eMPL -IMiddlewares/myusb -IMiddlewares/RC522/include -IDrivers/CMSIS/Include -Og -Wall -fdata-sections -ffunction-sections -g -gdwarf-2 -MMD -MP -MF"build/stm32f1xx_hal_gpio.d" -MT"build/stm32f1xx_hal_gpio.d" -Wa,-a,-ad,-alms=build/stm32f1xx_hal_gpio.lst Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_gpio.c -o build/stm32f1xx_hal_gpio.o
+arm-none-eabi-gcc -c -mcpu=cortex-m3 -mthumb   -DUSE_HAL_DRIVER -DSTM32F103xB -IInc -IDrivers/STM32F1xx_HAL_Driver/Inc -IDrivers/STM32F1xx_HAL_Driver/Inc/Legacy -IMiddlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3 -IDrivers/CMSIS/Device/ST/STM32F1xx/Include -IMiddlewares/Third_Party/FreeRTOS/Source/include -IMiddlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -IMiddlewares/ST/STM32_USB_Device_Library/Core/Inc -IMiddlewares/ST/STM32_USB_Device_Library/Class/HID/Inc -IMiddlewares/system/sys -IMiddlewares/system/usart -IMiddlewares/system/delay -IMiddlewares/cxxsource -IMiddlewares/HARDWARE/include -IMiddlewares/MPU6050 -IMiddlewares/MPU6050/eMPL -IMiddlewares/myusb -IMiddlewares/RC522/include -IDrivers/CMSIS/Include -Og -Wall -fdata-sections -ffunction-sections -g -gdwarf-2 -MMD -MP -MF"build/stm32f1xx_hal_uart.d" -MT"build/stm32f1xx_hal_uart.d" -Wa,-a,-ad,-alms=build/stm32f1xx_hal_uart.lst Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_uart.c -o build/stm32f1xx_hal_uart.o
+arm-none-eabi-gcc -c -mcpu=cortex-m3 -mthumb   -DUSE_HAL_DRIVER -DSTM32F103xB -IInc -IDrivers/STM32F1xx_HAL_Driver/Inc -IDrivers/STM32F1xx_HAL_Driver/Inc/Legacy -IMiddlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3 -IDrivers/CMSIS/Device/ST/STM32F1xx/Include -IMiddlewares/Third_Party/FreeRTOS/Source/include -IMiddlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -IMiddlewares/ST/STM32_USB_Device_Library/Core/Inc -IMiddlewares/ST/STM32_USB_Device_Library/Class/HID/Inc -IMiddlewares/system/sys -IMiddlewares/system/usart -IMiddlewares/system/delay -IMiddlewares/cxxsource -IMiddlewares/HARDWARE/include -IMiddlewares/MPU6050 -IMiddlewares/MPU6050/eMPL -IMiddlewares/myusb -IMiddlewares/RC522/include -IDrivers/CMSIS/Include -Og -Wall -fdata-sections -ffunction-sections -g -gdwarf-2 -MMD -MP -MF"build/stm32f1xx_hal_rcc.d" -MT"build/stm32f1xx_hal_rcc.d" -Wa,-a,-ad,-alms=build/stm32f1xx_hal_rcc.lst Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rcc.c -o build/stm32f1xx_hal_rcc.o
+arm-none-eabi-gcc -c -mcpu=cortex-m3 -mthumb   -DUSE_HAL_DRIVER -DSTM32F103xB -IInc -IDrivers/STM32F1xx_HAL_Driver/Inc -IDrivers/STM32F1xx_HAL_Driver/Inc/Legacy -IMiddlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3 -IDrivers/CMSIS/Device/ST/STM32F1xx/Include -IMiddlewares/Third_Party/FreeRTOS/Source/include -IMiddlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -IMiddlewares/ST/STM32_USB_Device_Library/Core/Inc -IMiddlewares/ST/STM32_USB_Device_Library/Class/HID/Inc -IMiddlewares/system/sys -IMiddlewares/system/usart -IMiddlewares/system/delay -IMiddlewares/cxxsource -IMiddlewares/HARDWARE/include -IMiddlewares/MPU6050 -IMiddlewares/MPU6050/eMPL -IMiddlewares/myusb -IMiddlewares/RC522/include -IDrivers/CMSIS/Include -Og -Wall -fdata-sections -ffunction-sections -g -gdwarf-2 -MMD -MP -MF"build/stm32f1xx_hal_gpio_ex.d" -MT"build/stm32f1xx_hal_gpio_ex.d" -Wa,-a,-ad,-alms=build/stm32f1xx_hal_gpio_ex.lst Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_gpio_ex.c -o build/stm32f1xx_hal_gpio_ex.o
+arm-none-eabi-gcc -c -mcpu=cortex-m3 -mthumb   -DUSE_HAL_DRIVER -DSTM32F103xB -IInc -IDrivers/STM32F1xx_HAL_Driver/Inc -IDrivers/STM32F1xx_HAL_Driver/Inc/Legacy -IMiddlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3 -IDrivers/CMSIS/Device/ST/STM32F1xx/Include -IMiddlewares/Third_Party/FreeRTOS/Source/include -IMiddlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -IMiddlewares/ST/STM32_USB_Device_Library/Core/Inc -IMiddlewares/ST/STM32_USB_Device_Library/Class/HID/Inc -IMiddlewares/system/sys -IMiddlewares/system/usart -IMiddlewares/system/delay -IMiddlewares/cxxsource -IMiddlewares/HARDWARE/include -IMiddlewares/MPU6050 -IMiddlewares/MPU6050/eMPL -IMiddlewares/myusb -IMiddlewares/RC522/include -IDrivers/CMSIS/Include -Og -Wall -fdata-sections -ffunction-sections -g -gdwarf-2 -MMD -MP -MF"build/usbd_core.d" -MT"build/usbd_core.d" -Wa,-a,-ad,-alms=build/usbd_core.lst Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_core.c -o build/usbd_core.o
+arm-none-eabi-gcc -c -mcpu=cortex-m3 -mthumb   -DUSE_HAL_DRIVER -DSTM32F103xB -IInc -IDrivers/STM32F1xx_HAL_Driver/Inc -IDrivers/STM32F1xx_HAL_Driver/Inc/Legacy -IMiddlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3 -IDrivers/CMSIS/Device/ST/STM32F1xx/Include -IMiddlewares/Third_Party/FreeRTOS/Source/include -IMiddlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -IMiddlewares/ST/STM32_USB_Device_Library/Core/Inc -IMiddlewares/ST/STM32_USB_Device_Library/Class/HID/Inc -IMiddlewares/system/sys -IMiddlewares/system/usart -IMiddlewares/system/delay -IMiddlewares/cxxsource -IMiddlewares/HARDWARE/include -IMiddlewares/MPU6050 -IMiddlewares/MPU6050/eMPL -IMiddlewares/myusb -IMiddlewares/RC522/include -IDrivers/CMSIS/Include -Og -Wall -fdata-sections -ffunction-sections -g -gdwarf-2 -MMD -MP -MF"build/usbd_ioreq.d" -MT"build/usbd_ioreq.d" -Wa,-a,-ad,-alms=build/usbd_ioreq.lst Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_ioreq.c -o build/usbd_ioreq.o
+arm-none-eabi-gcc -c -mcpu=cortex-m3 -mthumb   -DUSE_HAL_DRIVER -DSTM32F103xB -IInc -IDrivers/STM32F1xx_HAL_Driver/Inc -IDrivers/STM32F1xx_HAL_Driver/Inc/Legacy -IMiddlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3 -IDrivers/CMSIS/Device/ST/STM32F1xx/Include -IMiddlewares/Third_Party/FreeRTOS/Source/include -IMiddlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -IMiddlewares/ST/STM32_USB_Device_Library/Core/Inc -IMiddlewares/ST/STM32_USB_Device_Library/Class/HID/Inc -IMiddlewares/system/sys -IMiddlewares/system/usart -IMiddlewares/system/delay -IMiddlewares/cxxsource -IMiddlewares/HARDWARE/include -IMiddlewares/MPU6050 -IMiddlewares/MPU6050/eMPL -IMiddlewares/myusb -IMiddlewares/RC522/include -IDrivers/CMSIS/Include -Og -Wall -fdata-sections -ffunction-sections -g -gdwarf-2 -MMD -MP -MF"build/usbd_hid.d" -MT"build/usbd_hid.d" -Wa,-a,-ad,-alms=build/usbd_hid.lst Middlewares/ST/STM32_USB_Device_Library/Class/HID/Src/usbd_hid.c -o build/usbd_hid.o
+arm-none-eabi-gcc -c -mcpu=cortex-m3 -mthumb   -DUSE_HAL_DRIVER -DSTM32F103xB -IInc -IDrivers/STM32F1xx_HAL_Driver/Inc -IDrivers/STM32F1xx_HAL_Driver/Inc/Legacy -IMiddlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3 -IDrivers/CMSIS/Device/ST/STM32F1xx/Include -IMiddlewares/Third_Party/FreeRTOS/Source/include -IMiddlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -IMiddlewares/ST/STM32_USB_Device_Library/Core/Inc -IMiddlewares/ST/STM32_USB_Device_Library/Class/HID/Inc -IMiddlewares/system/sys -IMiddlewares/system/usart -IMiddlewares/system/delay -IMiddlewares/cxxsource -IMiddlewares/HARDWARE/include -IMiddlewares/MPU6050 -IMiddlewares/MPU6050/eMPL -IMiddlewares/myusb -IMiddlewares/RC522/include -IDrivers/CMSIS/Include -Og -Wall -fdata-sections -ffunction-sections -g -gdwarf-2 -MMD -MP -MF"build/usbd_ctlreq.d" -MT"build/usbd_ctlreq.d" -Wa,-a,-ad,-alms=build/usbd_ctlreq.lst Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_ctlreq.c -o build/usbd_ctlreq.o
+arm-none-eabi-gcc -c -mcpu=cortex-m3 -mthumb   -DUSE_HAL_DRIVER -DSTM32F103xB -IInc -IDrivers/STM32F1xx_HAL_Driver/Inc -IDrivers/STM32F1xx_HAL_Driver/Inc/Legacy -IMiddlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3 -IDrivers/CMSIS/Device/ST/STM32F1xx/Include -IMiddlewares/Third_Party/FreeRTOS/Source/include -IMiddlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -IMiddlewares/ST/STM32_USB_Device_Library/Core/Inc -IMiddlewares/ST/STM32_USB_Device_Library/Class/HID/Inc -IMiddlewares/system/sys -IMiddlewares/system/usart -IMiddlewares/system/delay -IMiddlewares/cxxsource -IMiddlewares/HARDWARE/include -IMiddlewares/MPU6050 -IMiddlewares/MPU6050/eMPL -IMiddlewares/myusb -IMiddlewares/RC522/include -IDrivers/CMSIS/Include -Og -Wall -fdata-sections -ffunction-sections -g -gdwarf-2 -MMD -MP -MF"build/timers.d" -MT"build/timers.d" -Wa,-a,-ad,-alms=build/timers.lst Middlewares/Third_Party/FreeRTOS/Source/timers.c -o build/timers.o
+arm-none-eabi-gcc -c -mcpu=cortex-m3 -mthumb   -DUSE_HAL_DRIVER -DSTM32F103xB -IInc -IDrivers/STM32F1xx_HAL_Driver/Inc -IDrivers/STM32F1xx_HAL_Driver/Inc/Legacy -IMiddlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3 -IDrivers/CMSIS/Device/ST/STM32F1xx/Include -IMiddlewares/Third_Party/FreeRTOS/Source/include -IMiddlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -IMiddlewares/ST/STM32_USB_Device_Library/Core/Inc -IMiddlewares/ST/STM32_USB_Device_Library/Class/HID/Inc -IMiddlewares/system/sys -IMiddlewares/system/usart -IMiddlewares/system/delay -IMiddlewares/cxxsource -IMiddlewares/HARDWARE/include -IMiddlewares/MPU6050 -IMiddlewares/MPU6050/eMPL -IMiddlewares/myusb -IMiddlewares/RC522/include -IDrivers/CMSIS/Include -Og -Wall -fdata-sections -ffunction-sections -g -gdwarf-2 -MMD -MP -MF"build/heap_4.d" -MT"build/heap_4.d" -Wa,-a,-ad,-alms=build/heap_4.lst Middlewares/Third_Party/FreeRTOS/Source/portable/MemMang/heap_4.c -o build/heap_4.o
+arm-none-eabi-gcc -c -mcpu=cortex-m3 -mthumb   -DUSE_HAL_DRIVER -DSTM32F103xB -IInc -IDrivers/STM32F1xx_HAL_Driver/Inc -IDrivers/STM32F1xx_HAL_Driver/Inc/Legacy -IMiddlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3 -IDrivers/CMSIS/Device/ST/STM32F1xx/Include -IMiddlewares/Third_Party/FreeRTOS/Source/include -IMiddlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -IMiddlewares/ST/STM32_USB_Device_Library/Core/Inc -IMiddlewares/ST/STM32_USB_Device_Library/Class/HID/Inc -IMiddlewares/system/sys -IMiddlewares/system/usart -IMiddlewares/system/delay -IMiddlewares/cxxsource -IMiddlewares/HARDWARE/include -IMiddlewares/MPU6050 -IMiddlewares/MPU6050/eMPL -IMiddlewares/myusb -IMiddlewares/RC522/include -IDrivers/CMSIS/Include -Og -Wall -fdata-sections -ffunction-sections -g -gdwarf-2 -MMD -MP -MF"build/queue.d" -MT"build/queue.d" -Wa,-a,-ad,-alms=build/queue.lst Middlewares/Third_Party/FreeRTOS/Source/queue.c -o build/queue.o
+arm-none-eabi-gcc -c -mcpu=cortex-m3 -mthumb   -DUSE_HAL_DRIVER -DSTM32F103xB -IInc -IDrivers/STM32F1xx_HAL_Driver/Inc -IDrivers/STM32F1xx_HAL_Driver/Inc/Legacy -IMiddlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3 -IDrivers/CMSIS/Device/ST/STM32F1xx/Include -IMiddlewares/Third_Party/FreeRTOS/Source/include -IMiddlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -IMiddlewares/ST/STM32_USB_Device_Library/Core/Inc -IMiddlewares/ST/STM32_USB_Device_Library/Class/HID/Inc -IMiddlewares/system/sys -IMiddlewares/system/usart -IMiddlewares/system/delay -IMiddlewares/cxxsource -IMiddlewares/HARDWARE/include -IMiddlewares/MPU6050 -IMiddlewares/MPU6050/eMPL -IMiddlewares/myusb -IMiddlewares/RC522/include -IDrivers/CMSIS/Include -Og -Wall -fdata-sections -ffunction-sections -g -gdwarf-2 -MMD -MP -MF"build/port.d" -MT"build/port.d" -Wa,-a,-ad,-alms=build/port.lst Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3/port.c -o build/port.o
+arm-none-eabi-gcc -c -mcpu=cortex-m3 -mthumb   -DUSE_HAL_DRIVER -DSTM32F103xB -IInc -IDrivers/STM32F1xx_HAL_Driver/Inc -IDrivers/STM32F1xx_HAL_Driver/Inc/Legacy -IMiddlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3 -IDrivers/CMSIS/Device/ST/STM32F1xx/Include -IMiddlewares/Third_Party/FreeRTOS/Source/include -IMiddlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -IMiddlewares/ST/STM32_USB_Device_Library/Core/Inc -IMiddlewares/ST/STM32_USB_Device_Library/Class/HID/Inc -IMiddlewares/system/sys -IMiddlewares/system/usart -IMiddlewares/system/delay -IMiddlewares/cxxsource -IMiddlewares/HARDWARE/include -IMiddlewares/MPU6050 -IMiddlewares/MPU6050/eMPL -IMiddlewares/myusb -IMiddlewares/RC522/include -IDrivers/CMSIS/Include -Og -Wall -fdata-sections -ffunction-sections -g -gdwarf-2 -MMD -MP -MF"build/list.d" -MT"build/list.d" -Wa,-a,-ad,-alms=build/list.lst Middlewares/Third_Party/FreeRTOS/Source/list.c -o build/list.o
+arm-none-eabi-gcc -c -mcpu=cortex-m3 -mthumb   -DUSE_HAL_DRIVER -DSTM32F103xB -IInc -IDrivers/STM32F1xx_HAL_Driver/Inc -IDrivers/STM32F1xx_HAL_Driver/Inc/Legacy -IMiddlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3 -IDrivers/CMSIS/Device/ST/STM32F1xx/Include -IMiddlewares/Third_Party/FreeRTOS/Source/include -IMiddlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -IMiddlewares/ST/STM32_USB_Device_Library/Core/Inc -IMiddlewares/ST/STM32_USB_Device_Library/Class/HID/Inc -IMiddlewares/system/sys -IMiddlewares/system/usart -IMiddlewares/system/delay -IMiddlewares/cxxsource -IMiddlewares/HARDWARE/include -IMiddlewares/MPU6050 -IMiddlewares/MPU6050/eMPL -IMiddlewares/myusb -IMiddlewares/RC522/include -IDrivers/CMSIS/Include -Og -Wall -fdata-sections -ffunction-sections -g -gdwarf-2 -MMD -MP -MF"build/tasks.d" -MT"build/tasks.d" -Wa,-a,-ad,-alms=build/tasks.lst Middlewares/Third_Party/FreeRTOS/Source/tasks.c -o build/tasks.o
+arm-none-eabi-gcc -c -mcpu=cortex-m3 -mthumb   -DUSE_HAL_DRIVER -DSTM32F103xB -IInc -IDrivers/STM32F1xx_HAL_Driver/Inc -IDrivers/STM32F1xx_HAL_Driver/Inc/Legacy -IMiddlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3 -IDrivers/CMSIS/Device/ST/STM32F1xx/Include -IMiddlewares/Third_Party/FreeRTOS/Source/include -IMiddlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -IMiddlewares/ST/STM32_USB_Device_Library/Core/Inc -IMiddlewares/ST/STM32_USB_Device_Library/Class/HID/Inc -IMiddlewares/system/sys -IMiddlewares/system/usart -IMiddlewares/system/delay -IMiddlewares/cxxsource -IMiddlewares/HARDWARE/include -IMiddlewares/MPU6050 -IMiddlewares/MPU6050/eMPL -IMiddlewares/myusb -IMiddlewares/RC522/include -IDrivers/CMSIS/Include -Og -Wall -fdata-sections -ffunction-sections -g -gdwarf-2 -MMD -MP -MF"build/croutine.d" -MT"build/croutine.d" -Wa,-a,-ad,-alms=build/croutine.lst Middlewares/Third_Party/FreeRTOS/Source/croutine.c -o build/croutine.o
+arm-none-eabi-gcc -c -mcpu=cortex-m3 -mthumb   -DUSE_HAL_DRIVER -DSTM32F103xB -IInc -IDrivers/STM32F1xx_HAL_Driver/Inc -IDrivers/STM32F1xx_HAL_Driver/Inc/Legacy -IMiddlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3 -IDrivers/CMSIS/Device/ST/STM32F1xx/Include -IMiddlewares/Third_Party/FreeRTOS/Source/include -IMiddlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -IMiddlewares/ST/STM32_USB_Device_Library/Core/Inc -IMiddlewares/ST/STM32_USB_Device_Library/Class/HID/Inc -IMiddlewares/system/sys -IMiddlewares/system/usart -IMiddlewares/system/delay -IMiddlewares/cxxsource -IMiddlewares/HARDWARE/include -IMiddlewares/MPU6050 -IMiddlewares/MPU6050/eMPL -IMiddlewares/myusb -IMiddlewares/RC522/include -IDrivers/CMSIS/Include -Og -Wall -fdata-sections -ffunction-sections -g -gdwarf-2 -MMD -MP -MF"build/cmsis_os.d" -MT"build/cmsis_os.d" -Wa,-a,-ad,-alms=build/cmsis_os.lst Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.c -o build/cmsis_os.o
+arm-none-eabi-gcc -c -mcpu=cortex-m3 -mthumb   -DUSE_HAL_DRIVER -DSTM32F103xB -IInc -IDrivers/STM32F1xx_HAL_Driver/Inc -IDrivers/STM32F1xx_HAL_Driver/Inc/Legacy -IMiddlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3 -IDrivers/CMSIS/Device/ST/STM32F1xx/Include -IMiddlewares/Third_Party/FreeRTOS/Source/include -IMiddlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -IMiddlewares/ST/STM32_USB_Device_Library/Core/Inc -IMiddlewares/ST/STM32_USB_Device_Library/Class/HID/Inc -IMiddlewares/system/sys -IMiddlewares/system/usart -IMiddlewares/system/delay -IMiddlewares/cxxsource -IMiddlewares/HARDWARE/include -IMiddlewares/MPU6050 -IMiddlewares/MPU6050/eMPL -IMiddlewares/myusb -IMiddlewares/RC522/include -IDrivers/CMSIS/Include -Og -Wall -fdata-sections -ffunction-sections -g -gdwarf-2 -MMD -MP -MF"build/event_groups.d" -MT"build/event_groups.d" -Wa,-a,-ad,-alms=build/event_groups.lst Middlewares/Third_Party/FreeRTOS/Source/event_groups.c -o build/event_groups.o
+arm-none-eabi-gcc -c -mcpu=cortex-m3 -mthumb   -DUSE_HAL_DRIVER -DSTM32F103xB -IInc -IDrivers/STM32F1xx_HAL_Driver/Inc -IDrivers/STM32F1xx_HAL_Driver/Inc/Legacy -IMiddlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3 -IDrivers/CMSIS/Device/ST/STM32F1xx/Include -IMiddlewares/Third_Party/FreeRTOS/Source/include -IMiddlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -IMiddlewares/ST/STM32_USB_Device_Library/Core/Inc -IMiddlewares/ST/STM32_USB_Device_Library/Class/HID/Inc -IMiddlewares/system/sys -IMiddlewares/system/usart -IMiddlewares/system/delay -IMiddlewares/cxxsource -IMiddlewares/HARDWARE/include -IMiddlewares/MPU6050 -IMiddlewares/MPU6050/eMPL -IMiddlewares/myusb -IMiddlewares/RC522/include -IDrivers/CMSIS/Include -Og -Wall -fdata-sections -ffunction-sections -g -gdwarf-2 -MMD -MP -MF"build/sys.d" -MT"build/sys.d" -Wa,-a,-ad,-alms=build/sys.lst Middlewares/system/sys/sys.c -o build/sys.o
+arm-none-eabi-gcc -c -mcpu=cortex-m3 -mthumb   -DUSE_HAL_DRIVER -DSTM32F103xB -IInc -IDrivers/STM32F1xx_HAL_Driver/Inc -IDrivers/STM32F1xx_HAL_Driver/Inc/Legacy -IMiddlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3 -IDrivers/CMSIS/Device/ST/STM32F1xx/Include -IMiddlewares/Third_Party/FreeRTOS/Source/include -IMiddlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -IMiddlewares/ST/STM32_USB_Device_Library/Core/Inc -IMiddlewares/ST/STM32_USB_Device_Library/Class/HID/Inc -IMiddlewares/system/sys -IMiddlewares/system/usart -IMiddlewares/system/delay -IMiddlewares/cxxsource -IMiddlewares/HARDWARE/include -IMiddlewares/MPU6050 -IMiddlewares/MPU6050/eMPL -IMiddlewares/myusb -IMiddlewares/RC522/include -IDrivers/CMSIS/Include -Og -Wall -fdata-sections -ffunction-sections -g -gdwarf-2 -MMD -MP -MF"build/usart.d" -MT"build/usart.d" -Wa,-a,-ad,-alms=build/usart.lst Middlewares/system/usart/usart.c -o build/usart.o
+arm-none-eabi-gcc -c -mcpu=cortex-m3 -mthumb   -DUSE_HAL_DRIVER -DSTM32F103xB -IInc -IDrivers/STM32F1xx_HAL_Driver/Inc -IDrivers/STM32F1xx_HAL_Driver/Inc/Legacy -IMiddlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3 -IDrivers/CMSIS/Device/ST/STM32F1xx/Include -IMiddlewares/Third_Party/FreeRTOS/Source/include -IMiddlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -IMiddlewares/ST/STM32_USB_Device_Library/Core/Inc -IMiddlewares/ST/STM32_USB_Device_Library/Class/HID/Inc -IMiddlewares/system/sys -IMiddlewares/system/usart -IMiddlewares/system/delay -IMiddlewares/cxxsource -IMiddlewares/HARDWARE/include -IMiddlewares/MPU6050 -IMiddlewares/MPU6050/eMPL -IMiddlewares/myusb -IMiddlewares/RC522/include -IDrivers/CMSIS/Include -Og -Wall -fdata-sections -ffunction-sections -g -gdwarf-2 -MMD -MP -MF"build/delay.d" -MT"build/delay.d" -Wa,-a,-ad,-alms=build/delay.lst Middlewares/system/delay/delay.c -o build/delay.o
+arm-none-eabi-gcc -c -mcpu=cortex-m3 -mthumb   -DUSE_HAL_DRIVER -DSTM32F103xB -IInc -IDrivers/STM32F1xx_HAL_Driver/Inc -IDrivers/STM32F1xx_HAL_Driver/Inc/Legacy -IMiddlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3 -IDrivers/CMSIS/Device/ST/STM32F1xx/Include -IMiddlewares/Third_Party/FreeRTOS/Source/include -IMiddlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -IMiddlewares/ST/STM32_USB_Device_Library/Core/Inc -IMiddlewares/ST/STM32_USB_Device_Library/Class/HID/Inc -IMiddlewares/system/sys -IMiddlewares/system/usart -IMiddlewares/system/delay -IMiddlewares/cxxsource -IMiddlewares/HARDWARE/include -IMiddlewares/MPU6050 -IMiddlewares/MPU6050/eMPL -IMiddlewares/myusb -IMiddlewares/RC522/include -IDrivers/CMSIS/Include -Og -Wall -fdata-sections -ffunction-sections -g -gdwarf-2 -MMD -MP -MF"build/dma.d" -MT"build/dma.d" -Wa,-a,-ad,-alms=build/dma.lst Middlewares/HARDWARE/src/dma.c -o build/dma.o
+arm-none-eabi-gcc -c -mcpu=cortex-m3 -mthumb   -DUSE_HAL_DRIVER -DSTM32F103xB -IInc -IDrivers/STM32F1xx_HAL_Driver/Inc -IDrivers/STM32F1xx_HAL_Driver/Inc/Legacy -IMiddlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3 -IDrivers/CMSIS/Device/ST/STM32F1xx/Include -IMiddlewares/Third_Party/FreeRTOS/Source/include -IMiddlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -IMiddlewares/ST/STM32_USB_Device_Library/Core/Inc -IMiddlewares/ST/STM32_USB_Device_Library/Class/HID/Inc -IMiddlewares/system/sys -IMiddlewares/system/usart -IMiddlewares/system/delay -IMiddlewares/cxxsource -IMiddlewares/HARDWARE/include -IMiddlewares/MPU6050 -IMiddlewares/MPU6050/eMPL -IMiddlewares/myusb -IMiddlewares/RC522/include -IDrivers/CMSIS/Include -Og -Wall -fdata-sections -ffunction-sections -g -gdwarf-2 -MMD -MP -MF"build/led.d" -MT"build/led.d" -Wa,-a,-ad,-alms=build/led.lst Middlewares/HARDWARE/src/led.c -o build/led.o
+arm-none-eabi-gcc -c -mcpu=cortex-m3 -mthumb   -DUSE_HAL_DRIVER -DSTM32F103xB -IInc -IDrivers/STM32F1xx_HAL_Driver/Inc -IDrivers/STM32F1xx_HAL_Driver/Inc/Legacy -IMiddlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3 -IDrivers/CMSIS/Device/ST/STM32F1xx/Include -IMiddlewares/Third_Party/FreeRTOS/Source/include -IMiddlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -IMiddlewares/ST/STM32_USB_Device_Library/Core/Inc -IMiddlewares/ST/STM32_USB_Device_Library/Class/HID/Inc -IMiddlewares/system/sys -IMiddlewares/system/usart -IMiddlewares/system/delay -IMiddlewares/cxxsource -IMiddlewares/HARDWARE/include -IMiddlewares/MPU6050 -IMiddlewares/MPU6050/eMPL -IMiddlewares/myusb -IMiddlewares/RC522/include -IDrivers/CMSIS/Include -Og -Wall -fdata-sections -ffunction-sections -g -gdwarf-2 -MMD -MP -MF"build/adc.d" -MT"build/adc.d" -Wa,-a,-ad,-alms=build/adc.lst Middlewares/HARDWARE/src/adc.c -o build/adc.o
+arm-none-eabi-gcc -c -mcpu=cortex-m3 -mthumb   -DUSE_HAL_DRIVER -DSTM32F103xB -IInc -IDrivers/STM32F1xx_HAL_Driver/Inc -IDrivers/STM32F1xx_HAL_Driver/Inc/Legacy -IMiddlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3 -IDrivers/CMSIS/Device/ST/STM32F1xx/Include -IMiddlewares/Third_Party/FreeRTOS/Source/include -IMiddlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -IMiddlewares/ST/STM32_USB_Device_Library/Core/Inc -IMiddlewares/ST/STM32_USB_Device_Library/Class/HID/Inc -IMiddlewares/system/sys -IMiddlewares/system/usart -IMiddlewares/system/delay -IMiddlewares/cxxsource -IMiddlewares/HARDWARE/include -IMiddlewares/MPU6050 -IMiddlewares/MPU6050/eMPL -IMiddlewares/myusb -IMiddlewares/RC522/include -IDrivers/CMSIS/Include -Og -Wall -fdata-sections -ffunction-sections -g -gdwarf-2 -MMD -MP -MF"build/spi.d" -MT"build/spi.d" -Wa,-a,-ad,-alms=build/spi.lst Middlewares/HARDWARE/src/spi.c -o build/spi.o
+arm-none-eabi-gcc -c -mcpu=cortex-m3 -mthumb   -DUSE_HAL_DRIVER -DSTM32F103xB -IInc -IDrivers/STM32F1xx_HAL_Driver/Inc -IDrivers/STM32F1xx_HAL_Driver/Inc/Legacy -IMiddlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3 -IDrivers/CMSIS/Device/ST/STM32F1xx/Include -IMiddlewares/Third_Party/FreeRTOS/Source/include -IMiddlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -IMiddlewares/ST/STM32_USB_Device_Library/Core/Inc -IMiddlewares/ST/STM32_USB_Device_Library/Class/HID/Inc -IMiddlewares/system/sys -IMiddlewares/system/usart -IMiddlewares/system/delay -IMiddlewares/cxxsource -IMiddlewares/HARDWARE/include -IMiddlewares/MPU6050 -IMiddlewares/MPU6050/eMPL -IMiddlewares/myusb -IMiddlewares/RC522/include -IDrivers/CMSIS/Include -Og -Wall -fdata-sections -ffunction-sections -g -gdwarf-2 -MMD -MP -MF"build/24l01.d" -MT"build/24l01.d" -Wa,-a,-ad,-alms=build/24l01.lst Middlewares/HARDWARE/src/24l01.c -o build/24l01.o
+arm-none-eabi-gcc -c -mcpu=cortex-m3 -mthumb   -DUSE_HAL_DRIVER -DSTM32F103xB -IInc -IDrivers/STM32F1xx_HAL_Driver/Inc -IDrivers/STM32F1xx_HAL_Driver/Inc/Legacy -IMiddlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3 -IDrivers/CMSIS/Device/ST/STM32F1xx/Include -IMiddlewares/Third_Party/FreeRTOS/Source/include -IMiddlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -IMiddlewares/ST/STM32_USB_Device_Library/Core/Inc -IMiddlewares/ST/STM32_USB_Device_Library/Class/HID/Inc -IMiddlewares/system/sys -IMiddlewares/system/usart -IMiddlewares/system/delay -IMiddlewares/cxxsource -IMiddlewares/HARDWARE/include -IMiddlewares/MPU6050 -IMiddlewares/MPU6050/eMPL -IMiddlewares/myusb -IMiddlewares/RC522/include -IDrivers/CMSIS/Include -Og -Wall -fdata-sections -ffunction-sections -g -gdwarf-2 -MMD -MP -MF"build/timer.d" -MT"build/timer.d" -Wa,-a,-ad,-alms=build/timer.lst Middlewares/HARDWARE/src/timer.c -o build/timer.o
+arm-none-eabi-gcc -c -mcpu=cortex-m3 -mthumb   -DUSE_HAL_DRIVER -DSTM32F103xB -IInc -IDrivers/STM32F1xx_HAL_Driver/Inc -IDrivers/STM32F1xx_HAL_Driver/Inc/Legacy -IMiddlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3 -IDrivers/CMSIS/Device/ST/STM32F1xx/Include -IMiddlewares/Third_Party/FreeRTOS/Source/include -IMiddlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -IMiddlewares/ST/STM32_USB_Device_Library/Core/Inc -IMiddlewares/ST/STM32_USB_Device_Library/Class/HID/Inc -IMiddlewares/system/sys -IMiddlewares/system/usart -IMiddlewares/system/delay -IMiddlewares/cxxsource -IMiddlewares/HARDWARE/include -IMiddlewares/MPU6050 -IMiddlewares/MPU6050/eMPL -IMiddlewares/myusb -IMiddlewares/RC522/include -IDrivers/CMSIS/Include -Og -Wall -fdata-sections -ffunction-sections -g -gdwarf-2 -MMD -MP -MF"build/stmflash.d" -MT"build/stmflash.d" -Wa,-a,-ad,-alms=build/stmflash.lst Middlewares/HARDWARE/src/stmflash.c -o build/stmflash.o
+In file included from Middlewares/HARDWARE/src/stmflash.c:1:
+Middlewares/HARDWARE/include/stmflash.h:13: warning: "FLASH_KEY1" redefined
+   13 | #define FLASH_KEY1               0X45670123
+      |
+In file included from Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f1xx.h:149,
+                 from Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_def.h:46,
+                 from Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc.h:45,
+                 from Inc/stm32f1xx_hal_conf.h:219,
+                 from Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h:46,
+                 from Middlewares/system/sys/sys.h:4,
+                 from Middlewares/HARDWARE/include/stmflash.h:3,
+                 from Middlewares/HARDWARE/src/stmflash.c:1:
+Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f103xb.h:10112: note: this is the location of the previous definition
+10112 | #define FLASH_KEY1                          FLASH_KEY1_Msk                     /*!< FPEC Key1 */
+      |
+In file included from Middlewares/HARDWARE/src/stmflash.c:1:
+Middlewares/HARDWARE/include/stmflash.h:14: warning: "FLASH_KEY2" redefined
+   14 | #define FLASH_KEY2               0XCDEF89AB
+      |
+In file included from Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f1xx.h:149,
+                 from Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_def.h:46,
+                 from Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc.h:45,
+                 from Inc/stm32f1xx_hal_conf.h:219,
+                 from Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h:46,
+                 from Middlewares/system/sys/sys.h:4,
+                 from Middlewares/HARDWARE/include/stmflash.h:3,
+                 from Middlewares/HARDWARE/src/stmflash.c:1:
+Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f103xb.h:10115: note: this is the location of the previous definition
+10115 | #define FLASH_KEY2                          FLASH_KEY2_Msk                     /*!< FPEC Key2 */
+      |
+arm-none-eabi-gcc -c -mcpu=cortex-m3 -mthumb   -DUSE_HAL_DRIVER -DSTM32F103xB -IInc -IDrivers/STM32F1xx_HAL_Driver/Inc -IDrivers/STM32F1xx_HAL_Driver/Inc/Legacy -IMiddlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3 -IDrivers/CMSIS/Device/ST/STM32F1xx/Include -IMiddlewares/Third_Party/FreeRTOS/Source/include -IMiddlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -IMiddlewares/ST/STM32_USB_Device_Library/Core/Inc -IMiddlewares/ST/STM32_USB_Device_Library/Class/HID/Inc -IMiddlewares/system/sys -IMiddlewares/system/usart -IMiddlewares/system/delay -IMiddlewares/cxxsource -IMiddlewares/HARDWARE/include -IMiddlewares/MPU6050 -IMiddlewares/MPU6050/eMPL -IMiddlewares/myusb -IMiddlewares/RC522/include -IDrivers/CMSIS/Include -Og -Wall -fdata-sections -ffunction-sections -g -gdwarf-2 -MMD -MP -MF"build/myiic.d" -MT"build/myiic.d" -Wa,-a,-ad,-alms=build/myiic.lst Middlewares/HARDWARE/src/myiic.c -o build/myiic.o
+arm-none-eabi-gcc -c -mcpu=cortex-m3 -mthumb   -DUSE_HAL_DRIVER -DSTM32F103xB -IInc -IDrivers/STM32F1xx_HAL_Driver/Inc -IDrivers/STM32F1xx_HAL_Driver/Inc/Legacy -IMiddlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3 -IDrivers/CMSIS/Device/ST/STM32F1xx/Include -IMiddlewares/Third_Party/FreeRTOS/Source/include -IMiddlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -IMiddlewares/ST/STM32_USB_Device_Library/Core/Inc -IMiddlewares/ST/STM32_USB_Device_Library/Class/HID/Inc -IMiddlewares/system/sys -IMiddlewares/system/usart -IMiddlewares/system/delay -IMiddlewares/cxxsource -IMiddlewares/HARDWARE/include -IMiddlewares/MPU6050 -IMiddlewares/MPU6050/eMPL -IMiddlewares/myusb -IMiddlewares/RC522/include -IDrivers/CMSIS/Include -Og -Wall -fdata-sections -ffunction-sections -g -gdwarf-2 -MMD -MP -MF"build/usart2.d" -MT"build/usart2.d" -Wa,-a,-ad,-alms=build/usart2.lst Middlewares/HARDWARE/src/usart2.c -o build/usart2.o
+arm-none-eabi-gcc -c -mcpu=cortex-m3 -mthumb   -DUSE_HAL_DRIVER -DSTM32F103xB -IInc -IDrivers/STM32F1xx_HAL_Driver/Inc -IDrivers/STM32F1xx_HAL_Driver/Inc/Legacy -IMiddlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3 -IDrivers/CMSIS/Device/ST/STM32F1xx/Include -IMiddlewares/Third_Party/FreeRTOS/Source/include -IMiddlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -IMiddlewares/ST/STM32_USB_Device_Library/Core/Inc -IMiddlewares/ST/STM32_USB_Device_Library/Class/HID/Inc -IMiddlewares/system/sys -IMiddlewares/system/usart -IMiddlewares/system/delay -IMiddlewares/cxxsource -IMiddlewares/HARDWARE/include -IMiddlewares/MPU6050 -IMiddlewares/MPU6050/eMPL -IMiddlewares/myusb -IMiddlewares/RC522/include -IDrivers/CMSIS/Include -Og -Wall -fdata-sections -ffunction-sections -g -gdwarf-2 -MMD -MP -MF"build/mpu6050.d" -MT"build/mpu6050.d" -Wa,-a,-ad,-alms=build/mpu6050.lst Middlewares/MPU6050/mpu6050.c -o build/mpu6050.o
+arm-none-eabi-gcc -c -mcpu=cortex-m3 -mthumb   -DUSE_HAL_DRIVER -DSTM32F103xB -IInc -IDrivers/STM32F1xx_HAL_Driver/Inc -IDrivers/STM32F1xx_HAL_Driver/Inc/Legacy -IMiddlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3 -IDrivers/CMSIS/Device/ST/STM32F1xx/Include -IMiddlewares/Third_Party/FreeRTOS/Source/include -IMiddlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -IMiddlewares/ST/STM32_USB_Device_Library/Core/Inc -IMiddlewares/ST/STM32_USB_Device_Library/Class/HID/Inc -IMiddlewares/system/sys -IMiddlewares/system/usart -IMiddlewares/system/delay -IMiddlewares/cxxsource -IMiddlewares/HARDWARE/include -IMiddlewares/MPU6050 -IMiddlewares/MPU6050/eMPL -IMiddlewares/myusb -IMiddlewares/RC522/include -IDrivers/CMSIS/Include -Og -Wall -fdata-sections -ffunction-sections -g -gdwarf-2 -MMD -MP -MF"build/imu.d" -MT"build/imu.d" -Wa,-a,-ad,-alms=build/imu.lst Middlewares/MPU6050/imu.c -o build/imu.o
+arm-none-eabi-gcc -c -mcpu=cortex-m3 -mthumb   -DUSE_HAL_DRIVER -DSTM32F103xB -IInc -IDrivers/STM32F1xx_HAL_Driver/Inc -IDrivers/STM32F1xx_HAL_Driver/Inc/Legacy -IMiddlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3 -IDrivers/CMSIS/Device/ST/STM32F1xx/Include -IMiddlewares/Third_Party/FreeRTOS/Source/include -IMiddlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -IMiddlewares/ST/STM32_USB_Device_Library/Core/Inc -IMiddlewares/ST/STM32_USB_Device_Library/Class/HID/Inc -IMiddlewares/system/sys -IMiddlewares/system/usart -IMiddlewares/system/delay -IMiddlewares/cxxsource -IMiddlewares/HARDWARE/include -IMiddlewares/MPU6050 -IMiddlewares/MPU6050/eMPL -IMiddlewares/myusb -IMiddlewares/RC522/include -IDrivers/CMSIS/Include -Og -Wall -fdata-sections -ffunction-sections -g -gdwarf-2 -MMD -MP -MF"build/inv_mpu_dmp_motion_driver.d" -MT"build/inv_mpu_dmp_motion_driver.d" -Wa,-a,-ad,-alms=build/inv_mpu_dmp_motion_driver.lst Middlewares/MPU6050/eMPL/inv_mpu_dmp_motion_driver.c -o build/inv_mpu_dmp_motion_driver.o
+arm-none-eabi-gcc -c -mcpu=cortex-m3 -mthumb   -DUSE_HAL_DRIVER -DSTM32F103xB -IInc -IDrivers/STM32F1xx_HAL_Driver/Inc -IDrivers/STM32F1xx_HAL_Driver/Inc/Legacy -IMiddlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3 -IDrivers/CMSIS/Device/ST/STM32F1xx/Include -IMiddlewares/Third_Party/FreeRTOS/Source/include -IMiddlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -IMiddlewares/ST/STM32_USB_Device_Library/Core/Inc -IMiddlewares/ST/STM32_USB_Device_Library/Class/HID/Inc -IMiddlewares/system/sys -IMiddlewares/system/usart -IMiddlewares/system/delay -IMiddlewares/cxxsource -IMiddlewares/HARDWARE/include -IMiddlewares/MPU6050 -IMiddlewares/MPU6050/eMPL -IMiddlewares/myusb -IMiddlewares/RC522/include -IDrivers/CMSIS/Include -Og -Wall -fdata-sections -ffunction-sections -g -gdwarf-2 -MMD -MP -MF"build/inv_mpu.d" -MT"build/inv_mpu.d" -Wa,-a,-ad,-alms=build/inv_mpu.lst Middlewares/MPU6050/eMPL/inv_mpu.c -o build/inv_mpu.o
+arm-none-eabi-gcc -c -mcpu=cortex-m3 -mthumb   -DUSE_HAL_DRIVER -DSTM32F103xB -IInc -IDrivers/STM32F1xx_HAL_Driver/Inc -IDrivers/STM32F1xx_HAL_Driver/Inc/Legacy -IMiddlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3 -IDrivers/CMSIS/Device/ST/STM32F1xx/Include -IMiddlewares/Third_Party/FreeRTOS/Source/include -IMiddlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -IMiddlewares/ST/STM32_USB_Device_Library/Core/Inc -IMiddlewares/ST/STM32_USB_Device_Library/Class/HID/Inc -IMiddlewares/system/sys -IMiddlewares/system/usart -IMiddlewares/system/delay -IMiddlewares/cxxsource -IMiddlewares/HARDWARE/include -IMiddlewares/MPU6050 -IMiddlewares/MPU6050/eMPL -IMiddlewares/myusb -IMiddlewares/RC522/include -IDrivers/CMSIS/Include -Og -Wall -fdata-sections -ffunction-sections -g -gdwarf-2 -MMD -MP -MF"build/usb_it.d" -MT"build/usb_it.d" -Wa,-a,-ad,-alms=build/usb_it.lst Middlewares/myusb/usb_it.c -o build/usb_it.o
+arm-none-eabi-gcc -c -mcpu=cortex-m3 -mthumb   -DUSE_HAL_DRIVER -DSTM32F103xB -IInc -IDrivers/STM32F1xx_HAL_Driver/Inc -IDrivers/STM32F1xx_HAL_Driver/Inc/Legacy -IMiddlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3 -IDrivers/CMSIS/Device/ST/STM32F1xx/Include -IMiddlewares/Third_Party/FreeRTOS/Source/include -IMiddlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -IMiddlewares/ST/STM32_USB_Device_Library/Core/Inc -IMiddlewares/ST/STM32_USB_Device_Library/Class/HID/Inc -IMiddlewares/system/sys -IMiddlewares/system/usart -IMiddlewares/system/delay -IMiddlewares/cxxsource -IMiddlewares/HARDWARE/include -IMiddlewares/MPU6050 -IMiddlewares/MPU6050/eMPL -IMiddlewares/myusb -IMiddlewares/RC522/include -IDrivers/CMSIS/Include -Og -Wall -fdata-sections -ffunction-sections -g -gdwarf-2 -MMD -MP -MF"build/usb.d" -MT"build/usb.d" -Wa,-a,-ad,-alms=build/usb.lst Middlewares/myusb/usb.c -o build/usb.o
+In file included from Middlewares/myusb/usb.c:1:
+Middlewares/myusb/usb.c: In function 'RESET_CallBack':
+Middlewares/myusb/usb.h:176:81: warning: suggest parentheses around arithmetic in operand of '|' [-Wparentheses]
+  176 | #define SetEpType(bEpNum,Type) (*((u16 *)(EP0REG + bEpNum)) = (GetEpReg(bEpNum) & 0x8f8f | Type))
+      |                                                                                 ^
+Middlewares/myusb/usb.c:140:2: note: in expansion of macro 'SetEpType'
+  140 |  SetEpType(EP0,EP_CONTROL);   /*璁剧疆绔  ^~~~~~~~~
+Middlewares/myusb/usb.h:176:81: warning: suggest parentheses around arithmetic in operand of '|' [-Wparentheses]
+  176 | #define SetEpType(bEpNum,Type) (*((u16 *)(EP0REG + bEpNum)) = (GetEpReg(bEpNum) & 0x8f8f | Type))
+      |                                                                                 ^
+Middlewares/myusb/usb.c:141:2: note: in expansion of macro 'SetEpType'
+  141 |  SetEpType(EP1,EP_INTERRUPT); /*璁剧疆绔  ^~~~~~~~~
+Middlewares/myusb/usb.h:176:81: warning: suggest parentheses around arithmetic in operand of '|' [-Wparentheses]
+  176 | #define SetEpType(bEpNum,Type) (*((u16 *)(EP0REG + bEpNum)) = (GetEpReg(bEpNum) & 0x8f8f | Type))
+      |                                                                                 ^
+Middlewares/myusb/usb.c:142:2: note: in expansion of macro 'SetEpType'
+  142 |  SetEpType(EP2,EP_INTERRUPT); /*璁剧疆绔  ^~~~~~~~~
+Middlewares/myusb/usb.h:178:81: warning: suggest parentheses around arithmetic in operand of '|' [-Wparentheses]
+  178 | #define SetEpAddr(bEpNum,Addr) (*((u16 *)(EP0REG + bEpNum)) = (GetEpReg(bEpNum) & 0x8f80 | Addr))
+      |                                                                                 ^
+Middlewares/myusb/usb.c:144:2: note: in expansion of macro 'SetEpAddr'
+  144 |  SetEpAddr(EP0,0);      /*璁剧疆绔  ^~~~~~~~~
+Middlewares/myusb/usb.h:178:81: warning: suggest parentheses around arithmetic in operand of '|' [-Wparentheses]
+  178 | #define SetEpAddr(bEpNum,Addr) (*((u16 *)(EP0REG + bEpNum)) = (GetEpReg(bEpNum) & 0x8f80 | Addr))
+      |                                                                                 ^
+Middlewares/myusb/usb.c:145:2: note: in expansion of macro 'SetEpAddr'
+  145 |  SetEpAddr(EP1,1);      /*璁剧疆绔  ^~~~~~~~~
+Middlewares/myusb/usb.h:178:81: warning: suggest parentheses around arithmetic in operand of '|' [-Wparentheses]
+  178 | #define SetEpAddr(bEpNum,Addr) (*((u16 *)(EP0REG + bEpNum)) = (GetEpReg(bEpNum) & 0x8f80 | Addr))
+      |                                                                                 ^
+Middlewares/myusb/usb.c:146:2: note: in expansion of macro 'SetEpAddr'
+  146 |  SetEpAddr(EP2,2);      /*璁剧疆绔  ^~~~~~~~~
+arm-none-eabi-gcc -c -mcpu=cortex-m3 -mthumb   -DUSE_HAL_DRIVER -DSTM32F103xB -IInc -IDrivers/STM32F1xx_HAL_Driver/Inc -IDrivers/STM32F1xx_HAL_Driver/Inc/Legacy -IMiddlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3 -IDrivers/CMSIS/Device/ST/STM32F1xx/Include -IMiddlewares/Third_Party/FreeRTOS/Source/include -IMiddlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -IMiddlewares/ST/STM32_USB_Device_Library/Core/Inc -IMiddlewares/ST/STM32_USB_Device_Library/Class/HID/Inc -IMiddlewares/system/sys -IMiddlewares/system/usart -IMiddlewares/system/delay -IMiddlewares/cxxsource -IMiddlewares/HARDWARE/include -IMiddlewares/MPU6050 -IMiddlewares/MPU6050/eMPL -IMiddlewares/myusb -IMiddlewares/RC522/include -IDrivers/CMSIS/Include -Og -Wall -fdata-sections -ffunction-sections -g -gdwarf-2 -MMD -MP -MF"build/MFRC_Task.d" -MT"build/MFRC_Task.d" -Wa,-a,-ad,-alms=build/MFRC_Task.lst Middlewares/RC522/MFRC_Task.c -o build/MFRC_Task.o
+Middlewares/RC522/MFRC_Task.c: In function 'delay1':
+Middlewares/RC522/MFRC_Task.c:16:2: warning: implicit declaration of function 'osDelay' [-Wimplicit-function-declaration]
+   16 |  osDelay(z);
+      |  ^~~~~~~
+Middlewares/RC522/MFRC_Task.c: In function 'MFRC_main':
+Middlewares/RC522/MFRC_Task.c:68:50: warning: passing argument 3 of 'PcdAuthState' discards 'const' qualifier from pointer target type [-Wdiscarded-qualifiers]
+   68 |         status = PcdAuthState(PICC_AUTHENT1A, 1, DefaultKey, g_ucTempbuf);//楠                                                  ^~~~~~~~~~
+In file included from Middlewares/RC522/MFRC_Task.c:4:
+Middlewares/RC522/include/MFRC522.h:17:77: note: expected 'unsigned char *' but argument is of type 'const unsigned char *'
+   17 | char PcdAuthState(unsigned char auth_mode,unsigned char addr,unsigned char *pKey,unsigned char *pSnr);
+      |                                                              ~~~~~~~~~~~~~~~^~~~
+Middlewares/RC522/MFRC_Task.c:72:30: warning: passing argument 2 of 'PcdWrite' discards 'const' qualifier from pointer target type [-Wdiscarded-qualifiers]
+   72 |         status = PcdWrite(1, data1);//?                              ^~~~~
+In file included from Middlewares/RC522/MFRC_Task.c:4:
+Middlewares/RC522/include/MFRC522.h:19:49: note: expected 'unsigned char *' but argument is of type 'const unsigned char *'
+   19 | char PcdWrite(unsigned char addr,unsigned char *pData);
+      |                                  ~~~~~~~~~~~~~~~^~~~~
+Middlewares/RC522/MFRC_Task.c:96:54: warning: passing argument 3 of 'PcdAuthState' discards 'const' qualifier from pointer target type [-Wdiscarded-qualifiers]
+   96 |             status = PcdAuthState(PICC_AUTHENT1A, 1, DefaultKey, g_ucTempbuf);//楠                                                      ^~~~~~~~~~
+In file included from Middlewares/RC522/MFRC_Task.c:4:
+Middlewares/RC522/include/MFRC522.h:17:77: note: expected 'unsigned char *' but argument is of type 'const unsigned char *'
+   17 | char PcdAuthState(unsigned char auth_mode,unsigned char addr,unsigned char *pKey,unsigned char *pSnr);
+      |                                                              ~~~~~~~~~~~~~~~^~~~
+Middlewares/RC522/MFRC_Task.c:100:48: warning: passing argument 3 of 'PcdValue' discards 'const' qualifier from pointer target type [-Wdiscarded-qualifiers]
+  100 |             status = PcdValue(PICC_DECREMENT,1,data2);//?                                                ^~~~~
+In file included from Middlewares/RC522/MFRC_Task.c:4:
+Middlewares/RC522/include/MFRC522.h:20:71: note: expected 'unsigned char *' but argument is of type 'const unsigned char *'
+   20 | char PcdValue(unsigned char dd_mode,unsigned char addr,unsigned char *pValue);
+      |                                                        ~~~~~~~~~~~~~~~^~~~~~
+arm-none-eabi-gcc -c -mcpu=cortex-m3 -mthumb   -DUSE_HAL_DRIVER -DSTM32F103xB -IInc -IDrivers/STM32F1xx_HAL_Driver/Inc -IDrivers/STM32F1xx_HAL_Driver/Inc/Legacy -IMiddlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3 -IDrivers/CMSIS/Device/ST/STM32F1xx/Include -IMiddlewares/Third_Party/FreeRTOS/Source/include -IMiddlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -IMiddlewares/ST/STM32_USB_Device_Library/Core/Inc -IMiddlewares/ST/STM32_USB_Device_Library/Class/HID/Inc -IMiddlewares/system/sys -IMiddlewares/system/usart -IMiddlewares/system/delay -IMiddlewares/cxxsource -IMiddlewares/HARDWARE/include -IMiddlewares/MPU6050 -IMiddlewares/MPU6050/eMPL -IMiddlewares/myusb -IMiddlewares/RC522/include -IDrivers/CMSIS/Include -Og -Wall -fdata-sections -ffunction-sections -g -gdwarf-2 -MMD -MP -MF"build/RC522.d" -MT"build/RC522.d" -Wa,-a,-ad,-alms=build/RC522.lst Middlewares/RC522/RC522.c -o build/RC522.o
+Middlewares/RC522/RC522.c: In function 'delay2':
+Middlewares/RC522/RC522.c:9:2: warning: implicit declaration of function 'osDelay' [-Wimplicit-function-declaration]
+    9 |  osDelay(z);
+      |  ^~~~~~~
+arm-none-eabi-gcc -c -mcpu=cortex-m3 -mthumb   -DUSE_HAL_DRIVER -DSTM32F103xB -IInc -IDrivers/STM32F1xx_HAL_Driver/Inc -IDrivers/STM32F1xx_HAL_Driver/Inc/Legacy -IMiddlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3 -IDrivers/CMSIS/Device/ST/STM32F1xx/Include -IMiddlewares/Third_Party/FreeRTOS/Source/include -IMiddlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -IMiddlewares/ST/STM32_USB_Device_Library/Core/Inc -IMiddlewares/ST/STM32_USB_Device_Library/Class/HID/Inc -IMiddlewares/system/sys -IMiddlewares/system/usart -IMiddlewares/system/delay -IMiddlewares/cxxsource -IMiddlewares/HARDWARE/include -IMiddlewares/MPU6050 -IMiddlewares/MPU6050/eMPL -IMiddlewares/myusb -IMiddlewares/RC522/include -IDrivers/CMSIS/Include -Og -Wall -fdata-sections -ffunction-sections -g -gdwarf-2 -MMD -MP -MF"build/usbd_conf.d" -MT"build/usbd_conf.d" -Wa,-a,-ad,-alms=build/usbd_conf.lst Src/usbd_conf.c -o build/usbd_conf.o
+arm-none-eabi-gcc -c -mcpu=cortex-m3 -mthumb   -DUSE_HAL_DRIVER -DSTM32F103xB -IInc -IDrivers/STM32F1xx_HAL_Driver/Inc -IDrivers/STM32F1xx_HAL_Driver/Inc/Legacy -IMiddlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3 -IDrivers/CMSIS/Device/ST/STM32F1xx/Include -IMiddlewares/Third_Party/FreeRTOS/Source/include -IMiddlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -IMiddlewares/ST/STM32_USB_Device_Library/Core/Inc -IMiddlewares/ST/STM32_USB_Device_Library/Class/HID/Inc -IMiddlewares/system/sys -IMiddlewares/system/usart -IMiddlewares/system/delay -IMiddlewares/cxxsource -IMiddlewares/HARDWARE/include -IMiddlewares/MPU6050 -IMiddlewares/MPU6050/eMPL -IMiddlewares/myusb -IMiddlewares/RC522/include -IDrivers/CMSIS/Include -Og -Wall -fdata-sections -ffunction-sections -g -gdwarf-2 -MMD -MP -MF"build/usb_device.d" -MT"build/usb_device.d" -Wa,-a,-ad,-alms=build/usb_device.lst Src/usb_device.c -o build/usb_device.o
+arm-none-eabi-gcc -c -mcpu=cortex-m3 -mthumb   -DUSE_HAL_DRIVER -DSTM32F103xB -IInc -IDrivers/STM32F1xx_HAL_Driver/Inc -IDrivers/STM32F1xx_HAL_Driver/Inc/Legacy -IMiddlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3 -IDrivers/CMSIS/Device/ST/STM32F1xx/Include -IMiddlewares/Third_Party/FreeRTOS/Source/include -IMiddlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -IMiddlewares/ST/STM32_USB_Device_Library/Core/Inc -IMiddlewares/ST/STM32_USB_Device_Library/Class/HID/Inc -IMiddlewares/system/sys -IMiddlewares/system/usart -IMiddlewares/system/delay -IMiddlewares/cxxsource -IMiddlewares/HARDWARE/include -IMiddlewares/MPU6050 -IMiddlewares/MPU6050/eMPL -IMiddlewares/myusb -IMiddlewares/RC522/include -IDrivers/CMSIS/Include -Og -Wall -fdata-sections -ffunction-sections -g -gdwarf-2 -MMD -MP -MF"build/usbd_desc.d" -MT"build/usbd_desc.d" -Wa,-a,-ad,-alms=build/usbd_desc.lst Src/usbd_desc.c -o build/usbd_desc.o
+Src/usbd_desc.c:130:14: warning: excess elements in array initializer
+  130 |         0x81,0x02, // INPUT (Data,Var,Abs)
+      |              ^~~~
+Src/usbd_desc.c:130:14: note: (near initialization for 'CustomHID_ReportDescriptor')
+Src/usbd_desc.c:133:9: warning: excess elements in array initializer
+  133 |         0x09,0x04, // USAGE ID - Vendor defined
+      |         ^~~~
+Src/usbd_desc.c:133:9: note: (near initialization for 'CustomHID_ReportDescriptor')
+Src/usbd_desc.c:133:14: warning: excess elements in array initializer
+  133 |         0x09,0x04, // USAGE ID - Vendor defined
+      |              ^~~~
+Src/usbd_desc.c:133:14: note: (near initialization for 'CustomHID_ReportDescriptor')
+Src/usbd_desc.c:134:9: warning: excess elements in array initializer
+  134 |         0x15,0x00, // LOGICAL_MINIMUM (0)
+      |         ^~~~
+Src/usbd_desc.c:134:9: note: (near initialization for 'CustomHID_ReportDescriptor')
+Src/usbd_desc.c:134:14: warning: excess elements in array initializer
+  134 |         0x15,0x00, // LOGICAL_MINIMUM (0)
+      |              ^~~~
+Src/usbd_desc.c:134:14: note: (near initialization for 'CustomHID_ReportDescriptor')
+Src/usbd_desc.c:135:9: warning: excess elements in array initializer
+  135 |         0x26,0x00,0xFF, // LOGICAL_MAXIMUM (255)
+      |         ^~~~
+Src/usbd_desc.c:135:9: note: (near initialization for 'CustomHID_ReportDescriptor')
+Src/usbd_desc.c:135:14: warning: excess elements in array initializer
+  135 |         0x26,0x00,0xFF, // LOGICAL_MAXIMUM (255)
+      |              ^~~~
+Src/usbd_desc.c:135:14: note: (near initialization for 'CustomHID_ReportDescriptor')
+Src/usbd_desc.c:135:19: warning: excess elements in array initializer
+  135 |         0x26,0x00,0xFF, // LOGICAL_MAXIMUM (255)
+      |                   ^~~~
+Src/usbd_desc.c:135:19: note: (near initialization for 'CustomHID_ReportDescriptor')
+Src/usbd_desc.c:136:9: warning: excess elements in array initializer
+  136 |         0x75,0x08, // REPORT_SIZE (8bit)
+      |         ^~~~
+Src/usbd_desc.c:136:9: note: (near initialization for 'CustomHID_ReportDescriptor')
+Src/usbd_desc.c:136:14: warning: excess elements in array initializer
+  136 |         0x75,0x08, // REPORT_SIZE (8bit)
+      |              ^~~~
+Src/usbd_desc.c:136:14: note: (near initialization for 'CustomHID_ReportDescriptor')
+Src/usbd_desc.c:137:9: warning: excess elements in array initializer
+  137 |         0x95,0x40, // REPORT_COUNT (64Byte)
+      |         ^~~~
+Src/usbd_desc.c:137:9: note: (near initialization for 'CustomHID_ReportDescriptor')
+Src/usbd_desc.c:137:14: warning: excess elements in array initializer
+  137 |         0x95,0x40, // REPORT_COUNT (64Byte)
+      |              ^~~~
+Src/usbd_desc.c:137:14: note: (near initialization for 'CustomHID_ReportDescriptor')
+Src/usbd_desc.c:138:9: warning: excess elements in array initializer
+  138 |         0x91,0x02, // OUTPUT (Data,Var,Abs)
+      |         ^~~~
+Src/usbd_desc.c:138:9: note: (near initialization for 'CustomHID_ReportDescriptor')
+Src/usbd_desc.c:138:14: warning: excess elements in array initializer
+  138 |         0x91,0x02, // OUTPUT (Data,Var,Abs)
+      |              ^~~~
+Src/usbd_desc.c:138:14: note: (near initialization for 'CustomHID_ReportDescriptor')
+Src/usbd_desc.c:140:9: warning: excess elements in array initializer
+  140 |         0xc0 /* END_COLLECTION */
+      |         ^~~~
+Src/usbd_desc.c:140:9: note: (near initialization for 'CustomHID_ReportDescriptor')
+Src/usbd_desc.c: In function 'USBD_FS_ProductStrDescriptor':
+Src/usbd_desc.c:60:36: warning: pointer targets in passing argument 1 of 'USBD_GetString' differ in signedness [-Wpointer-sign]
+   60 | #define USBD_PRODUCT_STRING_FS     "Human interface"
+      |                                    ^~~~~~~~~~~~~~~~~
+      |                                    |
+      |                                    char *
+Src/usbd_desc.c:200:21: note: in expansion of macro 'USBD_PRODUCT_STRING_FS'
+  200 |     USBD_GetString (USBD_PRODUCT_STRING_FS, USBD_StrDesc, length);
+      |                     ^~~~~~~~~~~~~~~~~~~~~~
+In file included from Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_core.h:40,
+                 from Src/usbd_desc.c:51:
+Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_ctlreq.h:93:39: note: expected 'uint8_t *' {aka 'unsigned char *'} but argument is of type 'char *'
+   93 | void USBD_GetString         (uint8_t *desc, uint8_t *unicode, uint16_t *len);
+      |                              ~~~~~~~~~^~~~
+Src/usbd_desc.c:60:36: warning: pointer targets in passing argument 1 of 'USBD_GetString' differ in signedness [-Wpointer-sign]
+   60 | #define USBD_PRODUCT_STRING_FS     "Human interface"
+      |                                    ^~~~~~~~~~~~~~~~~
+      |                                    |
+      |                                    char *
+Src/usbd_desc.c:204:21: note: in expansion of macro 'USBD_PRODUCT_STRING_FS'
+  204 |     USBD_GetString (USBD_PRODUCT_STRING_FS, USBD_StrDesc, length);
+      |                     ^~~~~~~~~~~~~~~~~~~~~~
+In file included from Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_core.h:40,
+                 from Src/usbd_desc.c:51:
+Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_ctlreq.h:93:39: note: expected 'uint8_t *' {aka 'unsigned char *'} but argument is of type 'char *'
+   93 | void USBD_GetString         (uint8_t *desc, uint8_t *unicode, uint16_t *len);
+      |                              ~~~~~~~~~^~~~
+Src/usbd_desc.c: In function 'USBD_FS_ManufacturerStrDescriptor':
+Src/usbd_desc.c:58:38: warning: pointer targets in passing argument 1 of 'USBD_GetString' differ in signedness [-Wpointer-sign]
+   58 | #define USBD_MANUFACTURER_STRING     "XAG"
+      |                                      ^~~~~
+      |                                      |
+      |                                      char *
+Src/usbd_desc.c:218:19: note: in expansion of macro 'USBD_MANUFACTURER_STRING'
+  218 |   USBD_GetString (USBD_MANUFACTURER_STRING, USBD_StrDesc, length);
+      |                   ^~~~~~~~~~~~~~~~~~~~~~~~
+In file included from Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_core.h:40,
+                 from Src/usbd_desc.c:51:
+Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_ctlreq.h:93:39: note: expected 'uint8_t *' {aka 'unsigned char *'} but argument is of type 'char *'
+   93 | void USBD_GetString         (uint8_t *desc, uint8_t *unicode, uint16_t *len);
+      |                              ~~~~~~~~~^~~~
+Src/usbd_desc.c: In function 'USBD_FS_SerialStrDescriptor':
+Src/usbd_desc.c:61:41: warning: pointer targets in passing argument 1 of 'USBD_GetString' differ in signedness [-Wpointer-sign]
+   61 | #define USBD_SERIALNUMBER_STRING_FS     "00000000001A"
+      |                                         ^~~~~~~~~~~~~~
+      |                                         |
+      |                                         char *
+Src/usbd_desc.c:233:21: note: in expansion of macro 'USBD_SERIALNUMBER_STRING_FS'
+  233 |     USBD_GetString (USBD_SERIALNUMBER_STRING_FS, USBD_StrDesc, length);
+      |                     ^~~~~~~~~~~~~~~~~~~~~~~~~~~
+In file included from Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_core.h:40,
+                 from Src/usbd_desc.c:51:
+Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_ctlreq.h:93:39: note: expected 'uint8_t *' {aka 'unsigned char *'} but argument is of type 'char *'
+   93 | void USBD_GetString         (uint8_t *desc, uint8_t *unicode, uint16_t *len);
+      |                              ~~~~~~~~~^~~~
+Src/usbd_desc.c:61:41: warning: pointer targets in passing argument 1 of 'USBD_GetString' differ in signedness [-Wpointer-sign]
+   61 | #define USBD_SERIALNUMBER_STRING_FS     "00000000001A"
+      |                                         ^~~~~~~~~~~~~~
+      |                                         |
+      |                                         char *
+Src/usbd_desc.c:237:21: note: in expansion of macro 'USBD_SERIALNUMBER_STRING_FS'
+  237 |     USBD_GetString (USBD_SERIALNUMBER_STRING_FS, USBD_StrDesc, length);
+      |                     ^~~~~~~~~~~~~~~~~~~~~~~~~~~
+In file included from Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_core.h:40,
+                 from Src/usbd_desc.c:51:
+Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_ctlreq.h:93:39: note: expected 'uint8_t *' {aka 'unsigned char *'} but argument is of type 'char *'
+   93 | void USBD_GetString         (uint8_t *desc, uint8_t *unicode, uint16_t *len);
+      |                              ~~~~~~~~~^~~~
+Src/usbd_desc.c: In function 'USBD_FS_ConfigStrDescriptor':
+Src/usbd_desc.c:62:42: warning: pointer targets in passing argument 1 of 'USBD_GetString' differ in signedness [-Wpointer-sign]
+   62 | #define USBD_CONFIGURATION_STRING_FS     "HID Config"
+      |                                          ^~~~~~~~~~~~
+      |                                          |
+      |                                          char *
+Src/usbd_desc.c:253:21: note: in expansion of macro 'USBD_CONFIGURATION_STRING_FS'
+  253 |     USBD_GetString (USBD_CONFIGURATION_STRING_FS, USBD_StrDesc, length);
+      |                     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~
+In file included from Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_core.h:40,
+                 from Src/usbd_desc.c:51:
+Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_ctlreq.h:93:39: note: expected 'uint8_t *' {aka 'unsigned char *'} but argument is of type 'char *'
+   93 | void USBD_GetString         (uint8_t *desc, uint8_t *unicode, uint16_t *len);
+      |                              ~~~~~~~~~^~~~
+Src/usbd_desc.c:62:42: warning: pointer targets in passing argument 1 of 'USBD_GetString' differ in signedness [-Wpointer-sign]
+   62 | #define USBD_CONFIGURATION_STRING_FS     "HID Config"
+      |                                          ^~~~~~~~~~~~
+      |                                          |
+      |                                          char *
+Src/usbd_desc.c:257:21: note: in expansion of macro 'USBD_CONFIGURATION_STRING_FS'
+  257 |     USBD_GetString (USBD_CONFIGURATION_STRING_FS, USBD_StrDesc, length);
+      |                     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~
+In file included from Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_core.h:40,
+                 from Src/usbd_desc.c:51:
+Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_ctlreq.h:93:39: note: expected 'uint8_t *' {aka 'unsigned char *'} but argument is of type 'char *'
+   93 | void USBD_GetString         (uint8_t *desc, uint8_t *unicode, uint16_t *len);
+      |                              ~~~~~~~~~^~~~
+Src/usbd_desc.c: In function 'USBD_FS_InterfaceStrDescriptor':
+Src/usbd_desc.c:63:38: warning: pointer targets in passing argument 1 of 'USBD_GetString' differ in signedness [-Wpointer-sign]
+   63 | #define USBD_INTERFACE_STRING_FS     "HID Interface"
+      |                                      ^~~~~~~~~~~~~~~
+      |                                      |
+      |                                      char *
+Src/usbd_desc.c:273:21: note: in expansion of macro 'USBD_INTERFACE_STRING_FS'
+  273 |     USBD_GetString (USBD_INTERFACE_STRING_FS, USBD_StrDesc, length);
+      |                     ^~~~~~~~~~~~~~~~~~~~~~~~
+In file included from Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_core.h:40,
+                 from Src/usbd_desc.c:51:
+Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_ctlreq.h:93:39: note: expected 'uint8_t *' {aka 'unsigned char *'} but argument is of type 'char *'
+   93 | void USBD_GetString         (uint8_t *desc, uint8_t *unicode, uint16_t *len);
+      |                              ~~~~~~~~~^~~~
+Src/usbd_desc.c:63:38: warning: pointer targets in passing argument 1 of 'USBD_GetString' differ in signedness [-Wpointer-sign]
+   63 | #define USBD_INTERFACE_STRING_FS     "HID Interface"
+      |                                      ^~~~~~~~~~~~~~~
+      |                                      |
+      |                                      char *
+Src/usbd_desc.c:277:21: note: in expansion of macro 'USBD_INTERFACE_STRING_FS'
+  277 |     USBD_GetString (USBD_INTERFACE_STRING_FS, USBD_StrDesc, length);
+      |                     ^~~~~~~~~~~~~~~~~~~~~~~~
+In file included from Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_core.h:40,
+                 from Src/usbd_desc.c:51:
+Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_ctlreq.h:93:39: note: expected 'uint8_t *' {aka 'unsigned char *'} but argument is of type 'char *'
+   93 | void USBD_GetString         (uint8_t *desc, uint8_t *unicode, uint16_t *len);
+      |                              ~~~~~~~~~^~~~
+arm-none-eabi-gcc -c -mcpu=cortex-m3 -mthumb   -DUSE_HAL_DRIVER -DSTM32F103xB -IInc -IDrivers/STM32F1xx_HAL_Driver/Inc -IDrivers/STM32F1xx_HAL_Driver/Inc/Legacy -IMiddlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3 -IDrivers/CMSIS/Device/ST/STM32F1xx/Include -IMiddlewares/Third_Party/FreeRTOS/Source/include -IMiddlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -IMiddlewares/ST/STM32_USB_Device_Library/Core/Inc -IMiddlewares/ST/STM32_USB_Device_Library/Class/HID/Inc -IMiddlewares/system/sys -IMiddlewares/system/usart -IMiddlewares/system/delay -IMiddlewares/cxxsource -IMiddlewares/HARDWARE/include -IMiddlewares/MPU6050 -IMiddlewares/MPU6050/eMPL -IMiddlewares/myusb -IMiddlewares/RC522/include -IDrivers/CMSIS/Include -Og -Wall -fdata-sections -ffunction-sections -g -gdwarf-2 -MMD -MP -MF"build/freertos.d" -MT"build/freertos.d" -Wa,-a,-ad,-alms=build/freertos.lst Src/freertos.c -o build/freertos.o
+arm-none-eabi-gcc -c -mcpu=cortex-m3 -mthumb   -DUSE_HAL_DRIVER -DSTM32F103xB -IInc -IDrivers/STM32F1xx_HAL_Driver/Inc -IDrivers/STM32F1xx_HAL_Driver/Inc/Legacy -IMiddlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3 -IDrivers/CMSIS/Device/ST/STM32F1xx/Include -IMiddlewares/Third_Party/FreeRTOS/Source/include -IMiddlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -IMiddlewares/ST/STM32_USB_Device_Library/Core/Inc -IMiddlewares/ST/STM32_USB_Device_Library/Class/HID/Inc -IMiddlewares/system/sys -IMiddlewares/system/usart -IMiddlewares/system/delay -IMiddlewares/cxxsource -IMiddlewares/HARDWARE/include -IMiddlewares/MPU6050 -IMiddlewares/MPU6050/eMPL -IMiddlewares/myusb -IMiddlewares/RC522/include -IDrivers/CMSIS/Include -Og -Wall -fdata-sections -ffunction-sections -g -gdwarf-2 -MMD -MP -MF"build/stm32f1xx_it.d" -MT"build/stm32f1xx_it.d" -Wa,-a,-ad,-alms=build/stm32f1xx_it.lst Src/stm32f1xx_it.c -o build/stm32f1xx_it.o
+arm-none-eabi-gcc -c -mcpu=cortex-m3 -mthumb   -DUSE_HAL_DRIVER -DSTM32F103xB -IInc -IDrivers/STM32F1xx_HAL_Driver/Inc -IDrivers/STM32F1xx_HAL_Driver/Inc/Legacy -IMiddlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3 -IDrivers/CMSIS/Device/ST/STM32F1xx/Include -IMiddlewares/Third_Party/FreeRTOS/Source/include -IMiddlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -IMiddlewares/ST/STM32_USB_Device_Library/Core/Inc -IMiddlewares/ST/STM32_USB_Device_Library/Class/HID/Inc -IMiddlewares/system/sys -IMiddlewares/system/usart -IMiddlewares/system/delay -IMiddlewares/cxxsource -IMiddlewares/HARDWARE/include -IMiddlewares/MPU6050 -IMiddlewares/MPU6050/eMPL -IMiddlewares/myusb -IMiddlewares/RC522/include -IDrivers/CMSIS/Include -Og -Wall -fdata-sections -ffunction-sections -g -gdwarf-2 -MMD -MP -MF"build/stm32f1xx_hal_msp.d" -MT"build/stm32f1xx_hal_msp.d" -Wa,-a,-ad,-alms=build/stm32f1xx_hal_msp.lst Src/stm32f1xx_hal_msp.c -o build/stm32f1xx_hal_msp.o
+arm-none-eabi-gcc -c -mcpu=cortex-m3 -mthumb   -DUSE_HAL_DRIVER -DSTM32F103xB -IInc -IDrivers/STM32F1xx_HAL_Driver/Inc -IDrivers/STM32F1xx_HAL_Driver/Inc/Legacy -IMiddlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3 -IDrivers/CMSIS/Device/ST/STM32F1xx/Include -IMiddlewares/Third_Party/FreeRTOS/Source/include -IMiddlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -IMiddlewares/ST/STM32_USB_Device_Library/Core/Inc -IMiddlewares/ST/STM32_USB_Device_Library/Class/HID/Inc -IMiddlewares/system/sys -IMiddlewares/system/usart -IMiddlewares/system/delay -IMiddlewares/cxxsource -IMiddlewares/HARDWARE/include -IMiddlewares/MPU6050 -IMiddlewares/MPU6050/eMPL -IMiddlewares/myusb -IMiddlewares/RC522/include -IDrivers/CMSIS/Include -Og -Wall -fdata-sections -ffunction-sections -g -gdwarf-2 -MMD -MP -MF"build/system_stm32f1xx.d" -MT"build/system_stm32f1xx.d" -Wa,-a,-ad,-alms=build/system_stm32f1xx.lst Src/system_stm32f1xx.c -o build/system_stm32f1xx.o
+arm-none-eabi-gcc -c -mcpu=cortex-m3 -mthumb   -DUSE_HAL_DRIVER -DSTM32F103xB -IInc -IDrivers/STM32F1xx_HAL_Driver/Inc 
+-IDrivers/STM32F1xx_HAL_Driver/Inc/Legacy -IMiddlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3 
+-IDrivers/CMSIS/Device/ST/STM32F1xx/Include -IMiddlewares/Third_Party/FreeRTOS/Source/include 
+-IMiddlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -IMiddlewares/ST/STM32_USB_Device_Library/Core/Inc 
+-IMiddlewares/ST/STM32_USB_Device_Library/Class/HID/Inc -IMiddlewares/system/sys -IMiddlewares/system/usart 
+-IMiddlewares/system/delay -IMiddlewares/cxxsource -IMiddlewares/HARDWARE/include -IMiddlewares/MPU6050 
+-IMiddlewares/MPU6050/eMPL -IMiddlewares/myusb -IMiddlewares/RC522/include 
+-IDrivers/CMSIS/Include -Og -Wall -fdata-sections -ffunction-sections -g -gdwarf-2 -MMD -MP -MF"build/main.d" -MT"build/main.d" -Wa,-a,-ad,-alms=build/main.lst Src/main.c -o build/main.o
+
+arm-none-eabi-gcc -c -mcpu=cortex-m3 -mthumb   -DUSE_HAL_DRIVER -DSTM32F103xB -D__arm__ -DSTM32F103xB -IInc 
+-IDrivers/STM32F1xx_HAL_Driver/Inc 
+-IDrivers/STM32F1xx_HAL_Driver/Inc/Legacy 
+-IDrivers/CMSIS/Device/ST/STM32F1xx/Include 
+-IDrivers/CMSIS/Include -Ia -Og -Wall -fdata-sections -ffunction-sections -g -gdwarf-2 -MMD -MP -MF"build/main.d" -Wa,-a,-ad,-alms=build/main.lst Src/main.c -o build/main.o
+
+In file included from Src/main.c:11:
+Middlewares/HARDWARE/include/stmflash.h:13: warning: "FLASH_KEY1" redefined
+   13 | #define FLASH_KEY1               0X45670123
+      |
+In file included from Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f1xx.h:149,
+                 from Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_def.h:46,
+                 from Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc.h:45,
+                 from Inc/stm32f1xx_hal_conf.h:219,
+                 from Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h:46,
+                 from Src/main.c:3:
+Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f103xb.h:10112: note: this is the location of the previous definition
+10112 | #define FLASH_KEY1                          FLASH_KEY1_Msk                     /*!< FPEC Key1 */
+      |
+In file included from Src/main.c:11:
+Middlewares/HARDWARE/include/stmflash.h:14: warning: "FLASH_KEY2" redefined
+   14 | #define FLASH_KEY2               0XCDEF89AB
+      |
+In file included from Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f1xx.h:149,
+                 from Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_def.h:46,
+                 from Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc.h:45,
+                 from Inc/stm32f1xx_hal_conf.h:219,
+                 from Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h:46,
+                 from Src/main.c:3:
+Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f103xb.h:10115: note: this is the location of the previous definition
+10115 | #define FLASH_KEY2                          FLASH_KEY2_Msk                     /*!< FPEC Key2 */
+      |
+Src/main.c: In function 'StartDefaultTask':
+Src/main.c:505:6: warning: unused variable 'i' [-Wunused-variable]
+  505 |   u8 i = 0;
+      |      ^
+At top level:
+Src/main.c:451:13: warning: 'MX_GPIO_Init' defined but not used [-Wunused-function]
+  451 | static void MX_GPIO_Init(void)
+      |             ^~~~~~~~~~~~
+Src/main.c:406:13: warning: 'MX_DMA_Init' defined but not used [-Wunused-function]
+  406 | static void MX_DMA_Init(void)
+      |             ^~~~~~~~~~~
+Src/main.c:383:13: warning: 'MX_USART2_UART_Init' defined but not used [-Wunused-function]
+  383 | static void MX_USART2_UART_Init(void)
+      |             ^~~~~~~~~~~~~~~~~~~
+Src/main.c:364:13: warning: 'MX_USART1_UART_Init' defined but not used [-Wunused-function]
+  364 | static void MX_USART1_UART_Init(void)
+      |             ^~~~~~~~~~~~~~~~~~~
+Src/main.c:301:13: warning: 'MX_TIM2_Init' defined but not used [-Wunused-function]
+  301 | static void MX_TIM2_Init(void)
+      |             ^~~~~~~~~~~~
+Src/main.c:228:13: warning: 'MX_TIM1_Init' defined but not used [-Wunused-function]
+  228 | static void MX_TIM1_Init(void)
+      |             ^~~~~~~~~~~~
+Src/main.c:204:13: warning: 'MX_SPI1_Init' defined but not used [-Wunused-function]
+  204 | static void MX_SPI1_Init(void)
+      |             ^~~~~~~~~~~~
+Src/main.c:184:13: warning: 'MX_I2C2_Init' defined but not used [-Wunused-function]
+  184 | static void MX_I2C2_Init(void)
+      |             ^~~~~~~~~~~~
+Src/main.c:152:13: warning: 'MX_ADC1_Init' defined but not used [-Wunused-function]
+  152 | static void MX_ADC1_Init(void)
+      |             ^~~~~~~~~~~~
+arm-none-eabi-g++ -c -lstdc++ -mcpu=cortex-m3 -mthumb   -DUSE_HAL_DRIVER -DSTM32F103xB -IInc -IDrivers/STM32F1xx_HAL_Driver/Inc -IDrivers/STM32F1xx_HAL_Driver/Inc/Legacy -IMiddlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3 -IDrivers/CMSIS/Device/ST/STM32F1xx/Include -IMiddlewares/Third_Party/FreeRTOS/Source/include -IMiddlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -IMiddlewares/ST/STM32_USB_Device_Library/Core/Inc -IMiddlewares/ST/STM32_USB_Device_Library/Class/HID/Inc -IMiddlewares/system/sys -IMiddlewares/system/usart -IMiddlewares/system/delay -IMiddlewares/cxxsource -IMiddlewares/HARDWARE/include -IMiddlewares/MPU6050 -IMiddlewares/MPU6050/eMPL -IMiddlewares/myusb -IMiddlewares/RC522/include -IDrivers/CMSIS/Include -Og -Wall -fdata-sections -ffunction-sections -g -gdwarf-2 -MMD -MP -MF"build/ringbuffer.d" -MT"build/ringbuffer.d"  -IMiddlewares/cxxsource -IMiddlewares/HARDWARE/include -g -ggdb3 -fno-rtti -fno-exceptions -fverbose-asm -fdata-sections -ffunction-sections -fpermissive -Wa,-ahlms=build/ringbuffer.lst Middlewares/cxxsource/ringbuffer.cpp -o build/ringbuffer.o
+arm-none-eabi-g++ -c -lstdc++ -mcpu=cortex-m3 -mthumb   -DUSE_HAL_DRIVER -DSTM32F103xB -IInc -IDrivers/STM32F1xx_HAL_Driver/Inc -IDrivers/STM32F1xx_HAL_Driver/Inc/Legacy -IMiddlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3 -IDrivers/CMSIS/Device/ST/STM32F1xx/Include -IMiddlewares/Third_Party/FreeRTOS/Source/include -IMiddlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -IMiddlewares/ST/STM32_USB_Device_Library/Core/Inc -IMiddlewares/ST/STM32_USB_Device_Library/Class/HID/Inc -IMiddlewares/system/sys -IMiddlewares/system/usart -IMiddlewares/system/delay -IMiddlewares/cxxsource -IMiddlewares/HARDWARE/include -IMiddlewares/MPU6050 -IMiddlewares/MPU6050/eMPL -IMiddlewares/myusb -IMiddlewares/RC522/include -IDrivers/CMSIS/Include -Og -Wall -fdata-sections -ffunction-sections -g -gdwarf-2 -MMD -MP -MF"build/line.d" -MT"build/line.d"  -IMiddlewares/cxxsource -IMiddlewares/HARDWARE/include -g -ggdb3 -fno-rtti -fno-exceptions -fverbose-asm -fdata-sections -ffunction-sections -fpermissive -Wa,-ahlms=build/line.lst Middlewares/cxxsource/line.cpp -o build/line.o
+arm-none-eabi-g++ -c -lstdc++ -mcpu=cortex-m3 -mthumb   -DUSE_HAL_DRIVER -DSTM32F103xB -IInc -IDrivers/STM32F1xx_HAL_Driver/Inc -IDrivers/STM32F1xx_HAL_Driver/Inc/Legacy -IMiddlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3 -IDrivers/CMSIS/Device/ST/STM32F1xx/Include -IMiddlewares/Third_Party/FreeRTOS/Source/include -IMiddlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -IMiddlewares/ST/STM32_USB_Device_Library/Core/Inc -IMiddlewares/ST/STM32_USB_Device_Library/Class/HID/Inc -IMiddlewares/system/sys -IMiddlewares/system/usart -IMiddlewares/system/delay -IMiddlewares/cxxsource -IMiddlewares/HARDWARE/include -IMiddlewares/MPU6050 -IMiddlewares/MPU6050/eMPL -IMiddlewares/myusb -IMiddlewares/RC522/include -IDrivers/CMSIS/Include -Og -Wall -fdata-sections -ffunction-sections -g -gdwarf-2 -MMD -MP -MF"build/uart_process.d" -MT"build/uart_process.d"  -IMiddlewares/cxxsource -IMiddlewares/HARDWARE/include -g -ggdb3 -fno-rtti -fno-exceptions -fverbose-asm -fdata-sections -ffunction-sections -fpermissive -Wa,-ahlms=build/uart_process.lst Middlewares/cxxsource/uart_process.cpp -o build/uart_process.o
+In file included from Middlewares/cxxsource/uart_process.cpp:12:
+Middlewares/HARDWARE/include/stmflash.h:13: warning: "FLASH_KEY1" redefined
+   13 | #define FLASH_KEY1               0X45670123
+      |
+In file included from Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f1xx.h:149,
+                 from Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_def.h:46,
+                 from Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc.h:45,
+                 from Inc/stm32f1xx_hal_conf.h:219,
+                 from Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h:46,
+                 from Middlewares/system/sys/sys.h:4,
+                 from Middlewares/cxxsource/uart_process.h:4,
+                 from Middlewares/cxxsource/uart_process.cpp:2:
+Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f103xb.h:10112: note: this is the location of the previous definition
+10112 | #define FLASH_KEY1                          FLASH_KEY1_Msk                     /*!< FPEC Key1 */
+      |
+In file included from Middlewares/cxxsource/uart_process.cpp:12:
+Middlewares/HARDWARE/include/stmflash.h:14: warning: "FLASH_KEY2" redefined
+   14 | #define FLASH_KEY2               0XCDEF89AB
+      |
+In file included from Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f1xx.h:149,
+                 from Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_def.h:46,
+                 from Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc.h:45,
+                 from Inc/stm32f1xx_hal_conf.h:219,
+                 from Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h:46,
+                 from Middlewares/system/sys/sys.h:4,
+                 from Middlewares/cxxsource/uart_process.h:4,
+                 from Middlewares/cxxsource/uart_process.cpp:2:
+Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f103xb.h:10115: note: this is the location of the previous definition
+10115 | #define FLASH_KEY2                          FLASH_KEY2_Msk                     /*!< FPEC Key2 */
+      |
+arm-none-eabi-gcc -x assembler-with-cpp -c -mcpu=cortex-m3 -mthumb   -DUSE_HAL_DRIVER -DSTM32F103xB -IInc -IDrivers/STM32F1xx_HAL_Driver/Inc -IDrivers/STM32F1xx_HAL_Driver/Inc/Legacy -IMiddlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3 -IDrivers/CMSIS/Device/ST/STM32F1xx/Include -IMiddlewares/Third_Party/FreeRTOS/Source/include -IMiddlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -IMiddlewares/ST/STM32_USB_Device_Library/Core/Inc -IMiddlewares/ST/STM32_USB_Device_Library/Class/HID/Inc -IMiddlewares/system/sys -IMiddlewares/system/usart -IMiddlewares/system/delay -IMiddlewares/cxxsource -IMiddlewares/HARDWARE/include -IMiddlewares/MPU6050 -IMiddlewares/MPU6050/eMPL -IMiddlewares/myusb -IMiddlewares/RC522/include -IDrivers/CMSIS/Include -Og -Wall -fdata-sections -ffunction-sections -g -gdwarf-2 -MMD -MP -MF"build/startup_stm32f103xb.d" -MT"build/startup_stm32f103xb.d" startup_stm32f103xb.s -o build/startup_stm32f103xb.o
+arm-none-eabi-gcc build/stm32f1xx_hal_flash.o build/stm32f1xx_hal.o build/stm32f1xx_hal_spi.o build/stm32f1xx_hal_pcd.o build/stm32f1xx_hal_pwr.o build/stm32f1xx_ll_usb.o build/stm32f1xx_hal_rcc_ex.o build/stm32f1xx_hal_tim.o build/stm32f1xx_hal_adc_ex.o build/stm32f1xx_hal_dma.o build/stm32f1xx_hal_spi_ex.o build/stm32f1xx_hal_cortex.o build/stm32f1xx_hal_pcd_ex.o build/stm32f1xx_hal_tim_ex.o build/stm32f1xx_hal_i2c.o build/stm32f1xx_hal_adc.o build/stm32f1xx_hal_flash_ex.o build/stm32f1xx_hal_gpio.o build/stm32f1xx_hal_uart.o build/stm32f1xx_hal_rcc.o build/stm32f1xx_hal_gpio_ex.o build/usbd_core.o build/usbd_ioreq.o build/usbd_hid.o build/usbd_ctlreq.o build/timers.o build/heap_4.o build/queue.o 
+build/port.o build/list.o build/tasks.o build/croutine.o build/cmsis_os.o build/event_groups.o build/sys.o build/usart.o build/delay.o build/dma.o build/led.o build/adc.o build/spi.o build/24l01.o build/timer.o build/stmflash.o build/myiic.o build/usart2.o build/mpu6050.o build/imu.o build/inv_mpu_dmp_motion_driver.o build/inv_mpu.o build/usb_it.o build/usb.o build/MFRC_Task.o build/RC522.o build/usbd_conf.o build/usb_device.o build/usbd_desc.o build/freertos.o build/stm32f1xx_it.o build/stm32f1xx_hal_msp.o build/system_stm32f1xx.o build/main.o build/ringbuffer.o build/line.o build/uart_process.o build/startup_stm32f103xb.o -mcpu=cortex-m3 -mthumb   -specs=nano.specs -TSTM32F103C8Tx_FLASH.ld  -lc -lm -lnosys -Wl,-Map=build/stm32proj.map,--cref -Wl,--gc-sections -o build/stm32proj.elf
+arm-none-eabi-size build/stm32proj.elf
+   text    data     bss     dec     hex filename
+  16948     316    6348   23612    5c3c build/stm32proj.elf
+arm-none-eabi-objcopy -O ihex build/stm32proj.elf build/stm32proj.hex
+arm-none-eabi-objcopy -O binary -S build/stm32proj.elf build/stm32proj.bin
+
+D:\01-Projects\Matlab-Projects\stm32f103c8>^A^A^A^A
+
+
+
+
+
+
+
+
+
+

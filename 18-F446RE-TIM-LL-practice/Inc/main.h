@@ -39,7 +39,7 @@ extern "C" {
 #include "stm32f4xx_ll_pwr.h"
 #include "stm32f4xx_ll_gpio.h"
 #include "stm32f4xx_ll_dma.h"
-
+#include "stm32f4xx_ll_adc.h"
 #include "stm32f4xx_ll_exti.h"
 #include "stm32f4xx_ll_tim.h"
 /* Private includes ----------------------------------------------------------*/

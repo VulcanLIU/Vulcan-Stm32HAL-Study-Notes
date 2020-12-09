@@ -22,6 +22,7 @@
 #include "main.h"
 #include "usart.h"
 #include "gpio.h"
+#include "myadc.h"
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
@@ -92,6 +93,9 @@ int main(void)
   /* USER CODE BEGIN 2 */
   //MX_TIM1_Init();
   MX_TIM1_OC_Init();
+  ADC_init();
+  LL_ADC_Enable(ADC1);
+  LL_ADC_REG_StartConversionSWStart(ADC1);
   /* USER CODE END 2 */
 
   /* Infinite loop */
