@@ -34,3 +34,12 @@ void ADC_init(void)
     LL_ADC_DisableIT_EOCS(ADC1);
     LL_ADC_REG_SetFlagEndOfConversion(ADC1,LL_ADC_REG_FLAG_EOC_SEQUENCE_CONV);
 }
+
+void ADC_begin()
+{
+    /*ADC上电*/
+    LL_ADC_Enable(ADC1);
+
+    /*ADC软件触发*/
+    LL_ADC_REG_StartConversionSWStart(ADC1);
+}

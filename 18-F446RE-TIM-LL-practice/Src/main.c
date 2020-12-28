@@ -93,9 +93,9 @@ int main(void)
   /* USER CODE BEGIN 2 */
   //MX_TIM1_Init();
   MX_TIM1_OC_Init();
+  MX_TIM8_OC_Init();
   ADC_init();
-  LL_ADC_Enable(ADC1);
-  LL_ADC_REG_StartConversionSWStart(ADC1);
+  ADC_begin();
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -103,7 +103,15 @@ int main(void)
   while (1)
   {
     /* USER CODE END WHILE */
-
+    volatile uint32_t ADC1_Value = LL_ADC_REG_ReadConversionData12(ADC1);
+    if (ADC1_Value < 10)
+    {
+      ADC1_Value = 10;
+    }
+    
+    LL_TIM_SetAutoReload(TIM8,ADC1_Value);
+    //LL_TIM_OC_SetCompareCH1(TIM8,ADC1_Value);
+    //LL_TIM_EnableUpdateEvent(TIM8);
     /* USER CODE BEGIN 3 */
   }
   /* USER CODE END 3 */
@@ -124,14 +132,13 @@ void SystemClock_Config(void)
   __HAL_PWR_VOLTAGESCALING_CONFIG(PWR_REGULATOR_VOLTAGE_SCALE3);
   /** Initializes the CPU, AHB and APB busses clocks 
   */
-  RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSI;
-  RCC_OscInitStruct.HSIState = RCC_HSI_ON;
-  RCC_OscInitStruct.HSICalibrationValue = RCC_HSICALIBRATION_DEFAULT;
+  RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSE;
+  RCC_OscInitStruct.HSEState = RCC_HSE_ON;
   RCC_OscInitStruct.PLL.PLLState = RCC_PLL_ON;
-  RCC_OscInitStruct.PLL.PLLSource = RCC_PLLSOURCE_HSI;
-  RCC_OscInitStruct.PLL.PLLM = 16;
-  RCC_OscInitStruct.PLL.PLLN = 336;
-  RCC_OscInitStruct.PLL.PLLP = RCC_PLLP_DIV4;
+  RCC_OscInitStruct.PLL.PLLSource = RCC_PLLSOURCE_HSE;
+  RCC_OscInitStruct.PLL.PLLM = 8;
+  RCC_OscInitStruct.PLL.PLLN = 180;
+  RCC_OscInitStruct.PLL.PLLP = RCC_PLLP_DIV2;
   RCC_OscInitStruct.PLL.PLLQ = 2;
   RCC_OscInitStruct.PLL.PLLR = 2;
   if (HAL_RCC_OscConfig(&RCC_OscInitStruct) != HAL_OK)
@@ -144,7 +151,7 @@ void SystemClock_Config(void)
                               |RCC_CLOCKTYPE_PCLK1|RCC_CLOCKTYPE_PCLK2;
   RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK;
   RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
-  RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV2;
+  RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV4;
   RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV1;
 
   if (HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_2) != HAL_OK)

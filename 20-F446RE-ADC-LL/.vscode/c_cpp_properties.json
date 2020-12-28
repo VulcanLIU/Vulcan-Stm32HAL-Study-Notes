@@ -14,10 +14,10 @@
                 "USE_FULL_LL_DRIVER"
             ],
             "windowsSdkVersion": "10.0.18362.0",
-            "compilerPath": "C:\\mingw64\\bin\\gcc.exe",
-            "cStandard": "c11",
-            "cppStandard": "c++17",
-            "intelliSenseMode":"gcc-x64"
+            //"compilerPath": "C:\\mingw64\\bin\\gcc.exe",
+            "cStandard": "gnu11",
+            "cppStandard": "gnu++17",
+            "intelliSenseMode":"clang-arm"
         }
     ],
     "version": 4

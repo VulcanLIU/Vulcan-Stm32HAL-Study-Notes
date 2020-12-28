@@ -8,6 +8,7 @@ extern "C"{
 #include "main.h"
 
 void ADC_init(void);
+void ADC_begin();
 
 #ifdef __cplusplus
 }
