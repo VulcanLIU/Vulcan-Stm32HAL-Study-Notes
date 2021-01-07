@@ -25,10 +25,14 @@
 #include "usart.h"
 #include "gpio.h"
 
-
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include "SSD1306_Inc\Adafruit_SSD1306.h"
+#include "Joystick_Inc\Joystick.h"
+#include "Blink_Inc\Blink.h"
+#include "GY25_Inc\GY25.h"
+#include "Stepper_Inc\Stepper.h"
+
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -79,6 +83,8 @@ void SystemClock_Config(void);
 long random(long howbig);
 long random(long howsmall, long howbig);
 void testanimate(const uint8_t *bitmap, uint8_t w, uint8_t h);
+int map(int x, int in_min, int in_max, int out_min, int out_max);
+float fmap(float x, float in_min, float in_max, float out_min, float out_max);
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
@@ -114,34 +120,76 @@ int main(void)
 
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
-  MX_TIM1_Init();
+  //MX_TIM1_Init();
   MX_USART2_UART_Init();
-  MX_TIM2_Init();
-  MX_USART1_UART_Init();
+  //MX_TIM2_Init();
+  //MX_USART1_UART_Init();
   /* USER CODE BEGIN 2 */
+  joystick.init();
+  joystick.begin();
+
+  blink.init();
+  blink.begin();
+
   // SSD1306_SWITCHCAPVCC = generate display voltage from 3.3V internally
   display.begin(SSD1306_SWITCHCAPVCC, 0x78); // Address 0x3D for 128x64
   display.display();
-  HAL_Delay(1000);
-  
-  display.clearDisplay();
-  display.setCursor(10,10);
-  display.setTextColor(WHITE);
-  display.println("sssss");
-  display.display();
-  HAL_Delay(1000);
-  
-  testanimate(logo_bmp, LOGO_WIDTH, LOGO_HEIGHT);
+
+  gy25.begin();
+
+  Stepper_left.init();
+  Stepper_left.begin();
+  Stepper_right.init();
+  Stepper_right.begin();
+
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
-  while (1){
+  while (1)
+  {
+    display.clearDisplay();
+    display.setCursor(0, 0);
+    display.setTextColor(WHITE);
+    display.print("H:");
+    display.print(joystick.ADC_VALUE_buffer[0] >> 8);
+    display.setCursor(64, 0);
+    display.setTextColor(WHITE);
+    display.print("V:");
+    display.print(joystick.ADC_VALUE_buffer[0] & 0xff);
+    if (joystick.Clicked == true)
+    {
+      display.setCursor(110, 0);
+      display.setTextColor(WHITE);
+      display.print("B");
+      joystick.Clicked = false;
+    }
 
+    display.setCursor(0, 10);
+    display.setTextColor(WHITE);
+    display.print("Y:");
+    display.print(gy25.YPR[0]);
+    display.setCursor(64, 10);
+    display.setTextColor(WHITE);
+    display.print("P:");
+    display.print(gy25.YPR[1]);
+    display.setCursor(0, 20);
+    display.setTextColor(WHITE);
+    display.print("R:");
+    display.print(gy25.YPR[2]);
+
+    display.display();
+
+    float _speed = fmap(joystick.ADC_VALUE_buffer[0] & 0xff, 0, 255,-1800, 1800);
+    Stepper_right.setSpeed(_speed);
+    Stepper_left.setSpeed(_speed);
+    //LL_USART_TransmitData8(USART1, 0XAA);
+
+    HAL_Delay(100);
   }
-    /* USER CODE END WHILE */
+  /* USER CODE END WHILE */
 
-    /* USER CODE BEGIN 3 */
+  /* USER CODE BEGIN 3 */
   /* USER CODE END 3 */
 }
 
@@ -182,8 +230,7 @@ void SystemClock_Config(void)
   }
   /** Initializes the CPU, AHB and APB busses clocks 
   */
-  RCC_ClkInitStruct.ClockType = RCC_CLOCKTYPE_HCLK|RCC_CLOCKTYPE_SYSCLK
-                              |RCC_CLOCKTYPE_PCLK1|RCC_CLOCKTYPE_PCLK2;
+  RCC_ClkInitStruct.ClockType = RCC_CLOCKTYPE_HCLK | RCC_CLOCKTYPE_SYSCLK | RCC_CLOCKTYPE_PCLK1 | RCC_CLOCKTYPE_PCLK2;
   RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK;
   RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
   RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV4;
@@ -265,7 +312,7 @@ void testanimate(const uint8_t *bitmap, uint8_t w, uint8_t h)
 
 /* USER CODE END 4 */
 
- /**
+/**
   * @brief  Period elapsed callback in non blocking mode
   * @note   This function is called  when TIM7 interrupt took place, inside
   * HAL_TIM_IRQHandler(). It makes a direct call to HAL_IncTick() to increment
@@ -278,7 +325,8 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
   /* USER CODE BEGIN Callback 0 */
 
   /* USER CODE END Callback 0 */
-  if (htim->Instance == TIM7) {
+  if (htim->Instance == TIM7)
+  {
     HAL_IncTick();
   }
   /* USER CODE BEGIN Callback 1 */
@@ -286,6 +334,15 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
   /* USER CODE END Callback 1 */
 }
 
+int map(int x, int in_min, int in_max, int out_min, int out_max)
+{
+  return (x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
+}
+
+float fmap(float x, float in_min, float in_max, float out_min, float out_max)
+{
+    return (x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
+}
 /**
   * @brief  This function is executed in case of error occurrence.
   * @retval None
@@ -298,7 +355,7 @@ void Error_Handler(void)
   /* USER CODE END Error_Handler_Debug */
 }
 
-#ifdef  USE_FULL_ASSERT
+#ifdef USE_FULL_ASSERT
 /**
   * @brief  Reports the name of the source file and the source line number
   *         where the assert_param error has occurred.
@@ -307,7 +364,7 @@ void Error_Handler(void)
   * @retval None
   */
 void assert_failed(uint8_t *file, uint32_t line)
-{ 
+{
   /* USER CODE BEGIN 6 */
   /* User can add his own implementation to report the file name and line number,
      tex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
