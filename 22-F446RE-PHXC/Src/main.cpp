@@ -27,11 +27,15 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-#include "SSD1306_Inc\Adafruit_SSD1306.h"
-#include "Joystick_Inc\Joystick.h"
-#include "Blink_Inc\Blink.h"
-#include "GY25_Inc\GY25.h"
-#include "Stepper_Inc\Stepper.h"
+#include "Adafruit_SSD1306.h"
+#include "Joystick.h"
+#include "Blink.h"
+#include "GY25.h"
+#include "Stepper.h"
+#include "HC08.h"
+#include "untitled2.h" // Model's header file
+#include "rtwtypes.h"
+#include "timer4.h"
 
 /* USER CODE END Includes */
 
@@ -85,11 +89,14 @@ long random(long howsmall, long howbig);
 void testanimate(const uint8_t *bitmap, uint8_t w, uint8_t h);
 int map(int x, int in_min, int in_max, int out_min, int out_max);
 float fmap(float x, float in_min, float in_max, float out_min, float out_max);
+void rt_OneStep(void);
+void OneStep(void);
+
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
-
+static untitled2ModelClass untitled2_Obj;
 /* USER CODE END 0 */
 
 /**
@@ -142,50 +149,74 @@ int main(void)
   Stepper_right.init();
   Stepper_right.begin();
 
+  hc08.begin();
+
+  untitled2_Obj.initialize();
+  timer4.init();
+  timer4.attachInterrupt(OneStep);
+  timer4.begin();
+
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
   {
+    //float _speed = fmap(joystick.ADC_VALUE_buffer[0] & 0xff, 0, 255, -1800, 1800);
+
+    hc08.send(gy25.getPitch(), Stepper_left.getSpeed());
+
+    // display.clearDisplay();
+    // display.setCursor(0, 0);
+    // display.setTextColor(WHITE);
+    // display.print("H:");
+    // display.print(joystick.ADC_VALUE_buffer[0] >> 8);
+    // display.setCursor(64, 0);
+    // display.setTextColor(WHITE);
+    // display.print("V:");
+    // display.print(joystick.ADC_VALUE_buffer[0] & 0xff);
+    // if (joystick.Clicked == true)
+    // {
+    //   display.setCursor(110, 0);
+    //   display.setTextColor(WHITE);
+    //   display.print("B");
+    //   joystick.Clicked = false;
+    // }
+
     display.clearDisplay();
     display.setCursor(0, 0);
     display.setTextColor(WHITE);
-    display.print("H:");
-    display.print(joystick.ADC_VALUE_buffer[0] >> 8);
-    display.setCursor(64, 0);
+    display.print("Kp:");
+    display.print(hc08.getKp());
+    display.setCursor(50, 0);
     display.setTextColor(WHITE);
-    display.print("V:");
-    display.print(joystick.ADC_VALUE_buffer[0] & 0xff);
-    if (joystick.Clicked == true)
-    {
-      display.setCursor(110, 0);
-      display.setTextColor(WHITE);
-      display.print("B");
-      joystick.Clicked = false;
-    }
-
+    display.print("Ki:");
+    display.print(hc08.getKi());
     display.setCursor(0, 10);
     display.setTextColor(WHITE);
-    display.print("Y:");
-    display.print(gy25.YPR[0]);
-    display.setCursor(64, 10);
-    display.setTextColor(WHITE);
-    display.print("P:");
-    display.print(gy25.YPR[1]);
-    display.setCursor(0, 20);
-    display.setTextColor(WHITE);
-    display.print("R:");
-    display.print(gy25.YPR[2]);
+    display.print("Kd:");
+    display.print(hc08.getKd());
+
+    // display.setCursor(0, 10);
+    // display.setTextColor(WHITE);
+    // display.print("Y:");
+    // display.print(gy25.YPR[0]);
+    // display.setCursor(64, 10);
+    // display.setTextColor(WHITE);
+    // display.print("P:");
+    // display.print(gy25.YPR[1]);
+    // display.setCursor(0, 20);
+    // display.setTextColor(WHITE);
+    // display.print("R:");
+    // display.print(gy25.YPR[2]);
+    // display.setCursor(64, 20);
+    // display.setTextColor(WHITE);
+    // display.print("S:");
+    // display.print(Stepper_left.getSpeed());
 
     display.display();
 
-    float _speed = fmap(joystick.ADC_VALUE_buffer[0] & 0xff, 0, 255,-1800, 1800);
-    Stepper_right.setSpeed(_speed);
-    Stepper_left.setSpeed(_speed);
-    //LL_USART_TransmitData8(USART1, 0XAA);
-
-    HAL_Delay(100);
+    HAL_Delay(5);
   }
   /* USER CODE END WHILE */
 
@@ -341,8 +372,59 @@ int map(int x, int in_min, int in_max, int out_min, int out_max)
 
 float fmap(float x, float in_min, float in_max, float out_min, float out_max)
 {
-    return (x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
+  return (x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
 }
+
+void rt_OneStep(void)
+{
+  static boolean_T OverrunFlag = false;
+
+  // Disable interrupts here
+
+  // Check for overrun
+  if (OverrunFlag)
+  {
+    rtmSetErrorStatus(untitled2_Obj.getRTM(), "Overrun");
+    return;
+  }
+
+  OverrunFlag = true;
+
+  // Save FPU context here (if necessary)
+  // Re-enable timer or interrupt here
+  // Set model inputs here
+
+  // Step the model for base rate
+  untitled2_Obj.step();
+
+  // Get model outputs here
+
+  // Indicate task complete
+  OverrunFlag = false;
+
+  // Disable interrupts here
+  // Restore FPU context here (if necessary)
+  // Enable interrupts here
+}
+
+void OneStep()
+{
+  untitled2ModelClass::ExtU_untitled2_T INPUT = {hc08.getTarget_Angle(),
+                                                 gy25.getPitch(),
+                                                 hc08.getKp(),
+                                                 hc08.getKi(),
+                                                 hc08.getKd()};
+
+  untitled2_Obj.setExternalInputs(&INPUT);
+
+  rt_OneStep();
+
+  untitled2ModelClass::ExtY_untitled2_T OUTPUT = untitled2_Obj.getExternalOutputs();
+
+  Stepper_right.setSpeed(OUTPUT.Stepper_Speed);
+  Stepper_left.setSpeed(OUTPUT.Stepper_Speed);
+}
+
 /**
   * @brief  This function is executed in case of error occurrence.
   * @retval None

@@ -3,9 +3,9 @@
 //
 // Code generated for Simulink model 'untitled2'.
 //
-// Model version                  : 1.16
+// Model version                  : 1.36
 // Simulink Coder version         : 9.3 (R2020a) 18-Nov-2019
-// C/C++ source code generated on : Sun Dec 27 17:32:37 2020
+// C/C++ source code generated on : Tue Jan 19 01:11:37 2021
 //
 // Target selection: ert.tlc
 // Embedded hardware selection: Intel->x86-64 (Windows64)
@@ -41,11 +41,10 @@ void untitled2ModelClass::step()
 {
   int_T idxDelay;
   real_T rtb_Error;
-  real_T rtb_Switch;
-  real_T rtb_Abs;
+  real_T rtb_Add;
   real_T rtb_Delay;
-  real_T rtb_Error_0;
-  real_T rtb_Switch_0;
+  real_T rtb_Switch1;
+  real_T rtb_Add_0;
   if ((&untitled2_M)->Timing.TaskCounters.TID[1] == 0) {
     // Delay: '<Root>/Delay'
     rtb_Delay = untitled2_DW.Delay_DSTATE[0];
@@ -77,43 +76,32 @@ void untitled2ModelClass::step()
     //
     //   Store in Global RAM
 
-    rtb_Switch = ((rtb_Error - untitled2_DW.UD_DSTATE) * untitled2_U.Kd +
-                  untitled2_U.Kp * rtb_Error) + (untitled2_DW.Integrator_DSTATE
-      - untitled2_DW.Integrator1_DSTATE) * untitled2_U.Ki;
-
-    // Saturate: '<Root>/Saturation'
-    if (rtb_Switch > 2000.0) {
-      rtb_Abs = 2000.0;
-    } else if (rtb_Switch < -2000.0) {
-      rtb_Abs = -2000.0;
-    } else {
-      rtb_Abs = rtb_Switch;
-    }
-
-    // End of Saturate: '<Root>/Saturation'
+    rtb_Add = ((rtb_Error - untitled2_DW.UD_DSTATE) * untitled2_U.Kd +
+               untitled2_U.Kp * rtb_Error) + (untitled2_DW.Integrator_DSTATE -
+      untitled2_DW.Integrator1_DSTATE) * untitled2_U.Ki;
 
     // Signum: '<Root>/Sign'
     if (rtb_Error < 0.0) {
-      rtb_Error_0 = -1.0;
+      rtb_Switch1 = -1.0;
     } else if (rtb_Error > 0.0) {
-      rtb_Error_0 = 1.0;
+      rtb_Switch1 = 1.0;
     } else if (rtb_Error == 0.0) {
-      rtb_Error_0 = 0.0;
+      rtb_Switch1 = 0.0;
     } else {
-      rtb_Error_0 = (rtNaN);
+      rtb_Switch1 = (rtNaN);
     }
 
     // End of Signum: '<Root>/Sign'
 
     // Signum: '<Root>/Sign1'
-    if (rtb_Switch < 0.0) {
-      rtb_Switch_0 = -1.0;
-    } else if (rtb_Switch > 0.0) {
-      rtb_Switch_0 = 1.0;
-    } else if (rtb_Switch == 0.0) {
-      rtb_Switch_0 = 0.0;
+    if (rtb_Add < 0.0) {
+      rtb_Add_0 = -1.0;
+    } else if (rtb_Add > 0.0) {
+      rtb_Add_0 = 1.0;
+    } else if (rtb_Add == 0.0) {
+      rtb_Add_0 = 0.0;
     } else {
-      rtb_Switch_0 = (rtNaN);
+      rtb_Add_0 = (rtNaN);
     }
 
     // End of Signum: '<Root>/Sign1'
@@ -124,33 +112,18 @@ void untitled2ModelClass::step()
     //   RelationalOperator: '<Root>/Equal'
     //   RelationalOperator: '<Root>/NotEqual'
 
-    if ((rtb_Error_0 == rtb_Switch_0) && (rtb_Switch != rtb_Abs)) {
-      rtb_Switch = rtb_Error;
+    if ((rtb_Switch1 == rtb_Add_0) && (rtb_Add != rtb_Add)) {
+      rtb_Switch1 = rtb_Error;
     } else {
-      rtb_Switch = 0.0;
+      rtb_Switch1 = 0.0;
     }
 
     // End of Switch: '<Root>/Switch1'
 
-    // Switch: '<Root>/Switch'
-    if (rtb_Abs > 0.0) {
-      // Outport: '<Root>/Step_Dir' incorporates:
-      //   Constant: '<Root>/Constant'
+    // Sum: '<Root>/Add1' incorporates:
+    //   Delay: '<Root>/Delay1'
 
-      untitled2_Y.Step_Dir = 1.0;
-    } else {
-      // Outport: '<Root>/Step_Dir' incorporates:
-      //   Constant: '<Root>/Constant1'
-
-      untitled2_Y.Step_Dir = -1.0;
-    }
-
-    // End of Switch: '<Root>/Switch'
-
-    // Outport: '<Root>/TIM_freq' incorporates:
-    //   Abs: '<Root>/Abs'
-
-    untitled2_Y.TIM_freq = std::abs(rtb_Abs);
+    untitled2_Y.Stepper_Speed += rtb_Add;
 
     // Update for Delay: '<Root>/Delay'
     for (idxDelay = 0; idxDelay < 19; idxDelay++) {
@@ -158,7 +131,7 @@ void untitled2ModelClass::step()
         1];
     }
 
-    untitled2_DW.Delay_DSTATE[19] = rtb_Switch;
+    untitled2_DW.Delay_DSTATE[19] = rtb_Switch1;
 
     // End of Update for Delay: '<Root>/Delay'
 
@@ -171,7 +144,7 @@ void untitled2ModelClass::step()
     untitled2_DW.UD_DSTATE = rtb_Error;
 
     // Update for DiscreteIntegrator: '<Root>/Integrator'
-    untitled2_DW.Integrator_DSTATE += rtb_Switch;
+    untitled2_DW.Integrator_DSTATE += rtb_Switch1;
 
     // Update for DiscreteIntegrator: '<Root>/Integrator1'
     untitled2_DW.Integrator1_DSTATE += rtb_Delay;

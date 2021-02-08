@@ -34,6 +34,10 @@ extern "C"
         void correctPitchRow();
         void correctYaw();
         void refresh();
+
+        float getPitch() { return YPR[1]; }
+        float getYaw() { return YPR[0]; }
+        float getRoll() { return YPR[2]; }
     };
 
     extern GY25 gy25;

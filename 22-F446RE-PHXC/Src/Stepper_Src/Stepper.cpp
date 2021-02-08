@@ -20,18 +20,18 @@ void Stepper::init()
     {
         LL_APB2_GRP1_EnableClock(LL_APB2_GRP1_PERIPH_TIM1);
         //设置预分频器
-        LL_TIM_SetPrescaler(TIMx, 9000);
+        LL_TIM_SetPrescaler(TIMx, 90);
         TIMx_freq = 90000000;
-        TIMx_prescaler = 9000;
+        TIMx_prescaler = 90;
     }
 
     if (TIMx == TIM2)
     {
         LL_APB1_GRP1_EnableClock(LL_APB1_GRP1_PERIPH_TIM2);
         //设置预分频器
-        LL_TIM_SetPrescaler(TIMx, 4500);
+        LL_TIM_SetPrescaler(TIMx, 45);
         TIMx_freq = 45000000;
-        TIMx_prescaler = 4500;
+        TIMx_prescaler = 45;
     }
 
     //定时器选择时钟源
@@ -138,7 +138,7 @@ void Stepper::stop()
 
 void Stepper::setDirection(DIRCTION dir)
 {
-    if (dir == POS)
+    if (dir == INV)
     {
         if (TIMx == TIM1)
         {
@@ -149,7 +149,7 @@ void Stepper::setDirection(DIRCTION dir)
             LL_GPIO_WriteOutputPort(GPIOB, LL_GPIO_ReadOutputPort(GPIOB) & (~LL_GPIO_PIN_10));
         }
     }
-    if (dir == INV)
+    if (dir == POS)
     {
         if (TIMx == TIM1)
         {
@@ -164,10 +164,36 @@ void Stepper::setDirection(DIRCTION dir)
 
 void Stepper::setFreq(uint16_t freq)
 {
-    uint16_t ARR_t = TIMx_freq / TIMx_prescaler / freq;
+    if (freq == 0)
+    {
+        LL_TIM_DisableCounter(TIMx);
+        return;
+    }
+    else if (!LL_TIM_IsEnabledCounter(TIMx))
+    {
+        LL_TIM_EnableCounter(TIMx);
+    }
+
+    uint32_t ARR_t = TIMx_freq / TIMx_prescaler / freq;
+
+    if (ARR_t > 65535) //触碰上限——频率过低
+    {
+        TIMx_prescaler *= 10; //提高分频比
+    }
+
+    if (ARR_t < 2) //触碰下限——频率过高
+    {
+        TIMx_prescaler /= 10; //降低分频比
+    }
+
+    LL_TIM_SetPrescaler(TIMx, TIMx_prescaler);
+
+    ARR_t = TIMx_freq / TIMx_prescaler / freq;
+
     uint16_t CCR_t = ARR_t * 0.5;
 
     LL_TIM_SetAutoReload(TIMx, ARR_t);
+
     if (Channel == LL_TIM_CHANNEL_CH3)
     {
         LL_TIM_OC_SetCompareCH3(TIMx, CCR_t);
@@ -195,12 +221,21 @@ void Stepper::setSpeed(float speed)
     setDirection(_dir);
 
     //速度限幅
-    if (speed > 1800)
-        speed = 1800;
-    if (speed < 180)
-        speed = 180;
+    // if (speed > 5000)
+    //     speed = 5000;
+    if (speed < 10)
+        speed = 10;
+
+    //speed = 5000;
+
+    this->speed = speed;
 
     //将速度转化为定时器频率
     uint16_t _freq = speed / 1.8;
     setFreq(_freq);
+}
+
+float Stepper::getSpeed()
+{
+    return speed;
 }

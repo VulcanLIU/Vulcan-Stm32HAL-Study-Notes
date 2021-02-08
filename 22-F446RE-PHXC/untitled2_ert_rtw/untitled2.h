@@ -3,9 +3,9 @@
 //
 // Code generated for Simulink model 'untitled2'.
 //
-// Model version                  : 1.16
+// Model version                  : 1.36
 // Simulink Coder version         : 9.3 (R2020a) 18-Nov-2019
-// C/C++ source code generated on : Sun Dec 27 17:32:37 2020
+// C/C++ source code generated on : Tue Jan 19 01:11:37 2021
 //
 // Target selection: ert.tlc
 // Embedded hardware selection: Intel->x86-64 (Windows64)
@@ -14,7 +14,6 @@
 //
 #ifndef RTW_HEADER_untitled2_h_
 #define RTW_HEADER_untitled2_h_
-#include <cmath>
 #include "rtwtypes.h"
 #include "untitled2_types.h"
 #include "rtGetNaN.h"
@@ -47,14 +46,13 @@ class untitled2ModelClass {
     real_T Target_Angle;               // '<Root>/Target_Angle'
     real_T Current_Angle;              // '<Root>/Current_Angle'
     real_T Kp;                         // '<Root>/Kp'
-    real_T Kd;                         // '<Root>/Kd'
     real_T Ki;                         // '<Root>/Ki'
+    real_T Kd;                         // '<Root>/Kd'
   } ExtU_untitled2_T;
 
   // External outputs (root outports fed by signals with default storage)
   typedef struct {
-    real_T TIM_freq;                   // '<Root>/TIM_freq'
-    real_T Step_Dir;                   // '<Root>/Step_Dir'
+    real_T Stepper_Speed;              // '<Root>/Stepper_Speed'
   } ExtY_untitled2_T;
 
   // Real-time Model Data Structure

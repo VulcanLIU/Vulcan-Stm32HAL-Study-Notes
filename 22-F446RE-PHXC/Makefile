@@ -64,6 +64,7 @@ Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_gpio.c\
 Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_usart.c\
 Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_ll_utils.c\
 Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_ll_rcc.c\
+Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_ll_tim.c\
 Src/system_stm32f4xx.c \
 Src/stm32f4xx_hal_timebase_tim.c \
 Src/i2c.c \
@@ -86,7 +87,13 @@ Src/SSD1306_Src/WString.cpp \
 Src/Joystick_Src/Joystick.cpp \
 Src/Blink_Src/Blink.cpp\
 Src/GY25_Src/GY25.cpp\
-Src/Stepper_Src/Stepper.cpp
+Src/Stepper_Src/Stepper.cpp\
+Src/HC08_Src/HC08.cpp\
+Src/timer4_Src/timer4.cpp\
+untitled2_ert_rtw/rt_nonfinite.cpp\
+untitled2_ert_rtw/rtGetInf.cpp\
+untitled2_ert_rtw/rtGetNaN.cpp\
+untitled2_ert_rtw/untitled2.cpp
 
 # ASM sources
 ASM_SOURCES =  \
@@ -169,7 +176,10 @@ CXX_INCLUDES = \
 -IInc\Joystick_Inc\
 -IInc\Blink_Inc\
 -IInc\GY25_Inc\
--IInc\Stepper_Inc
+-IInc\Stepper_Inc\
+-IInc\HC08_Inc\
+-IInc\timer4_Inc\
+-Iuntitled2_ert_rtw
 
 # compile gcc flags
 ASFLAGS = $(MCU) $(AS_DEFS) $(AS_INCLUDES) $(OPT) -Wall -fdata-sections -ffunction-sections
