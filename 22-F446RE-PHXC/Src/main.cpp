@@ -206,7 +206,7 @@ int main(void)
     // display.print("P:");
     // display.print(gy25.YPR[1]);
     // display.setCursor(0, 20);
-    // display.setTextColor(WHITE);
+    // display.setTextColor(WHITE);sjsjsjsjsjj
     // display.print("R:");
     // display.print(gy25.YPR[2]);
     // display.setCursor(64, 20);
