@@ -235,7 +235,7 @@ void Stepper::setSpeed(float speed)
     setFreq(_freq);
 }
 
-float Stepper::getSpeed()
+float Stepper::getSpeed(float a)
 {
     return speed;
 }

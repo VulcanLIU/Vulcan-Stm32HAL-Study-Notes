@@ -47,6 +47,12 @@ void GY25::USART_begin()
 
 void GY25::USART_gpio_init()
 {
+
+    /**USART1 GPIO Configuration    
+    PB6     ------> USART1_TX
+    PB7     ------> USART1_RX 
+    */
+
     //开GPIOB时钟
     LL_AHB1_GRP1_EnableClock(LL_AHB1_GRP1_PERIPH_GPIOB);
 

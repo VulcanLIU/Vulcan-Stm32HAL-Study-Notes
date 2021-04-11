@@ -3,9 +3,9 @@
 //
 // Code generated for Simulink model 'untitled2'.
 //
-// Model version                  : 1.36
+// Model version                  : 1.37
 // Simulink Coder version         : 9.3 (R2020a) 18-Nov-2019
-// C/C++ source code generated on : Tue Jan 19 01:11:37 2021
+// C/C++ source code generated on : Thu Feb 11 17:34:33 2021
 //
 // Target selection: ert.tlc
 // Embedded hardware selection: Intel->x86-64 (Windows64)
@@ -41,9 +41,10 @@ void untitled2ModelClass::step()
 {
   int_T idxDelay;
   real_T rtb_Error;
+  real_T rtb_DeadZone;
   real_T rtb_Add;
   real_T rtb_Delay;
-  real_T rtb_Switch1;
+  real_T rtb_Error_0;
   real_T rtb_Add_0;
   if ((&untitled2_M)->Timing.TaskCounters.TID[1] == 0) {
     // Delay: '<Root>/Delay'
@@ -80,15 +81,26 @@ void untitled2ModelClass::step()
                untitled2_U.Kp * rtb_Error) + (untitled2_DW.Integrator_DSTATE -
       untitled2_DW.Integrator1_DSTATE) * untitled2_U.Ki;
 
+    // DeadZone: '<Root>/Dead Zone'
+    if (rtb_Add > 0.5) {
+      rtb_DeadZone = rtb_Add - 0.5;
+    } else if (rtb_Add >= -0.5) {
+      rtb_DeadZone = 0.0;
+    } else {
+      rtb_DeadZone = rtb_Add - -0.5;
+    }
+
+    // End of DeadZone: '<Root>/Dead Zone'
+
     // Signum: '<Root>/Sign'
     if (rtb_Error < 0.0) {
-      rtb_Switch1 = -1.0;
+      rtb_Error_0 = -1.0;
     } else if (rtb_Error > 0.0) {
-      rtb_Switch1 = 1.0;
+      rtb_Error_0 = 1.0;
     } else if (rtb_Error == 0.0) {
-      rtb_Switch1 = 0.0;
+      rtb_Error_0 = 0.0;
     } else {
-      rtb_Switch1 = (rtNaN);
+      rtb_Error_0 = (rtNaN);
     }
 
     // End of Signum: '<Root>/Sign'
@@ -112,10 +124,10 @@ void untitled2ModelClass::step()
     //   RelationalOperator: '<Root>/Equal'
     //   RelationalOperator: '<Root>/NotEqual'
 
-    if ((rtb_Switch1 == rtb_Add_0) && (rtb_Add != rtb_Add)) {
-      rtb_Switch1 = rtb_Error;
+    if ((rtb_Error_0 == rtb_Add_0) && (rtb_Add != rtb_DeadZone)) {
+      rtb_Add = rtb_Error;
     } else {
-      rtb_Switch1 = 0.0;
+      rtb_Add = 0.0;
     }
 
     // End of Switch: '<Root>/Switch1'
@@ -123,7 +135,7 @@ void untitled2ModelClass::step()
     // Sum: '<Root>/Add1' incorporates:
     //   Delay: '<Root>/Delay1'
 
-    untitled2_Y.Stepper_Speed += rtb_Add;
+    untitled2_Y.Stepper_Speed += rtb_DeadZone;
 
     // Update for Delay: '<Root>/Delay'
     for (idxDelay = 0; idxDelay < 19; idxDelay++) {
@@ -131,7 +143,7 @@ void untitled2ModelClass::step()
         1];
     }
 
-    untitled2_DW.Delay_DSTATE[19] = rtb_Switch1;
+    untitled2_DW.Delay_DSTATE[19] = rtb_Add;
 
     // End of Update for Delay: '<Root>/Delay'
 
@@ -144,7 +156,7 @@ void untitled2ModelClass::step()
     untitled2_DW.UD_DSTATE = rtb_Error;
 
     // Update for DiscreteIntegrator: '<Root>/Integrator'
-    untitled2_DW.Integrator_DSTATE += rtb_Switch1;
+    untitled2_DW.Integrator_DSTATE += rtb_Add;
 
     // Update for DiscreteIntegrator: '<Root>/Integrator1'
     untitled2_DW.Integrator1_DSTATE += rtb_Delay;
