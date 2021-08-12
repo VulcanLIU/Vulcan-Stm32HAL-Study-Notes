@@ -1,6 +1,6 @@
 #include "Stepper.h"
 
-Stepper Stepper_left(TIM1, LL_TIM_CHANNEL_CH3);
+Stepper Stepper_left(TIM1, LL_TIM_CHANNEL_CH1);
 Stepper Stepper_right(TIM2, LL_TIM_CHANNEL_CH2);
 
 Stepper::Stepper(TIM_TypeDef *TIMx, uint32_t Channel)
@@ -44,15 +44,15 @@ void Stepper::init()
     //使能自动重载预装载
     LL_TIM_EnableARRPreload(TIMx);
 
-    if (Channel == LL_TIM_CHANNEL_CH3 || Channel == LL_TIM_CHANNEL_CH3N)
+    if (Channel == LL_TIM_CHANNEL_CH1 || Channel == LL_TIM_CHANNEL_CH1N)
     {
         //设置比较值
-        LL_TIM_OC_SetCompareCH3(TIMx, 1000 - 1);
+        LL_TIM_OC_SetCompareCH1(TIMx, 1000 - 1);
         //设置成PWM模式
-        LL_TIM_OC_SetMode(TIMx, LL_TIM_CHANNEL_CH3, LL_TIM_OCMODE_PWM1);
+        LL_TIM_OC_SetMode(TIMx, LL_TIM_CHANNEL_CH1, LL_TIM_OCMODE_PWM1);
 
         //设置捕获/比较寄存器值
-        LL_TIM_OC_EnablePreload(TIMx, LL_TIM_CHANNEL_CH3);
+        LL_TIM_OC_EnablePreload(TIMx, LL_TIM_CHANNEL_CH1);
     }
 
     if (Channel == LL_TIM_CHANNEL_CH2 || Channel == LL_TIM_CHANNEL_CH2N)
@@ -82,21 +82,21 @@ void Stepper::gpio_init()
     {
         //开启GPIO时钟
         LL_AHB1_GRP1_EnableClock(LL_AHB1_GRP1_PERIPH_GPIOA);
-        LL_AHB1_GRP1_EnableClock(LL_AHB1_GRP1_PERIPH_GPIOB);
 
         //GPIO选为AF
+        //M1-DIR
         LL_GPIO_InitTypeDef GPIO_InitStruct = {0};
         GPIO_InitStruct.Mode = LL_GPIO_MODE_OUTPUT;
         GPIO_InitStruct.OutputType = LL_GPIO_OUTPUT_PUSHPULL;
-        GPIO_InitStruct.Pin = LL_GPIO_PIN_4;
+        GPIO_InitStruct.Pin = LL_GPIO_PIN_9;
         GPIO_InitStruct.Pull = LL_GPIO_PULL_NO;
         GPIO_InitStruct.Speed = LL_GPIO_SPEED_FREQ_MEDIUM;
-        LL_GPIO_Init(GPIOB, &GPIO_InitStruct);
-
+        LL_GPIO_Init(GPIOA, &GPIO_InitStruct);
+        //M1-STEP
         GPIO_InitStruct.Alternate = LL_GPIO_AF_1;
         GPIO_InitStruct.Mode = LL_GPIO_MODE_ALTERNATE;
         GPIO_InitStruct.OutputType = LL_GPIO_OUTPUT_PUSHPULL;
-        GPIO_InitStruct.Pin = LL_GPIO_PIN_10;
+        GPIO_InitStruct.Pin = LL_GPIO_PIN_8;
         GPIO_InitStruct.Pull = LL_GPIO_PULL_NO;
         GPIO_InitStruct.Speed = LL_GPIO_SPEED_FREQ_MEDIUM;
         LL_GPIO_Init(GPIOA, &GPIO_InitStruct);
@@ -106,16 +106,18 @@ void Stepper::gpio_init()
     {
         //开启GPIO时钟
         LL_AHB1_GRP1_EnableClock(LL_AHB1_GRP1_PERIPH_GPIOB);
+        LL_AHB1_GRP1_EnableClock(LL_AHB1_GRP1_PERIPH_GPIOC);
 
         //GPIO选为AF
+        //M2-DIR
         LL_GPIO_InitTypeDef GPIO_InitStruct = {0};
         GPIO_InitStruct.Mode = LL_GPIO_MODE_OUTPUT;
         GPIO_InitStruct.OutputType = LL_GPIO_OUTPUT_PUSHPULL;
-        GPIO_InitStruct.Pin = LL_GPIO_PIN_10;
+        GPIO_InitStruct.Pin = LL_GPIO_PIN_7;
         GPIO_InitStruct.Pull = LL_GPIO_PULL_NO;
         GPIO_InitStruct.Speed = LL_GPIO_SPEED_FREQ_MEDIUM;
-        LL_GPIO_Init(GPIOB, &GPIO_InitStruct);
-
+        LL_GPIO_Init(GPIOC, &GPIO_InitStruct);   
+        //M2-STEP
         GPIO_InitStruct.Alternate = LL_GPIO_AF_1;
         GPIO_InitStruct.Mode = LL_GPIO_MODE_ALTERNATE;
         GPIO_InitStruct.OutputType = LL_GPIO_OUTPUT_PUSHPULL;
@@ -194,9 +196,9 @@ void Stepper::setFreq(uint16_t freq)
 
     LL_TIM_SetAutoReload(TIMx, ARR_t);
 
-    if (Channel == LL_TIM_CHANNEL_CH3)
+    if (Channel == LL_TIM_CHANNEL_CH1)
     {
-        LL_TIM_OC_SetCompareCH3(TIMx, CCR_t);
+        LL_TIM_OC_SetCompareCH1(TIMx, CCR_t);
     }
     if (Channel == LL_TIM_CHANNEL_CH2)
     {
@@ -235,7 +237,7 @@ void Stepper::setSpeed(float speed)
     setFreq(_freq);
 }
 
-float Stepper::getSpeed(float a)
+float Stepper::getSpeed()
 {
     return speed;
 }

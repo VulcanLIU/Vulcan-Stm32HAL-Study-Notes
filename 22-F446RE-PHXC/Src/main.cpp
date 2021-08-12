@@ -135,8 +135,8 @@ int main(void)
   joystick.init();
   joystick.begin();
 
-  blink.init();
-  blink.begin();
+  //blink.init();
+  //blink.begin();
 
   // SSD1306_SWITCHCAPVCC = generate display voltage from 3.3V internally
   display.begin(SSD1306_SWITCHCAPVCC, 0x78); // Address 0x3D for 128x64
@@ -420,9 +420,13 @@ void OneStep()
   rt_OneStep();
 
   untitled2ModelClass::ExtY_untitled2_T OUTPUT = untitled2_Obj.getExternalOutputs();
-
-  Stepper_right.setSpeed(OUTPUT.Stepper_Speed);
-  Stepper_left.setSpeed(OUTPUT.Stepper_Speed);
+  
+  //Stepper类解耦测试
+  Stepper_right.setSpeed(1000);
+  Stepper_left.setSpeed(300);
+  //
+  //Stepper_right.setSpeed(OUTPUT.Stepper_Speed);
+  //Stepper_left.setSpeed(OUTPUT.Stepper_Speed);
 }
 
 /**
